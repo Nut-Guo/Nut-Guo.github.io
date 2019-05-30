@@ -6,9 +6,46 @@
     <description>Recent content in Categories on Edidor Demo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <lastBuildDate>Fri, 12 Apr 2019 21:48:10 +0000</lastBuildDate>
     
 	<atom:link href="https://nut-guo.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CTF</title>
+      <link>https://nut-guo.github.io/categories/ctf/</link>
+      <pubDate>Fri, 12 Apr 2019 21:48:10 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/categories/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>笔记</title>
+      <link>https://nut-guo.github.io/categories/%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 12 Apr 2019 21:48:10 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/categories/%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wargame</title>
+      <link>https://nut-guo.github.io/categories/wargame/</link>
+      <pubDate>Mon, 11 Mar 2019 20:33:14 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/categories/wargame/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>教程</title>
+      <link>https://nut-guo.github.io/categories/%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Tue, 19 Feb 2019 01:37:27 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/categories/%E6%95%99%E7%A8%8B/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

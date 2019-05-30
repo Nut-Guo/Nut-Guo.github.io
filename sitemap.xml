@@ -3,6 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nut-guo.github.io/categories/ctf/</loc>
+    <lastmod>2019-04-12T21:48:10+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nut-guo.github.io/tags/ctf/</loc>
+    <lastmod>2019-04-12T21:48:10+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nut-guo.github.io/categories/</loc>
+    <lastmod>2019-04-12T21:48:10+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nut-guo.github.io/</loc>
     <lastmod>2019-04-12T21:48:10+00:00</lastmod>
     <priority>0</priority>
@@ -15,13 +33,43 @@
   </url>
   
   <url>
+    <loc>https://nut-guo.github.io/tags/</loc>
+    <lastmod>2019-04-12T21:48:10+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nut-guo.github.io/tags/%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2019-04-12T21:48:10+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nut-guo.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2019-04-12T21:48:10+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://nut-guo.github.io/categories/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2019-04-12T21:48:10+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nut-guo.github.io/tags/wargame/</loc>
+    <lastmod>2019-03-15T10:55:51+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nut-guo.github.io/posts/liveoverflow/</loc>
     <lastmod>2019-03-15T10:55:51+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nut-guo.github.io/categories/wargame/</loc>
+    <lastmod>2019-03-11T20:33:14+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -37,12 +85,6 @@
   <url>
     <loc>https://nut-guo.github.io/posts/bandit%E6%95%B4%E7%90%86/</loc>
     <lastmod>2019-02-21T23:25:20+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nut-guo.github.io/tags/</loc>
-    <lastmod>2019-02-19T16:23:29+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -62,12 +104,19 @@
   </url>
   
   <url>
+    <loc>https://nut-guo.github.io/tags/linux/</loc>
+    <lastmod>2019-02-19T01:37:27+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nut-guo.github.io/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2019-02-19T01:37:27+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://nut-guo.github.io/categories/</loc>
+    <loc>https://nut-guo.github.io/categories/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2019-02-19T01:37:27+00:00</lastmod>
     <priority>0</priority>
   </url>
   

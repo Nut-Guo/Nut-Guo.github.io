@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Edidor Demo</title>
+    <link>https://nut-guo.github.io/tags/linux/</link>
+    <description>Recent content in Linux on Edidor Demo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 19 Feb 2019 01:37:27 +0000</lastBuildDate>
+    
+	<atom:link href="https://nut-guo.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Manjaro装机记录</title>
+      <link>https://nut-guo.github.io/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Tue, 19 Feb 2019 01:37:27 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/</guid>
+      <description>经历了一番骚操作之后不慎干掉了自己经营许久的Manjaro KDE，痛定思痛，重新安装操作系统的过程中必定会踩到许多的坑，小记一波，预防不幸再</description>
+    </item>
+    
+  </channel>
+</rss>

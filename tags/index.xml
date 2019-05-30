@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Edidor Demo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 19 Feb 2019 16:23:29 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Apr 2019 21:48:10 +0000</lastBuildDate>
     
 	<atom:link href="https://nut-guo.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CTF</title>
+      <link>https://nut-guo.github.io/tags/ctf/</link>
+      <pubDate>Fri, 12 Apr 2019 21:48:10 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/tags/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>基础</title>
+      <link>https://nut-guo.github.io/tags/%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Fri, 12 Apr 2019 21:48:10 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/tags/%E5%9F%BA%E7%A1%80/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wargame</title>
+      <link>https://nut-guo.github.io/tags/wargame/</link>
+      <pubDate>Fri, 15 Mar 2019 10:55:51 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/tags/wargame/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>资源</title>
@@ -17,6 +44,15 @@
       <pubDate>Tue, 19 Feb 2019 16:23:29 +0000</pubDate>
       
       <guid>https://nut-guo.github.io/tags/%E8%B5%84%E6%BA%90/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://nut-guo.github.io/tags/linux/</link>
+      <pubDate>Tue, 19 Feb 2019 01:37:27 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/tags/linux/</guid>
       <description></description>
     </item>
     
