@@ -40,6 +40,18 @@
   </url>
   
   <url>
+    <loc>https://nut-guo.github.io/tags/</loc>
+    <lastmod>2019-02-19T16:23:29+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nut-guo.github.io/tags/%E8%B5%84%E6%BA%90/</loc>
+    <lastmod>2019-02-19T16:23:29+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nut-guo.github.io/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</loc>
     <lastmod>2019-02-19T16:23:29+00:00</lastmod>
   </url>
@@ -61,11 +73,6 @@
   
   <url>
     <loc>https://nut-guo.github.io/series/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nut-guo.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
