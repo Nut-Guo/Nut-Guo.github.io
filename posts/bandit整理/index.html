@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    
+    <link rel="canonical" href="https://nut-guo.github.io/posts/bandit%E6%95%B4%E7%90%86/" />
+    <meta name="description" content="CTF the hard way ">
+    
+
+    <title>Bandit整理 &middot; Edidor Demo</title>
+
+    <link rel="shortcut icon" href="https://nut-guo.github.io/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://nut-guo.github.io/css/main.css" />
+    
+        
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-light.min.css">
+        
+    
+    
+    
+    <link rel="stylesheet" href="https://nut-guo.github.io/css/">
+    
+</head>
+
+
+<body class="loading light-mode">
+    
+<div class="top">
+    <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+</div>
+<div class="bottom">
+    <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+</div>
+
+    <header class="header">
+    <ul class="menu clearfix control">
+        
+<li class="logo-container logo-light">
+    <a href="https://nut-guo.github.io/" class="btn logo-link">
+        <img class="logo" src="https://nut-guo.github.io/images/logo_light.svg" alt="logo" />
+    </a>
+</li>
+
+
+<li class="logo-container logo-default">
+    <a href="https://nut-guo.github.io/" class="btn logo-link">
+        <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+    </a>
+</li>
+
+        
+        
+        
+        
+        <li 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                Article
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="/posts"
+                    
+                        class="btn "
+                    >Posts</a>
+                </li>
+                
+                <li class="">
+                    <a href="/tags"
+                    
+                        class="btn "
+                    >Tags</a>
+                </li>
+                
+                <li class="">
+                    <a href="/categories"
+                    
+                        class="btn "
+                    >Categories</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+        
+        
+        <li 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                View
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="#"
+                    
+                        class="btn toggle-sidebar"
+                    >Toggle Sidebar</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+        
+        
+        <li  id="theme-switcher" 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                Theme
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="light" class="btn"
+                        
+                    >Light</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="dark" class="btn"
+                        
+                    >Dark</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="wild" class="btn"
+                        
+                    >Wild</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        class="export-wild btn"
+                        
+                    >Export Wild Style</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+    </ul>
+</header>
+
+    <div class="middle">
+        <nav class="sidebar">
+            <ul class="posts control">
+    
+    <li><a class="no-break btn" href='/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/'><i class="icon icon-post"></i>数据结构</a></li>
+    
+    <li><a class="no-break btn" href='/posts/liveoverflow/'><i class="icon icon-post"></i>liveoverflow笔记</a></li>
+    
+    <li><a class="no-break btn" href='/posts/natas%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>natas整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/leviathan%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>leviathan整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/bandit%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>Bandit整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>资源整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/8086cpu%E6%A6%82%E8%BF%B0/'><i class="icon icon-post"></i>8086CPU概述</a></li>
+    
+    <li><a class="no-break btn" href='/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/'><i class="icon icon-post"></i>Manjaro装机记录</a></li>
+    
+</ul>
+
+        </nav>
+        <main class="main">
+            <article class="article">
+    <h2 class="title"><a href='/posts/bandit%E6%95%B4%E7%90%86/' class="btn">Bandit整理</a></h2>
+    <div class="article-meta clearfix">
+        <ul class="dates clearfix left control">
+            <li><i class="icon icon-date"></i></li>
+            <li class="publish-date">
+                <time datetime="2019.02.21">2019.02.21</time>
+            </li>
+        </ul>
+        
+        
+    </div>
+    <div class="content">
+        
+        
+
+<p>题目来源：<a href="http://overthewire.org/wargames/">OverTheWire</a></p>
+
+<h1 id="bandit0">Bandit0</h1>
+
+<ul>
+<li>ssh</li>
+</ul>
+
+<p>ssh <username>@<remoteserber> -p <port></p>
+
+<h1 id="bandit1">Bandit1</h1>
+
+<p><a href="https://www.cnblogs.com/peida/archive/2012/12/05/2803591.html">linux命令</a></p>
+
+<p>或者你可以自己man</p>
+
+<p>dashed filename：-会被识别为标准输入输出，若存在名称为“-”的文件，则访问时需要使用./-或者绝对路径</p>
+
+<p><a href="http://tldp.org/LDP/abs/html/special-chars.html">special characters</a></p>
+
+<h1 id="bandit2">Bandit2</h1>
+
+<p>包含空格的文件名，用&rsquo; &lsquo;或者&rdquo; &ldquo;括起来</p>
+
+<h1 id="bandit3">Bandit3</h1>
+
+<p>通过ls -la查看所有的文件，其中隐藏文件以.开头</p>
+
+<h1 id="bandit4">Bandit4</h1>
+
+<p>存档：pIwrPrtPN36QITSp3EQaw936yaFoFgAB</p>
+
+<p>文件名以&rdquo;-&ldquo;开头的在表示文件名时应当包括括号或者在前面加&rdquo;./&rdquo;</p>
+
+<h1 id="bandit5">Bandit5</h1>
+
+<p>存档：koReBOKuIDDepwhWk7jZC0RTdopnAYKh</p>
+
+<p>find 命令，</p>
+
+<p>-type 查找文件类型</p>
+
+<p>-size n[bckw]</p>
+
+<p>-exec command {} \;</p>
+
+<p>-executable</p>
+
+<p>加!表示对后面一条参数制定的内容取反</p>
+
+<h1 id="bandit6">Bandit6</h1>
+
+<p>DXjZPULLxYr17uwoI01bNLQbtFemEgo7</p>
+
+<p>find命令</p>
+
+<p>-user 用户</p>
+
+<p>-group 组</p>
+
+<h1 id="bandit7">Bandit7</h1>
+
+<p>HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs</p>
+
+<p>cat filename | grep content 在指定文件中查找内容</p>
+
+<h1 id="bandit8">Bandit8</h1>
+
+<p>cvX2JJa4CFALtqS87jk27qwqGhBM9plV</p>
+
+<p>sort 文件中内容排序</p>
+
+<p>| 管道</p>
+
+<p>uniq -u 查找文件中仅仅出现了一次的行</p>
+
+<h1 id="bandit9">Bandit9</h1>
+
+<p>UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR</p>
+
+<p>strings 显示文件中的字符串</p>
+
+<h1 id="bandit10">Bandit10</h1>
+
+<p>truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk</p>
+
+<p>base64 命令利用base64对文件解码</p>
+
+<h1 id="bandit11">Bandit11</h1>
+
+<p>IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR</p>
+
+<p>tr 命令　translate 将两个集合中的元素做相应的替换</p>
+
+<h1 id="bandit12">Bandit12</h1>
+
+<p>5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu</p>
+
+<p>这题折腾了各种解压方式</p>
+
+<p>gzip文件，需要先利用mv命令将文件的后缀名改为.gz然后使用 gunzip filename 来解压</p>
+
+<p>bzip2文件，一般以.bz2为后缀，可以通过bzip2 -d filename 来解压缩</p>
+
+<p>tar 文件，使用tar xvf filename 来解压缩</p>
+
+<p>同时，还接触到了xxd命令，该命令可以将十六进制的文本文件还原为可执行的二进制文件</p>
+
+<p>xxd -r filename &gt; destinationname</p>
+
+<h1 id="bandit13">Bandit13</h1>
+
+<p>8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL</p>
+
+<p>远程复制　scp -P port username@location:filepath destination</p>
+
+<p>利用秘钥的远程登录　ssh -i key username@location:filepath -p port</p>
+
+<h1 id="bandit14">Bandit14</h1>
+
+<p>4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e</p>
+
+<p>nc命令从给定ip地址的指定端口获取文件: nc address port</p>
+
+<p>利用echo 命令传递密码</p>
+
+<h1 id="bandit15">Bandit15</h1>
+
+<p>BfMYroe26WYalil77FoDi9qh59eK5xNr</p>
+
+<pre><code class="language-bash">openssl s_client -ign_eof -connect localhost:30001
+</code></pre>
+
+<p>s_client 表示作为一个客户端，-ign_eof 表示忽略eof，在此处的用途是使中断在读取到我们输入的密码末尾的eof后仍然保持连接（然而我在实测过程中发现不加这个参数似乎也名没有发现任何异常）。</p>
+
+<p>-connect localhost:30001声明了链接的ip和端口</p>
+
+<p>可使用echo password| 来通过管道实现密码的输入</p>
+
+<h1 id="bandit16">Bandit16</h1>
+
+<p>cluFn7wTiGryunymYOu4RcffSxQluehd</p>
+
+<p>通过nmap扫描端口，并尝试和排除其中的允许其他协议的端口</p>
+
+<p>nmap -p port1-port2 address</p>
+
+<h1 id="bandit17">Bandit17</h1>
+
+<p>利用diff 命令比较两个文件</p>
+
+<p>diff file1 file2</p>
+
+<p>输出中的a为add，c为change，d为delete的记号</p>
+
+<p>&lt;后是file1中的数据</p>
+
+<p>&gt;后是file2中的数据</p>
+
+<h1 id="bandit18">Bandit18</h1>
+
+<p>kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd</p>
+
+<p>这个挑战中.bashrc中的设置使伪终端pty(pseudo terminal)bash在打开后被自动关闭</p>
+
+<p>为了克服这个问题，我们需要使用伪终端，通过在ssh 命令中使用-t强制分配伪终端，或者是利用-T命令禁止使用伪终端，从而避免了.bashrc发挥作用</p>
+
+<h1 id="bandit19">Bandit19</h1>
+
+<p>IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x</p>
+
+<p>利用所给的二进制文件来更改uid，从而获得其提供的权限，打开制定位置的密码。</p>
+
+<p>chmod 中可以通过u+s 或者g+s 来更改suid权限，这个十分危险，将赋予二进制文件root权限。</p>
+
+<h1 id="bandit20">Bandit20</h1>
+
+<p>GbKksEFF4yrVs6il55v6gwY5aVje5f0j</p>
+
+<p>建立监听端口</p>
+
+<p>nc -l -p &ldquo;port&rdquo; &lt; &ldquo;filepath&rdquo;</p>
+
+<p>或者利用echo</p>
+
+<p>echo &ldquo;content&rdquo; | nc -l -p &ldquo;port&rdquo;</p>
+
+<p>同时对于nc命令，可以利用添加&amp;参数使命令在后台运行</p>
+
+<h1 id="bandit21">Bandit21</h1>
+
+<p>gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr</p>
+
+<p>查看位于/etc/cron.d目录下的文件发现守护进程，得到了一个脚本（.sh文件）在该文件中我们发现密码被导入了一个新建的文件中，查看该文件获得密码</p>
+
+<h1 id="bandit22">Bandit22</h1>
+
+<p>Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI</p>
+
+<p>命令执行后在后方加上&gt;/dev/null 将输出导入到了/dev/null，而该文件夹会无视所有的输入，从而达到了忽视输出的效果</p>
+
+<p>使用守护进程中利用了cut 命令剪切了md5sum加密的一段字符，将其作为文件名(cut -d &ldquo;分隔符&rdquo; -f &ldquo;选取第几段&rdquo;)</p>
+
+<p>我们重新相应的执行该过程获得文件名</p>
+
+<h1 id="banidt23">Banidt23</h1>
+
+<p>jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n</p>
+
+<p>cron 的进程每隔一段时间就会被执行，通过前几关相同的办法，我们得到了执行的脚本，解读后我们发现它会执行目录下的所有脚本，我们可以写自己的脚本，并将其放到题目中声明的文件夹中，从而使之被执行（利用其权限获得用户密码）</p>
+
+<h1 id="bandit24">Bandit24</h1>
+
+<p>UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ</p>
+
+<p>写简单的shell 脚本完成暴力破解</p>
+
+<p>利用for循环遍历</p>
+
+<h1 id="bandit25">Bandit25</h1>
+
+<p>uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG</p>
+
+<p>利用给出的sshkey连接bandit26,发现马上退出了，利用工具查看/etc/passwd文件确定用户的终端，发现被修改为另一个可执行文件，查看，发现其打印文件然后退出</p>
+
+<p>缩小终端窗口，使之以more的形式输入，从而不立刻退出，在该界面下按&rdquo;v&rdquo;使用vim(获得了用户的权限)</p>
+
+<p>在vim 中通过e filepath命令编辑指定文件，这里我们可以直接查看本关密码</p>
+
+<h1 id="bandit26">Bandit26</h1>
+
+<p>5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z</p>
+
+<p>承上启下，这一关中能够使用的唯一的工具也就是在vim中，我们可以通过:set shell=/bin/bash来修改执行操作的终端，然后利用:!来执行外部操作，利用在目录下给出的可执行文件提权</p>
+
+<h1 id="bandit27">Bandit27</h1>
+
+<p>3ba3118a22e93127a4ed485be72ef5ea</p>
+
+<p>利用git命令克隆文件到本地获得密码</p>
+
+<h1 id="bandit28">Bandit28</h1>
+
+<p>0ef186ac70e04ea33b4c1853d2526fa2</p>
+
+<p>git clone 同样的套路，但是这回由于文件添加进来之后又被修改，复制过来的文件中并没有我们需要的密码，我们可以通过git log查看修改记录,发现其中某一次修改删除了内容，通过 git checkout &ldquo;hash offered in log&rdquo;来查看历史版本</p>
+
+<h1 id="bandit29">Bandit29</h1>
+
+<p>bbc96594b4e001778eee9975372716b2</p>
+
+<p>查看README.md发现没有想要的内容，log中无明确信息，通过git branch -r查看远程分支,然后通过git checkout &ldquo;branch name&rdquo;来切换到相应的分支进行查看，获得了有内容的密码文件</p>
+
+<h1 id="bandit30">Bandit30</h1>
+
+<p>5b90576bedb2cc04c86a9e924ce42faf</p>
+
+<p>git tag 显示仓库的标签，发现有名为secret的tag，然后利用git show &ldquo;tag name&rdquo;查看tag，获得密码</p>
+
+<h1 id="bandit31">Bandit31</h1>
+
+<p>47e603bb428404d265f59c42920d81e5</p>
+
+<p>此关卡的目的在于向仓库中提交符合要求的文件，并获得其回复信息中的密码</p>
+
+<p>git add 向index 中添加内容</p>
+
+<p>git commit 向repo中提交更改,-m &lt;msg&gt;选项，将msg作为commit的信息</p>
+
+<p>git push将本地更改同步到remote，这时一个可选的参数是选择提交的分支&rdquo;origin master&rdquo;</p>
+
+<p>注意处理好.gitignore文件中的内容</p>
+
+<h1 id="bandit32">Bandit32</h1>
+
+<p>56a9bf19c63d650ce78e6ec0354ee45e</p>
+
+<p>uppershell文件中所有的操作命令都会被转化为大写，从而无法执行</p>
+
+<p>利用$加变量名的方式通过变量名的形式来逃出这个限制</p>
+
+<p>$0 Shell 本身的文件名称</p>
+
+<p>$@ 所有参数列表</p>
+
+<p>$- 查看所有使用set命令设定的flag</p>
+
+<p>$? 查看最后运行的命令的结束代码（返回值）</p>
+
+<p>$! shell 最后运行的后台process的PID</p>
+
+<p>$$ shell 本身的PID</p>
+
+<h1 id="bandit33">Bandit33</h1>
+
+<p>c9c3199ddf4121b10cf581a98d51caee</p>
+
+        
+    </div>
+
+</article>
+<section class="comment">
+    <p class="local-info">
+        Comment is disabled to avoid unwanted discussions from 'localhost:1313' on your Disqus
+        account...
+    </p>
+    <div id="disqus_thread"></div>
+</section>
+<script type="text/javascript">
+
+    (function () {
+        if (window.location.hostname == "localhost") {
+            return
+        }
+        document.querySelector('.local-info').classList.add('hide')
+
+        let dsq = document.createElement('script')
+        dsq.type = 'text/javascript'
+        dsq.async = true
+        let disqus_shortname = 'your disqus short name'
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+    })()
+</script>
+
+
+        </main>
+    </div>
+    <footer class="footer clearfix">
+    <ul class="control social clearfix">
+        <li><a class="author btn" href="#">Sciver</a></li>
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon behance"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon email"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon facebook"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon github"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon twitter"></i></a>
+        </li>
+        
+        
+        <li>
+            <a class="icon-link btn" href="https://nut-guo.github.io/index.xml" type="application/rss+xml" title="rss">
+                <i class="rss icon"></i></a>
+        </li>
+    </ul>
+
+    <ul class="control status clearfix">
+        <li><a href="#" class="btn">Posts:
+                9</a>
+        </li>
+        <li><a href="#" class="btn">Pages:
+                0</a></li>
+        <li><a href="#" class="btn">en</a></li>
+        <li><a href="https://gohugo.io" class="btn">Hugo, 0.55.6</a></li>
+        <li><a href="https://github.com/jacobsun/edidor" class="btn">Theme: Edidor</a></li>
+        <li>
+            <a href="#" class="btn">Last build: <time
+                    datetime=""></time>
+            </a>
+        </li>
+    </ul>
+</footer>
+<div class="dialog">
+    <div class="wrapper">
+        <div class="clearfix"><button class="btn close-dialog">X</button></div>
+        <header>
+            <h1 class="title">Theme Name</h1>
+        </header>
+        <main>
+            <div class="clearfix">
+                <label for="theme-name">
+                    <p>Only English Character, space, hyphen are allowed!</p>
+                    <p>Valid name examples: "custom", "fantastic theme", "my-theme"</p>
+                    <p>Invalid name examles: "我的主题", ":)", "123"</p>
+                </label>
+                <input type="text" name="theme-name" id="theme-name">
+            </div>
+            <div class="clearfix">
+                <button class="btn export">Export</button>
+            </div>
+
+        </main>
+        <footer></footer>
+    </div>
+</div>
+
+    <script src="https://nut-guo.github.io/js/main.js"></script>
+
+    <script src="https://nut-guo.github.io/js/"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'your ga id', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</body>
+
+</html>

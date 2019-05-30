@@ -6,18 +6,81 @@
     <description>Recent content in Posts on Edidor Demo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 May 2019 13:23:08 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 12 Apr 2019 21:48:10 +0000</lastBuildDate>
     
 	<atom:link href="https://nut-guo.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Hacking</title>
-      <link>https://nut-guo.github.io/posts/hacking/</link>
-      <pubDate>Thu, 30 May 2019 13:23:08 +0800</pubDate>
+      <title>数据结构</title>
+      <link>https://nut-guo.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Fri, 12 Apr 2019 21:48:10 +0000</pubDate>
       
-      <guid>https://nut-guo.github.io/posts/hacking/</guid>
-      <description></description>
+      <guid>https://nut-guo.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+      <description>绪论 程序开发过程 需求分析 确定实际问题对程序的要求 模型设计 将具体问题抽象为可以通过计算机解决的为题，其中需要利用数据结构和算法的知识 编码实现 检</description>
+    </item>
+    
+    <item>
+      <title>liveoverflow笔记</title>
+      <link>https://nut-guo.github.io/posts/liveoverflow/</link>
+      <pubDate>Fri, 15 Mar 2019 10:55:51 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/liveoverflow/</guid>
+      <description>0x0B ssh 连接，ps aux查看进程，ip addr查看网络地址，id 查看当前id(gid uid ) 0x0C 利用man 命令查看C函数，阅读manual 找到可能存在</description>
+    </item>
+    
+    <item>
+      <title>natas整理</title>
+      <link>https://nut-guo.github.io/posts/natas%E6%95%B4%E7%90%86/</link>
+      <pubDate>Mon, 11 Mar 2019 20:33:14 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/natas%E6%95%B4%E7%90%86/</guid>
+      <description>natas0 natas0 可以利用快捷键或者使用右键打开源码获得password natas1 gtVrDuiDfck831PqWsLEZy5gyDz1clto 在浏览器中利用F12查看html源码 在index中找到了被注释掉的passwo</description>
+    </item>
+    
+    <item>
+      <title>leviathan整理</title>
+      <link>https://nut-guo.github.io/posts/leviathan%E6%95%B4%E7%90%86/</link>
+      <pubDate>Mon, 11 Mar 2019 18:42:53 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/leviathan%E6%95%B4%E7%90%86/</guid>
+      <description>Leviathan0 leviathan0 ls -la查看文件夹下的所有文件的信息，发现属主为leviathan1的文件夹，有大量冗余的信息，利用管道和grep配合查找信息 Leviathan1 rioGegei8m 目录下</description>
+    </item>
+    
+    <item>
+      <title>Bandit整理</title>
+      <link>https://nut-guo.github.io/posts/bandit%E6%95%B4%E7%90%86/</link>
+      <pubDate>Thu, 21 Feb 2019 23:25:20 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/bandit%E6%95%B4%E7%90%86/</guid>
+      <description>题目来源：OverTheWire Bandit0 ssh ssh @ -p Bandit1 linux命令 或者你可以自己man dashed filename：-会被识别为标准输入输出，若存在名称为“-</description>
+    </item>
+    
+    <item>
+      <title>资源整理</title>
+      <link>https://nut-guo.github.io/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</link>
+      <pubDate>Tue, 19 Feb 2019 16:23:29 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</guid>
+      <description>Hacker101 picoCTF Compiler Explorer Vidar Team wiki Github Ret2 Systems Engineering Blog IO NetGarage Pwnable.kr OverTheWire Reversing.kr W3Challs 在线工具集 图灵机模拟器 后续慢慢整理</description>
+    </item>
+    
+    <item>
+      <title>8086CPU概述</title>
+      <link>https://nut-guo.github.io/posts/8086cpu%E6%A6%82%E8%BF%B0/</link>
+      <pubDate>Tue, 19 Feb 2019 14:46:39 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/8086cpu%E6%A6%82%E8%BF%B0/</guid>
+      <description>资料 8086 《汇编语言（第三版）》王爽 基础知识 概念 机器语言：以二进制数字表示的机器指令的集合 汇编语言：机器指令便于记忆和书写的形式 汇编指令：机器码</description>
+    </item>
+    
+    <item>
+      <title>Manjaro装机记录</title>
+      <link>https://nut-guo.github.io/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Tue, 19 Feb 2019 01:37:27 +0000</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/</guid>
+      <description>经历了一番骚操作之后不慎干掉了自己经营许久的Manjaro KDE，痛定思痛，重新安装操作系统的过程中必定会踩到许多的坑，小记一波，预防不幸再</description>
     </item>
     
   </channel>

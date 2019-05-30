@@ -7,13 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Hugo 0.55.6" />
     
-    <link rel="canonical" href="https://nut-guo.github.io/categories/" />
+    <link rel="canonical" href="https://nut-guo.github.io/posts/leviathan%E6%95%B4%E7%90%86/" />
     <meta name="description" content="CTF the hard way ">
     
-    <link rel="alternate" type="application/rss&#43;xml" href="https://nut-guo.github.io/categories/index.xml">
-    
 
-    <title>Categories &middot; Edidor Demo</title>
+    <title>leviathan整理 &middot; Edidor Demo</title>
 
     <link rel="shortcut icon" href="https://nut-guo.github.io/images/favicon.ico" />
 
@@ -188,11 +186,102 @@
 
         </nav>
         <main class="main">
-            
-<h2 class="title"><a class="terms-title" href="https://nut-guo.github.io/categories" class="btn"> Categories </a></h2>
-<ul class="terms-list control">
-    
-</ul>
+            <article class="article">
+    <h2 class="title"><a href='/posts/leviathan%E6%95%B4%E7%90%86/' class="btn">leviathan整理</a></h2>
+    <div class="article-meta clearfix">
+        <ul class="dates clearfix left control">
+            <li><i class="icon icon-date"></i></li>
+            <li class="publish-date">
+                <time datetime="2019.03.11">2019.03.11</time>
+            </li>
+        </ul>
+        
+        
+    </div>
+    <div class="content">
+        
+        
+
+<h1 id="leviathan0">Leviathan0</h1>
+
+<p>leviathan0</p>
+
+<p>ls -la查看文件夹下的所有文件的信息，发现属主为leviathan1的文件夹，有大量冗余的信息，利用管道和grep配合查找信息</p>
+
+<h1 id="leviathan1">Leviathan1</h1>
+
+<p>rioGegei8m</p>
+
+<p>目录下有一个简单的二进制文件，要求输入密码，没有任何线索，在简单的逆向之后发现，其中有调用setuid，那么可能获取到一个拥有下一个level的权限的sh，密码校验的方式十分简单，不过是一个strcmp那么我们可以很快的确定正确的密码应该是sexsecretlovegod,获得了sh之后cat密码文件从而过关</p>
+
+<h1 id="leviathan2">Leviathan2</h1>
+
+<p>ougahZi8Ta</p>
+
+<p>利用ltrace 命令显示命令中调用的库函数</p>
+
+<p>利用printfile直接获取密码失败，新建一个测试文件，利用ltrace命令查看过程中的函数调用情况，发现命令将参数利用snprintf写入了缓冲区，setuid之后系统调用cat,可以通过修改文件名，以test为例，可以将文件名修改为&rdquo;test;sh&rdquo;在这个过程中cat之后打开终端。</p>
+
+<h1 id="leviathan3">Leviathan3</h1>
+
+<p>Ahdiemoo1j</p>
+
+<p>在此关中，同样还是利用ltrace跟踪二进制文件的函数调用情况，在还是调用了strcmp命令，我们由此获得了密码。不适用ltrace ，输入我们刚刚获得的密码，获得shell.</p>
+
+<p>这个过程中遇到的一个小问题在于我们在ltrace中直接输入密码得到的sh没有得到正确的UID，观察得知在此之前执行了setruid的函数，设置了真实的UID</p>
+
+<h1 id="leviathan4">Leviathan4</h1>
+
+<p>vuH0coox6m</p>
+
+<p>找到的二进制文件给出了一份二进制输出，我们利用在线的翻译工具，将二进制的数据转化为ascii码表示的文本</p>
+
+<h1 id="leviathan5">Leviathan5</h1>
+
+<p>Tith4cokei</p>
+
+<p>ltrace 发现二进制文件将输出一个路径为/tmp/file.log的文件</p>
+
+<p>可以通过ln -s命令建立符号链接，将我们想要获取的储存密码的文件链接到该文件上，从而利用这样的方式输出我们想要得到的密码。</p>
+
+<h1 id="leviathan6">Leviathan6</h1>
+
+<p>UgaoFee4li</p>
+
+<p>在这个关卡中，我们写了一个简单的脚本利用for循环来实现了暴力破解得到了shell</p>
+
+<h1 id="leviathan7">Leviathan7</h1>
+
+<p>ahy7MaeBo9</p>
+
+        
+    </div>
+
+</article>
+<section class="comment">
+    <p class="local-info">
+        Comment is disabled to avoid unwanted discussions from 'localhost:1313' on your Disqus
+        account...
+    </p>
+    <div id="disqus_thread"></div>
+</section>
+<script type="text/javascript">
+
+    (function () {
+        if (window.location.hostname == "localhost") {
+            return
+        }
+        document.querySelector('.local-info').classList.add('hide')
+
+        let dsq = document.createElement('script')
+        dsq.type = 'text/javascript'
+        dsq.async = true
+        let disqus_shortname = 'your disqus short name'
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+    })()
+</script>
+
 
         </main>
     </div>

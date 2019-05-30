@@ -7,13 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Hugo 0.55.6" />
     
-    <link rel="canonical" href="https://nut-guo.github.io/categories/" />
+    <link rel="canonical" href="https://nut-guo.github.io/posts/liveoverflow/" />
     <meta name="description" content="CTF the hard way ">
     
-    <link rel="alternate" type="application/rss&#43;xml" href="https://nut-guo.github.io/categories/index.xml">
-    
 
-    <title>Categories &middot; Edidor Demo</title>
+    <title>liveoverflow笔记 &middot; Edidor Demo</title>
 
     <link rel="shortcut icon" href="https://nut-guo.github.io/images/favicon.ico" />
 
@@ -188,11 +186,146 @@
 
         </nav>
         <main class="main">
-            
-<h2 class="title"><a class="terms-title" href="https://nut-guo.github.io/categories" class="btn"> Categories </a></h2>
-<ul class="terms-list control">
-    
+            <article class="article">
+    <h2 class="title"><a href='/posts/liveoverflow/' class="btn">liveoverflow笔记</a></h2>
+    <div class="article-meta clearfix">
+        <ul class="dates clearfix left control">
+            <li><i class="icon icon-date"></i></li>
+            <li class="publish-date">
+                <time datetime="2019.03.15">2019.03.15</time>
+            </li>
+        </ul>
+        
+        
+    </div>
+    <div class="content">
+        
+        
+
+<h1 id="0x0b">0x0B</h1>
+
+<p>ssh 连接，ps aux查看进程，ip addr查看网络地址，id 查看当前id(gid uid )</p>
+
+<h1 id="0x0c">0x0C</h1>
+
+<p>利用man 命令查看C函数，阅读manual 找到可能存在的漏洞，manual中给出的Bug信息可能可以指出破解的方向</p>
+
+<p>volatile 变量，有些变量如果在程序中未发生过变化，那么程序中的部分分支可能是无效的，为了防止编译器对程序进行自动优化，可以定义volatile变量使程序保持原貌。</p>
+
+<ul>
+<li>汇编</li>
 </ul>
+
+<p>栈抬升之后，ebp指向原来的ebp的地址</p>
+
+<p>lea:load effective address将地址复制到寄存器或者内存中</p>
+
+<p>参数传递：将参数通过eax存放在character buffer上</p>
+
+<ul>
+<li>gdb操作</li>
+</ul>
+
+<p>b 设置断点：b *main；b *&lt;addr&gt;</p>
+
+<p>set 设置参数：set disassembly-flavor intel(汇编语言使用intel语法)</p>
+
+<p>info查看信息：info proc mappings；info registers</p>
+
+<p>define hook-stop:设置停止时执行的操作</p>
+
+<p>x 分析地址：x/24wx \$esp; x/2i \$eip;x funcname(查看函数位置)具体的参数含义可以在gdb 中help</p>
+
+<ul>
+<li>技巧</li>
+</ul>
+
+<p>python -c &lsquo; &lsquo;执行操作，可以用python语言构造输入</p>
+
+<p>python中可以通过chr()将数字转换为其对应的ascii字符</p>
+
+<p>Stack２解题过程中需要设置环境变量，利用export命令临时设置；该临时变量中含有换行符，无法直接在终端中构造，可以通过`　`获取其中的命令的输出来构造，具体如下：GREENIE=<code>python -c 'print &quot;A&quot;*64+&quot;\x0a\x0d\x0a\x0d&quot;'</code>然后export GREENIE</p>
+
+<h1 id="0x0d">0x0D</h1>
+
+<p>解决stack3的过程中似乎遇到一点小问题，编写的exp在python3中无法顺利将地址添加到padding的末尾，而只能利用python2来解决</p>
+
+<ul>
+<li>objdump使用</li>
+</ul>
+
+<p>-t选项显示所有的标记可与|grep搭配使用</p>
+
+<ul>
+<li>python</li>
+</ul>
+
+<p>构造地址：利用struct库(import struct;eip=struct.pack(&ldquo;I&rdquo;, 0x080483f4)</p>
+
+<h1 id="0x0e">0x0E</h1>
+
+<p>gdb 中x/s　打印字符串</p>
+
+<p>int 3中断程序运行，\xcc　debugger　可以用这样的方式来测试我们的payload是否能够成功被运行</p>
+
+<p>在不同的环境中运行，由于环境变量存在差异，可能带来不同的地址偏移，可以通过nop 来填充payload 解决问题，这个方法叫做nopslide</p>
+
+<p>我们可以在shellcode storm 网站上找到合适的shellcode作为我们的payload</p>
+
+<p>我们用这样的方式运行了一个sh之后，它将一个文件作为输入，而无法获取我们的新的输入，这时候我们需要利用一些技巧：cat</p>
+
+<p>cat命令，如果没接任何参数的话将会把标准输入作为他的输入，从而会重新打印我们的任何一个输入，利用这一点，我们可以通过cat来进行我们获得的sh的输入</p>
+
+<p>此处最终给出的命令是(python exp.py;cat)|/opt/protostar/bin/stack5,即将构造出来的输入和接着执行的cat命令都重定向到我们要利用的二进制文件中去。</p>
+
+<p>总结：</p>
+
+<p>​   如何确定eip的位置：在gdb中设置合适的断点，在该处打印出当前的stack和registers，leave之后，由于ret时是取出存储在当前esp中的值来确定下一步执行的命令，我们可以在之前溢出的时候通过修改eip的值来更改下一步执行的指令的位置。</p>
+
+<p>​   更改了eip之后，由于数据和代码对于机器而言是无差别的，所有被eip指向的内容都会被当作代码来执行，那么我们可以在此后再添加上一段payload。</p>
+
+<p>​   但是由于程序运行加载到内存的过程中，由于环境变量的不同，可能会使得地址存在一些偏移，而不能直接准确的执行我们希望其执行的命令，这个时候可以通过nopslide来解决，用\x90，即nop来占位，只要eip指向了任何一个nop，那么最终都会执行到我们所加入的payload中去，即执行了我们的shellcode.</p>
+
+<h1 id="0x0f">0x0F</h1>
+
+<p>程序中限制了函数返回地址不能在栈上，但是此时可以通过返回返回函数的地址，而将我们想要执行的指令的地址放在返回的地址之后，从而可以跳过这一限制</p>
+
+<p>或者我们还可以利用ret2libc的方法，调用system中的/bin/sh达到提权的目的</p>
+
+<p>在gdb中用info proc map我们可以打印出程序中各内容在地址中的分布状况，找到libc的位置，然后用find进行搜索。</p>
+
+<p>或者在终端中用strings解析所有的字符串，然后利用grep从中查找所需的内容；示例：strings -a -t x /lib/libc-2.11.2.so |grep /bin/sh（-a 所有，-t x将所有的偏移打印为hex,将这个地方找到的偏移加到libc被加载的起始位置即可得到/bin/sh的位置）</p>
+
+<p>system函数可以执行执行终端命令，在gdb 中利用p system可以打印出system的地址</p>
+
+        
+    </div>
+
+</article>
+<section class="comment">
+    <p class="local-info">
+        Comment is disabled to avoid unwanted discussions from 'localhost:1313' on your Disqus
+        account...
+    </p>
+    <div id="disqus_thread"></div>
+</section>
+<script type="text/javascript">
+
+    (function () {
+        if (window.location.hostname == "localhost") {
+            return
+        }
+        document.querySelector('.local-info').classList.add('hide')
+
+        let dsq = document.createElement('script')
+        dsq.type = 'text/javascript'
+        dsq.async = true
+        let disqus_shortname = 'your disqus short name'
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+    })()
+</script>
+
 
         </main>
     </div>

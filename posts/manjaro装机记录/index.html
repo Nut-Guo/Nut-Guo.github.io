@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    
+    <link rel="canonical" href="https://nut-guo.github.io/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/" />
+    <meta name="description" content="CTF the hard way ">
+    
+
+    <title>Manjaro装机记录 &middot; Edidor Demo</title>
+
+    <link rel="shortcut icon" href="https://nut-guo.github.io/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://nut-guo.github.io/css/main.css" />
+    
+        
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-light.min.css">
+        
+    
+    
+    
+    <link rel="stylesheet" href="https://nut-guo.github.io/css/">
+    
+</head>
+
+
+<body class="loading light-mode">
+    
+<div class="top">
+    <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+</div>
+<div class="bottom">
+    <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+</div>
+
+    <header class="header">
+    <ul class="menu clearfix control">
+        
+<li class="logo-container logo-light">
+    <a href="https://nut-guo.github.io/" class="btn logo-link">
+        <img class="logo" src="https://nut-guo.github.io/images/logo_light.svg" alt="logo" />
+    </a>
+</li>
+
+
+<li class="logo-container logo-default">
+    <a href="https://nut-guo.github.io/" class="btn logo-link">
+        <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+    </a>
+</li>
+
+        
+        
+        
+        
+        <li 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                Article
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="/posts"
+                    
+                        class="btn "
+                    >Posts</a>
+                </li>
+                
+                <li class="">
+                    <a href="/tags"
+                    
+                        class="btn "
+                    >Tags</a>
+                </li>
+                
+                <li class="">
+                    <a href="/categories"
+                    
+                        class="btn "
+                    >Categories</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+        
+        
+        <li 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                View
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="#"
+                    
+                        class="btn toggle-sidebar"
+                    >Toggle Sidebar</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+        
+        
+        <li  id="theme-switcher" 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                Theme
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="light" class="btn"
+                        
+                    >Light</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="dark" class="btn"
+                        
+                    >Dark</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="wild" class="btn"
+                        
+                    >Wild</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        class="export-wild btn"
+                        
+                    >Export Wild Style</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+    </ul>
+</header>
+
+    <div class="middle">
+        <nav class="sidebar">
+            <ul class="posts control">
+    
+    <li><a class="no-break btn" href='/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/'><i class="icon icon-post"></i>数据结构</a></li>
+    
+    <li><a class="no-break btn" href='/posts/liveoverflow/'><i class="icon icon-post"></i>liveoverflow笔记</a></li>
+    
+    <li><a class="no-break btn" href='/posts/natas%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>natas整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/leviathan%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>leviathan整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/bandit%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>Bandit整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>资源整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/8086cpu%E6%A6%82%E8%BF%B0/'><i class="icon icon-post"></i>8086CPU概述</a></li>
+    
+    <li><a class="no-break btn" href='/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/'><i class="icon icon-post"></i>Manjaro装机记录</a></li>
+    
+</ul>
+
+        </nav>
+        <main class="main">
+            <article class="article">
+    <h2 class="title"><a href='/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/' class="btn">Manjaro装机记录</a></h2>
+    <div class="article-meta clearfix">
+        <ul class="dates clearfix left control">
+            <li><i class="icon icon-date"></i></li>
+            <li class="publish-date">
+                <time datetime="2019.02.19">2019.02.19</time>
+            </li>
+        </ul>
+        
+        
+    </div>
+    <div class="content">
+        
+        
+
+<p>经历了一番骚操作之后不慎干掉了自己经营许久的Manjaro KDE，痛定思痛，重新安装操作系统的过程中必定会踩到许多的坑，小记一波，预防不幸再次发生。</p>
+
+<hr />
+
+<p>安装过程没什么好说的，分区这些东西，总感觉个人用户低端如我，直接一个分区也没什么不好的地方，之后有进一步的需求，例如交换分区的话，swapfile可以成为一个更好的解决方案，从配置的过程开始记起。</p>
+
+<hr />
+
+<h3 id="1-换源">1.换源</h3>
+
+<blockquote>
+<p>重装千万条，换源第一条；换源不规范，迟早要完蛋。</p>
+</blockquote>
+
+<ul>
+<li><p>选择国内镜像</p>
+
+<pre><code>sudo pacman-mirrors -i -c China -m rank //更新镜像排名
+</code></pre></li>
+
+<li><p>添加archlinuxcn和arch4edu</p>
+
+<pre><code>更改 /etc/pacman.conf
+#添加以下内容：
+[archlinuxcn]
+SigLevel = Optional TrustedOnly
+Server = http://mirrors.ustc.edu.cn/archlinuxcn/$arch
+
+[arch4edu]
+SigLevel = Never
+Server = http://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch
+</code></pre></li>
+
+<li><p>更换rubygem源</p>
+
+<pre><code># 添加 TUNA 源并移除默认源
+gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+# 列出已有源
+gem sources -l
+# 应该只有 TUNA 一个
+</code></pre></li>
+
+<li><p>git代理</p>
+
+<pre><code>git config --global http.proxy 'socks5://127.0.0.1:1080'
+</code></pre></li>
+
+<li><p>使用以下命令替换 bundler 默认源</p>
+
+<pre><code>bash bundle config mirror.https://rubygems.org https://mirrors.tuna.tsinghua.edu.cn/rubygems 
+</code></pre></li>
+
+<li><p>blackarch repo 的添加与换源</p>
+
+<pre><code># Run https://blackarch.org/strap.sh as root and follow the instructions.
+$ curl -O https://blackarch.org/strap.sh
+
+# The SHA1 sum should match: 9f770789df3b7803105e5fbc19212889674cd503 strap.sh
+$ sha1sum strap.sh
+
+# Set execute bit
+$ chmod +x strap.sh
+
+# Run strap.sh
+$ sudo ./strap.sh 
+换源
+$ kate /etc/pacman.conf
+#修改
+[blackarch]github下载文件巨慢，挂代理(先配置好socks5)
+[方法](https://www.jianshu.com/p/5e74b1042b70)
+
+SigLevel = Optional TrustAll
+Server = https://mirrors.ustc.edu.cn/blackarch/$repo/os/$arch
+注意及时安装相应的keyring
+</code></pre></li>
+</ul>
+
+<p>还有换源问题的话求助tuna好了
+<a href="https://mirror.tuna.tsinghua.edu.cn/">https://mirror.tuna.tsinghua.edu.cn/</a></p>
+
+<hr />
+
+<h3 id="2-必要软件的安装">2.必要软件的安装</h3>
+
+<ul>
+<li>yay(aur软件安装)</li>
+
+<li><p>yaourt
+有时候aur源下载巨慢，可考虑通过将下载好的文件放到yaourt的tmp文件中，并通过yaourt更改PKGBUILD文件指向本地安装包，跳过校验</p></li>
+
+<li><p><a href="https://github.com/erguotou520/electron-ssr">electron-ssr</a></p></li>
+
+<li><p><a href="http://www.frogjun.com/fq-a/">搭梯子</a></p></li>
+</ul>
+
+<p>问题 ：electron-ssr无法使用</p>
+
+<p>方案：版本适配问题，目前(2019-2-12)0.2.6版本对KDE版本存在bug，安装之前的版本，手动设置开机启动,浏览器之外的软件使用ssr，配置socks5代理即可，如telegram</p>
+
+<p>问题：终端无法科学上网</p>
+
+<p>方案：<a href="https://blog.fazero.me/2015/08/31/%E5%88%A9%E7%94%A8proxychains%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8socks5%E4%BB%A3%E7%90%86/">proxychains</a></p>
+
+<p>问题：github下载文件巨慢，挂代理(先配置好socks5)</p>
+
+<p>方法：<a href="https://www.jianshu.com/p/5e74b1042b70">配置socks5代理</a></p>
+
+<ul>
+<li><p>搜狗输入法</p>
+
+<pre><code>sudo pacman -S fcitx-sogoupinyin
+sudo pacman -S fcitx-im
+sudo pacman -S fcitx-configtool#kde桌面环境下的kcm-fcitx更为美观)
+sudo gedit ~/.xprofile
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=&quot;im=fcitx&quot;
+</code></pre></li>
+
+<li><p>zsh</p>
+
+<pre><code>sudo pacman -S zsh zsh-completions
+cat /etc/shells
+chsh -s /bin/zsh
+sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
+</code></pre></li>
+</ul>
+
+<p>配置zsh主题(修改~/.zshrc)，推荐steeef，此外theunraveler,af-magic</p>
+
+<ul>
+<li><p>goldendict
+<a href="https://www.zhihu.com/question/21133533/answer/142164875">字典库</a></p></li>
+
+<li><p>vmware</p></li>
+</ul>
+
+<p>问题：vmware无法运行虚拟机</p>
+
+<p>方案：安装linux-headers</p>
+
+<p>问题：vmware无法联网</p>
+
+<p>方案：启用vmware-net服务</p>
+
+<pre><code>systemctl start vmware-networks.service
+systemctl enable vmware-networks.service
+</code></pre>
+
+<p>问题：vmware图形加速</p>
+
+<p>方案：修改配置文件~/.vmware/preferences
+增加或修改为</p>
+
+<pre><code>mks.gl.allowBlacklistedDrivers = &quot;TRUE&quot;
+</code></pre>
+
+<p>问题：交换空间不够</p>
+
+<p>方案：参见5，设置swapfile
+- crossover</p>
+
+<p>问题：crossover 缺少so文件</p>
+
+<p>方案：安装相应的lib32文件</p>
+
+<ul>
+<li><p>telegram(注意配置socks5端口)</p></li>
+
+<li><p>peda</p>
+
+<pre><code>echo &quot;source /usr/share/peda/peda.py&quot; &gt;&gt; ~/.gdbinit 
+</code></pre></li>
+
+<li><p>tmux<a href="https://github.com/izuolan/.tmux">(配置)</a></p></li>
+</ul>
+
+<p>工具</p>
+
+<ul>
+<li>radare2+cutter</li>
+</ul>
+
+<p>最终还是没能解决jupyter的问题。。。</p>
+
+<p>下载之后安装decompiler插件</p>
+
+<pre><code>$r2pm -i r2dc
+</code></pre>
+
+<p>补充:(后来发现radare2本身足够好用，cutter并非必需品)</p>
+
+<p><a href="https://github.com/ITAYC0HEN/A-journey-into-Radare2">入坑传教</a></p>
+
+<p>喜欢的配色!!!：cga</p>
+
+<ul>
+<li>ida<a href="https://pan.baidu.com/s/1c3R6iZY#list/path=%2F">下载</a></li>
+<li><a href="https://www.sendspace.com/file/dpjvwd">hopper</a></li>
+</ul>
+
+<hr />
+
+<h3 id="3-各类放缩问题">3.各类放缩问题</h3>
+
+<ul>
+<li>系统缩放设置</li>
+<li>搜狗拼音外观设置更改字体大小</li>
+<li>crossover更改wine的dpi</li>
+</ul>
+
+<hr />
+
+<h3 id="4-挂载windows分区">4.挂载Windows分区</h3>
+
+<p>查看Windows分区UUID</p>
+
+<pre><code>$ lsblk -f
+
+NAME   FSTYPE LABEL      UUID                                 MOUNTPOINTL
+sda                                                         
+├─sda1 ext4   Arch_Linux 978e3e81-8048-4ae1-8a06-aa727458e8ff /
+├─sda2 ntfs   Windows    6C1093E61093B594                     
+└─sda3 ext4   Storage    f838b24e-3a66-4d02-86f4-a2e73e454336 /media/Storage
+sdb                                                           
+├─sdb1 ntfs   Games      9E68F00568EFD9D3                     
+└─sdb2 ext4   Backup     14d50a6c-e083-42f2-b9c4-bc8bae38d274 /media/Backup
+sdc                                                           
+└─sdc1 vfat   Camera     47FA-4071                            /media/Camera
+</code></pre>
+
+<p>修改/etc/fstab文件</p>
+
+<pre><code># &lt;file system&gt;   &lt;dir&gt;		&lt;type&gt;    &lt;options&gt;             &lt;dump&gt;  &lt;pass&gt;
+UUID=(分区的UUID)  /mnt/windows(挂载点)  ntfs-3g   defaults		  0       0
+</code></pre>
+
+<hr />
+
+<h3 id="5-设置swapfile">5.设置swapfile</h3>
+
+<ul>
+<li><p>手动设置
+<a href="https://wiki.manjaro.org/index.php?title=Add_a_/swapfile">(官方wiki)</a></p></li>
+
+<li><p>自动化
+systemd-swap</p></li>
+</ul>
+
+<p><a href="https://wiki.archlinux.org/index.php/Install" title="Install">安装</a> 软件包 <a href="https://www.archlinux.org/packages/?name=systemd-swap">systemd-swap</a>。
+设置 <code>/etc/systemd/swap.conf</code> 文件的 <em>Swap File Universal</em> 一节下的 <code>swapfu_enabled=1</code>。 <a href="https://wiki.archlinux.org/index.php/Start/enable" title="Start/enable">启动/启用</a> <code>systemd-swap</code> 服务。 访问 <a href="https://github.com/Nefelim4ag/systemd-swap">作者的 GitHub</a> 页面来获取更多的信息，或者设置 <a href="https://github.com/Nefelim4ag/systemd-swap/blob/master/README.md#about-configuration">推荐的配置</a>。</p>
+
+<hr />
+
+<h3 id="6-odoo">6.odoo</h3>
+
+<p>想自己动手改善果壳生活体验，遂开始折腾odoo！
+如果有包管理的话通过包管理安装自然最好，否则可考虑源码安装
+<a href="https://www.odoo.com/documentation/master/setup/install.html">官方文档</a>
+<a href="https://wiki.archlinux.org/index.php/PostgreSQL">postgresql wiki</a>
+此处吸取教训，官方指南总是比博文要来的规范，能靠官方文档解决的问题不求人
+module没有加载的真实原因不是版本不对，而是自己没有把步骤都做完呀。。。</p>
+
+<pre><code class="language-shell">#安装
+yay -S odoo
+sudo pacman -S postgresql
+#配置数据库
+sudo -iu postgres
+initdb -D /var/lib/postgres/data
+</code></pre>
+
+<h3 id="7-linux-与win10的交易">7.Linux 与Win10的交易</h3>
+
+<p>时间同步</p>
+
+<p><code>sudo timedatectl set-local-rtc true</code></p>
+
+<p><a href="https://zhuanlan.zhihu.com/p/31640193">公用蓝牙鼠标</a></p>
+
+        
+    </div>
+
+</article>
+<section class="comment">
+    <p class="local-info">
+        Comment is disabled to avoid unwanted discussions from 'localhost:1313' on your Disqus
+        account...
+    </p>
+    <div id="disqus_thread"></div>
+</section>
+<script type="text/javascript">
+
+    (function () {
+        if (window.location.hostname == "localhost") {
+            return
+        }
+        document.querySelector('.local-info').classList.add('hide')
+
+        let dsq = document.createElement('script')
+        dsq.type = 'text/javascript'
+        dsq.async = true
+        let disqus_shortname = 'your disqus short name'
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+    })()
+</script>
+
+
+        </main>
+    </div>
+    <footer class="footer clearfix">
+    <ul class="control social clearfix">
+        <li><a class="author btn" href="#">Sciver</a></li>
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon behance"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon email"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon facebook"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon github"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon twitter"></i></a>
+        </li>
+        
+        
+        <li>
+            <a class="icon-link btn" href="https://nut-guo.github.io/index.xml" type="application/rss+xml" title="rss">
+                <i class="rss icon"></i></a>
+        </li>
+    </ul>
+
+    <ul class="control status clearfix">
+        <li><a href="#" class="btn">Posts:
+                9</a>
+        </li>
+        <li><a href="#" class="btn">Pages:
+                0</a></li>
+        <li><a href="#" class="btn">en</a></li>
+        <li><a href="https://gohugo.io" class="btn">Hugo, 0.55.6</a></li>
+        <li><a href="https://github.com/jacobsun/edidor" class="btn">Theme: Edidor</a></li>
+        <li>
+            <a href="#" class="btn">Last build: <time
+                    datetime=""></time>
+            </a>
+        </li>
+    </ul>
+</footer>
+<div class="dialog">
+    <div class="wrapper">
+        <div class="clearfix"><button class="btn close-dialog">X</button></div>
+        <header>
+            <h1 class="title">Theme Name</h1>
+        </header>
+        <main>
+            <div class="clearfix">
+                <label for="theme-name">
+                    <p>Only English Character, space, hyphen are allowed!</p>
+                    <p>Valid name examples: "custom", "fantastic theme", "my-theme"</p>
+                    <p>Invalid name examles: "我的主题", ":)", "123"</p>
+                </label>
+                <input type="text" name="theme-name" id="theme-name">
+            </div>
+            <div class="clearfix">
+                <button class="btn export">Export</button>
+            </div>
+
+        </main>
+        <footer></footer>
+    </div>
+</div>
+
+    <script src="https://nut-guo.github.io/js/main.js"></script>
+
+    <script src="https://nut-guo.github.io/js/"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'your ga id', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</body>
+
+</html>

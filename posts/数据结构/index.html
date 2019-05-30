@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    
+    <link rel="canonical" href="https://nut-guo.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" />
+    <meta name="description" content="CTF the hard way ">
+    
+
+    <title>数据结构 &middot; Edidor Demo</title>
+
+    <link rel="shortcut icon" href="https://nut-guo.github.io/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://nut-guo.github.io/css/main.css" />
+    
+        
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-light.min.css">
+        
+    
+    
+    
+    <link rel="stylesheet" href="https://nut-guo.github.io/css/">
+    
+</head>
+
+
+<body class="loading light-mode">
+    
+<div class="top">
+    <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+</div>
+<div class="bottom">
+    <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+</div>
+
+    <header class="header">
+    <ul class="menu clearfix control">
+        
+<li class="logo-container logo-light">
+    <a href="https://nut-guo.github.io/" class="btn logo-link">
+        <img class="logo" src="https://nut-guo.github.io/images/logo_light.svg" alt="logo" />
+    </a>
+</li>
+
+
+<li class="logo-container logo-default">
+    <a href="https://nut-guo.github.io/" class="btn logo-link">
+        <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+    </a>
+</li>
+
+        
+        
+        
+        
+        <li 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                Article
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="/posts"
+                    
+                        class="btn "
+                    >Posts</a>
+                </li>
+                
+                <li class="">
+                    <a href="/tags"
+                    
+                        class="btn "
+                    >Tags</a>
+                </li>
+                
+                <li class="">
+                    <a href="/categories"
+                    
+                        class="btn "
+                    >Categories</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+        
+        
+        <li 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                View
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="#"
+                    
+                        class="btn toggle-sidebar"
+                    >Toggle Sidebar</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+        
+        
+        <li  id="theme-switcher" 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                Theme
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="light" class="btn"
+                        
+                    >Light</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="dark" class="btn"
+                        
+                    >Dark</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="wild" class="btn"
+                        
+                    >Wild</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        class="export-wild btn"
+                        
+                    >Export Wild Style</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+    </ul>
+</header>
+
+    <div class="middle">
+        <nav class="sidebar">
+            <ul class="posts control">
+    
+    <li><a class="no-break btn" href='/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/'><i class="icon icon-post"></i>数据结构</a></li>
+    
+    <li><a class="no-break btn" href='/posts/liveoverflow/'><i class="icon icon-post"></i>liveoverflow笔记</a></li>
+    
+    <li><a class="no-break btn" href='/posts/natas%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>natas整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/leviathan%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>leviathan整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/bandit%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>Bandit整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>资源整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/8086cpu%E6%A6%82%E8%BF%B0/'><i class="icon icon-post"></i>8086CPU概述</a></li>
+    
+    <li><a class="no-break btn" href='/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/'><i class="icon icon-post"></i>Manjaro装机记录</a></li>
+    
+</ul>
+
+        </nav>
+        <main class="main">
+            <article class="article">
+    <h2 class="title"><a href='/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/' class="btn">数据结构</a></h2>
+    <div class="article-meta clearfix">
+        <ul class="dates clearfix left control">
+            <li><i class="icon icon-date"></i></li>
+            <li class="publish-date">
+                <time datetime="2019.04.12">2019.04.12</time>
+            </li>
+        </ul>
+        
+        
+    </div>
+    <div class="content">
+        
+        
+
+<h1 id="绪论">绪论</h1>
+
+<ul>
+<li><p>程序开发过程</p>
+
+<ul>
+<li>需求分析</li>
+<li>确定实际问题对程序的要求</li>
+<li>模型设计</li>
+<li>将具体问题抽象为可以通过计算机解决的为题，其中需要利用数据结构和算法的知识</li>
+<li>编码实现</li>
+<li>检查测试</li>
+<li>测试调试</li>
+</ul></li>
+
+<li><p>算法和算法分析</p>
+
+<ul>
+<li>概念</li>
+<li>问题：需要解决的问题</li>
+<li>问题实例：需要解决的问题的某个具体的例子</li>
+<li>算法：对解决问题的过程的严格描述</li>
+<li>算法的性质</li>
+<li>有穷性</li>
+<li>能行性</li>
+<li>确定性</li>
+<li>终止性</li>
+<li>输入输出</li>
+<li>算法设计模式（通用的一些想法）</li>
+<li>枚举法</li>
+<li>贪心法</li>
+<li>分治法</li>
+<li>回溯法（搜索）</li>
+<li>动态规划法</li>
+<li>分支限界法（搜索法的改进）</li>
+<li>算法分析</li>
+<li>基本假设
+
+<ul>
+<li>空间单位</li>
+<li>时间单位</li>
+</ul></li>
+<li>算法代价看作实例规模的函数
+
+<ul>
+<li>时间代价</li>
+<li>空间代价</li>
+</ul></li>
+<li>分情况考虑代价
+
+<ul>
+<li>最好（无价值）</li>
+<li>最坏情况的时间代价</li>
+<li>平均时间代价</li>
+</ul></li>
+<li>算法复杂度
+
+<ul>
+<li>渐近函数</li>
+<li>时间复杂度</li>
+<li>常用：$O(1)常量复杂度\O(\log n)对数复杂度\O(n)线性复杂度\O(n\log n)\O(n^2)平方复杂度\O(n^3)\O(2^n)指数复杂度$</li>
+<li>空间复杂度</li>
+</ul></li>
+<li>分析
+
+<ul>
+<li>基本操作：复杂度为O(1)，若为函数调用则将其整体时间复杂度代入计算</li>
+<li>加法规则（顺序复合）：若算法为多个部分的顺序复合，复杂性是着多个部分的复杂性之和，而由于忽略常量因子，则加法等价于求最大值</li>
+<li>乘法规则（循环结构）：若算法为一个循环，循环体执行$T_1(n)$次，每次循环体时间$T_2(n)$，则$T(n)=O(T_1(n)*T_2(n))$</li>
+<li>取最大原则（分支结构）：如果算法为条件分支，则复杂性为各分支结构中最大的</li>
+<li>递归算法的时间复杂度：</li>
+<li>$T(n)=O(n^k)+a\times T(n/b)$</li>
+<li>若$a&gt;b^k$则$T(n)=O(n^{\log_ba})$</li>
+<li>若$a=b^k$则$T(n)=O(n^k\log n)$</li>
+<li>若$a&lt;b^k$则$T(n)=O(n^k）$</li>
+</ul></li>
+<li>Python操作的时间开销
+
+<ul>
+<li>基本算数运算为常量时间</li>
+<li>组合对象的复制和切片操作需要线性时间</li>
+<li>list和tuple访问和修改元素为常量时间，而增删元素操作为线性时间</li>
+<li>构造新结构为线性时间</li>
+</ul></li>
+<li>程序实现和效率陷阱（某些步骤的具体实现可能使得原本可行的算法变得不可接受）</li>
+</ul></li>
+
+<li><p>数据结构</p>
+
+<ul>
+<li>概念</li>
+<li>数据：经过了编码的信息</li>
+<li>数据结构：数据之间关联和组合的形式</li>
+<li>抽象定义</li>
+<li>$D=（E(element)，R(relation)）$</li>
+<li>重要类别</li>
+<li>集合</li>
+<li>序列</li>
+<li>层次</li>
+<li>树</li>
+<li>图（可将前面几种结构看作受限的图结构）</li>
+<li>结构性数据结构（关键在于结构）和功能性数据结构（关键在于依赖于此结构实现的对于数据的访问特性）</li>
+<li>Python的内存对象表示</li>
+<li>对象标识(id)</li>
+<li>对象关联的表示
+
+<ul>
+<li>利用元素存储位置隐式的表示（顺序表示）</li>
+<li>字符串，开始用一确定大小的块存储字符串长度，后接实际内容</li>
+<li>在内存中显式的表示（链接表示）</li>
+<li>通常数据的表示为两种形式的混合</li>
+</ul></li>
+<li>引用语义（变量中保存对象的引用（内存地址）），与之相对应的，在C语言中变量采取的是值语义的形式，变量的值直接的保存在变量的存储区里</li>
+
+<li><p>变量与对象之间存在链接，而对象之间也存在链接</p>
+
+<h1 id="抽象数据类型和python类">抽象数据类型和Python类</h1></li>
+</ul></li>
+
+<li><p>抽象数据类型：数据抽象，与函数所实现的计算抽象或过程抽象相对应。为目的的实现提供接口，而包装成的整个整体隐藏了其中的技术实现的细节。将对象的使用与其具体实现隔离。</p>
+
+<ul>
+<li>ADT思想</li>
+<li>围绕一类数据定义程序模块</li>
+<li>接口与实现分离</li>
+<li>需要实现时从所用的编程语言中选取和使得机制</li>
+</ul></li>
+
+<li><p>数据类型的操作</p>
+
+<ul>
+<li>构造操作</li>
+<li>解析操作</li>
+<li>变动操作（不变类型和可变类型）</li>
+</ul></li>
+
+<li><p>Python类</p>
+
+<ul>
+<li>头部，体</li>
+<li>属性</li>
+<li>以_开头的名字为内部的名字，无法在类之外访问；以__开头但不以其结尾的属性在类定义之外不能直接以此名称访问，从而保护内部数据</li>
+<li>类方法</li>
+<li>初始化方法<strong>init</strong>(self,arg1,arg2&hellip;)</li>
+<li>实例方法（操作对象的实例的方法）</li>
+<li>非实例方法（不依赖于类的对象，但是仅与类的实现的某一局部特性有关而不应定义为全局变量，称为静态方法，描述时需要在函数定义的头部之前加修饰符@staticmethod，且参数列表中不应该有self参数,可以通过从对象或类除法通过圆点形式调用，本质上说就是类里面定义的局部的普通函数）</li>
+<li>特殊方法（定义该类的某种算数运算，特殊方法名均以__开头和结尾，二元运算的参数为（self,another））
+
+<ul>
+<li>四则运算：add,mul,floordiv,truediv,sub,mod</li>
+<li>比较:eq,lt,ne,le,gt,ge</li>
+<li>字符串化：str</li>
+</ul></li>
+<li>类定义和使用</li>
+<li>名字空间</li>
+<li>类中定义的变量和函数称为类的属性</li>
+<li>类对象的使用：属性访问和实例化</li>
+<li>__doc__数据属性：类的文档串</li>
+<li>实例初始化的过程
+
+<ol>
+<li>创建类的对象</li>
+<li>利用初始化函数为对象的属性赋值</li>
+<li>返回新建的对象并通过赋值语句把新对象赋值给变量作为其约束值</li>
+</ol></li>
+<li>方法的定义和使用
+
+<ul>
+<li>实例方法用圆点形式调用时，将调用该方法的对象约束到第一个形参self</li>
+<li>方法对象不同于函数对象，包含了两个成分：类中的函数定义生成的函数对象；调用时约束的一个实例对象</li>
+</ul></li>
+<li>说明
+
+<ul>
+<li>创建了类的对象之后仍可以通过属性赋值的方式为类增加新属性，包括数据属性和函数属性</li>
+<li>若需要在一个方法函数中调用同一个类中的其他函数，需要利用self以属性描述的方式写法调用</li>
+<li>方法函数就是定义在类中的函数，可以访问全局名字空间，必要时可以用global或nonlocal声明</li>
+<li>内置函数isinstance(obj,cls)检查类和对象的关系</li>
+</ul></li>
+<li>类方法
+
+<ul>
+<li>定义前加修饰符@classmethod,习惯以cls作为表示其调用类的参数，类方法执行时，调用它的类自动约束到方法的cls参数中，用于访问类的其他属性</li>
+</ul></li>
+<li>类定义的作用域规则
+
+<ul>
+<li>函数中局部名字的作用域自动延伸到内部潜逃的作用域，而类定义中不然，在类的名字 并不延伸到类定义中嵌套的作用域，从而在内部嵌套的作用域中需要用基于类名的属性引用的方式</li>
+</ul></li>
+<li>私有变量
+
+<ul>
+<li>约定以_开头的名字作为实例对象内部的东西，永远不从对象的外部访问</li>
+<li>以__开头的名字在类之外无法用属性访问的方式找到该名字</li>
+</ul></li>
+<li>类继承</li>
+<li>作用：基于已有的类定义新类，重复利用代码；建立类之间的继承关系，更好的组织和构造复杂的程序</li>
+<li>基类，派生类，继承关系，层次结构（不能出现循环结构）</li>
+<li>替换原理：在使用一个基类的实例对象的上下文中应当也能够使用其派生类</li>
+<li>内置函数issubclass(cls1,cls2)检验后者是否直接或间接的继承前者</li>
+<li>派生类的对象也是基类的对象</li>
+<li>方法查找
+
+<ul>
+<li>从派生类的实例调用方法时，首先从实例对象所属的类开始，若没找到定义就在其基类中查找</li>
+<li>若在继承类中覆盖了原有的方法，则派生类中调用时就不会使用基类中的方法了</li>
+<li>动态约束，调用时基于self所表示的那个实例对象的类型去确定应该调用哪个函数（不同于静态约束的根据程序正文去确定被调用方法的方式）</li>
+</ul></li>
+<li>标准函数super()
+
+<ul>
+<li>super().m()从对象所属类的基类中开始查找方法函数</li>
+<li>super(C,obj).m()从指定的类C开始查找函数属性m，找到后将C的一个实例obj作为m的self实参</li>
+</ul></li>
+<li>Python异常</li>
+<li>异常处理：try,except</li>
+<li>Python中的异常都是类，产生遗产个旧市生成相应的类的实例对象</li>
+<li>定义异常时从系统异常中选择一个合适的异常从中派生处自己的异常类</li>
+<li>若不需要定义的异常类执行特殊的操作，课利用pass填充函数体使结构完整</li>
+<li>异常的传播和捕获
+
+<ul>
+<li>在try语句中查找处理异常的except语句</li>
+<li>若未找到则在外层的try语句中查找异常处理的方法</li>
+<li>若函数中不存在处理，则函数的执行异常终止，在函数的调用点引发异常，在该环境下查找异常处理的方法</li>
+<li>若某一布找到了异常处理的方法，则执行处理后继续执行try语句，否则层层退出直到最上层也没找到则终止程序</li>
+</ul></li>
+</ul></li>
+</ul>
+
+        
+    </div>
+
+</article>
+<section class="comment">
+    <p class="local-info">
+        Comment is disabled to avoid unwanted discussions from 'localhost:1313' on your Disqus
+        account...
+    </p>
+    <div id="disqus_thread"></div>
+</section>
+<script type="text/javascript">
+
+    (function () {
+        if (window.location.hostname == "localhost") {
+            return
+        }
+        document.querySelector('.local-info').classList.add('hide')
+
+        let dsq = document.createElement('script')
+        dsq.type = 'text/javascript'
+        dsq.async = true
+        let disqus_shortname = 'your disqus short name'
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+    })()
+</script>
+
+
+        </main>
+    </div>
+    <footer class="footer clearfix">
+    <ul class="control social clearfix">
+        <li><a class="author btn" href="#">Sciver</a></li>
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon behance"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon email"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon facebook"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon github"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon twitter"></i></a>
+        </li>
+        
+        
+        <li>
+            <a class="icon-link btn" href="https://nut-guo.github.io/index.xml" type="application/rss+xml" title="rss">
+                <i class="rss icon"></i></a>
+        </li>
+    </ul>
+
+    <ul class="control status clearfix">
+        <li><a href="#" class="btn">Posts:
+                9</a>
+        </li>
+        <li><a href="#" class="btn">Pages:
+                0</a></li>
+        <li><a href="#" class="btn">en</a></li>
+        <li><a href="https://gohugo.io" class="btn">Hugo, 0.55.6</a></li>
+        <li><a href="https://github.com/jacobsun/edidor" class="btn">Theme: Edidor</a></li>
+        <li>
+            <a href="#" class="btn">Last build: <time
+                    datetime=""></time>
+            </a>
+        </li>
+    </ul>
+</footer>
+<div class="dialog">
+    <div class="wrapper">
+        <div class="clearfix"><button class="btn close-dialog">X</button></div>
+        <header>
+            <h1 class="title">Theme Name</h1>
+        </header>
+        <main>
+            <div class="clearfix">
+                <label for="theme-name">
+                    <p>Only English Character, space, hyphen are allowed!</p>
+                    <p>Valid name examples: "custom", "fantastic theme", "my-theme"</p>
+                    <p>Invalid name examles: "我的主题", ":)", "123"</p>
+                </label>
+                <input type="text" name="theme-name" id="theme-name">
+            </div>
+            <div class="clearfix">
+                <button class="btn export">Export</button>
+            </div>
+
+        </main>
+        <footer></footer>
+    </div>
+</div>
+
+    <script src="https://nut-guo.github.io/js/main.js"></script>
+
+    <script src="https://nut-guo.github.io/js/"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'your ga id', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</body>
+
+</html>

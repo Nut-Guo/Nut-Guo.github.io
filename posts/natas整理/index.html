@@ -7,13 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Hugo 0.55.6" />
     
-    <link rel="canonical" href="https://nut-guo.github.io/categories/" />
+    <link rel="canonical" href="https://nut-guo.github.io/posts/natas%E6%95%B4%E7%90%86/" />
     <meta name="description" content="CTF the hard way ">
     
-    <link rel="alternate" type="application/rss&#43;xml" href="https://nut-guo.github.io/categories/index.xml">
-    
 
-    <title>Categories &middot; Edidor Demo</title>
+    <title>natas整理 &middot; Edidor Demo</title>
 
     <link rel="shortcut icon" href="https://nut-guo.github.io/images/favicon.ico" />
 
@@ -188,11 +186,90 @@
 
         </nav>
         <main class="main">
-            
-<h2 class="title"><a class="terms-title" href="https://nut-guo.github.io/categories" class="btn"> Categories </a></h2>
-<ul class="terms-list control">
-    
-</ul>
+            <article class="article">
+    <h2 class="title"><a href='/posts/natas%E6%95%B4%E7%90%86/' class="btn">natas整理</a></h2>
+    <div class="article-meta clearfix">
+        <ul class="dates clearfix left control">
+            <li><i class="icon icon-date"></i></li>
+            <li class="publish-date">
+                <time datetime="2019.03.11">2019.03.11</time>
+            </li>
+        </ul>
+        
+        
+    </div>
+    <div class="content">
+        
+        
+
+<h1 id="natas0">natas0</h1>
+
+<p>natas0</p>
+
+<p>可以利用快捷键或者使用右键打开源码获得password</p>
+
+<h1 id="natas1">natas1</h1>
+
+<p>gtVrDuiDfck831PqWsLEZy5gyDz1clto</p>
+
+<p>在浏览器中利用F12查看html源码</p>
+
+<p>在index中找到了被注释掉的password</p>
+
+<h1 id="natas2">natas2</h1>
+
+<p>ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi</p>
+
+<p>从源码中间发现有一个jpg文件，没有什么用，但是观察到路径中有一个files,我们进入到files文件夹中，发现了users.txt文件，打开，获得natas3的密码</p>
+
+<h1 id="natas3">natas3</h1>
+
+<p>sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14</p>
+
+<p>源码中提示google无法获得任何有用的信息，这个信息让我们联想到/robots.txt中将会存在控制搜索引擎是否能够查找到的信息，在网址后面加上该文件目录后，我们发现其中提示了一个目录Disallow:/&hellip;/，在此目录下的users.txt文件中我们找到了这关的密码。</p>
+
+<h1 id="natas4">natas4</h1>
+
+<p>Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ</p>
+
+<p>提示需要以另一个url来登入才行，需要修改referer参数，可以利用curl命令来执行此操作</p>
+
+<p>通过&ndash;user username:passwd来登录,通过&ndash;referer选项来设置referer</p>
+
+<p>最后需要接上url</p>
+
+<h1 id="natas5">natas5</h1>
+
+<p>iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq</p>
+
+        
+    </div>
+
+</article>
+<section class="comment">
+    <p class="local-info">
+        Comment is disabled to avoid unwanted discussions from 'localhost:1313' on your Disqus
+        account...
+    </p>
+    <div id="disqus_thread"></div>
+</section>
+<script type="text/javascript">
+
+    (function () {
+        if (window.location.hostname == "localhost") {
+            return
+        }
+        document.querySelector('.local-info').classList.add('hide')
+
+        let dsq = document.createElement('script')
+        dsq.type = 'text/javascript'
+        dsq.async = true
+        let disqus_shortname = 'your disqus short name'
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+    })()
+</script>
+
 
         </main>
     </div>
