@@ -6,10 +6,19 @@
     <description>Recent content in CTF on Edidor Demo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 12 Apr 2019 21:48:10 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 May 2019 19:40:56 +0800</lastBuildDate>
     
 	<atom:link href="https://nut-guo.github.io/categories/ctf/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Pwnable</title>
+      <link>https://nut-guo.github.io/posts/pwnable.kr/</link>
+      <pubDate>Thu, 30 May 2019 19:40:56 +0800</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/pwnable.kr/</guid>
+      <description>Pwnable.kr Notes flag 运行程序得到如下输出： I will malloc() and strcpy the flag there. take it. 根据提示信息，flag会被存放载程序中并且通过strcpy进行处理，按理说应该刻意直接通过s</description>
+    </item>
     
     <item>
       <title>数据结构</title>
@@ -62,7 +71,7 @@
       <pubDate>Tue, 19 Feb 2019 16:23:29 +0000</pubDate>
       
       <guid>https://nut-guo.github.io/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</guid>
-      <description>Hacker101 picoCTF Compiler Explorer Vidar Team wiki Github Ret2 Systems Engineering Blog IO NetGarage Pwnable.kr OverTheWire Reversing.kr W3Challs 在线工具集 图灵机模拟器 后续慢慢整理</description>
+      <description>CTF学习资源整理 队伍资源 Vidar Team wiki Github Web Hacker101 picoCTF Reverse Compiler Explorer Wargame Reversing.kr IO NetGarage Pwnable.kr OverTheWire ret2 Blogs Ret2 Systems Engineering Blog Online tools 在线工具集</description>
     </item>
     
     <item>

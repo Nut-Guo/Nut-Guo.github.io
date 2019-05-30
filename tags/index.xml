@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Edidor Demo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 12 Apr 2019 21:48:10 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 May 2019 19:40:56 +0800</lastBuildDate>
     
 	<atom:link href="https://nut-guo.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>CTF</title>
       <link>https://nut-guo.github.io/tags/ctf/</link>
-      <pubDate>Fri, 12 Apr 2019 21:48:10 +0000</pubDate>
+      <pubDate>Thu, 30 May 2019 19:40:56 +0800</pubDate>
       
       <guid>https://nut-guo.github.io/tags/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wargame</title>
+      <link>https://nut-guo.github.io/tags/wargame/</link>
+      <pubDate>Thu, 30 May 2019 19:40:56 +0800</pubDate>
+      
+      <guid>https://nut-guo.github.io/tags/wargame/</guid>
       <description></description>
     </item>
     
@@ -26,15 +35,6 @@
       <pubDate>Fri, 12 Apr 2019 21:48:10 +0000</pubDate>
       
       <guid>https://nut-guo.github.io/tags/%E5%9F%BA%E7%A1%80/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Wargame</title>
-      <link>https://nut-guo.github.io/tags/wargame/</link>
-      <pubDate>Fri, 15 Mar 2019 10:55:51 +0000</pubDate>
-      
-      <guid>https://nut-guo.github.io/tags/wargame/</guid>
       <description></description>
     </item>
     

@@ -6,10 +6,19 @@
     <description>Recent content in Wargame on Edidor Demo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 11 Mar 2019 20:33:14 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 May 2019 19:40:56 +0800</lastBuildDate>
     
 	<atom:link href="https://nut-guo.github.io/categories/wargame/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Pwnable</title>
+      <link>https://nut-guo.github.io/posts/pwnable.kr/</link>
+      <pubDate>Thu, 30 May 2019 19:40:56 +0800</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/pwnable.kr/</guid>
+      <description>Pwnable.kr Notes flag 运行程序得到如下输出： I will malloc() and strcpy the flag there. take it. 根据提示信息，flag会被存放载程序中并且通过strcpy进行处理，按理说应该刻意直接通过s</description>
+    </item>
     
     <item>
       <title>natas整理</title>
