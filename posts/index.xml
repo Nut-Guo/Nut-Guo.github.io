@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Edidor Demo</title>
+    <title>Posts on Sciver&#39;s Blog</title>
     <link>https://nut-guo.github.io/posts/</link>
-    <description>Recent content in Posts on Edidor Demo</description>
+    <description>Recent content in Posts on Sciver&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 30 May 2019 19:40:56 +0800</lastBuildDate>
@@ -71,7 +71,7 @@
       <pubDate>Tue, 19 Feb 2019 16:23:29 +0000</pubDate>
       
       <guid>https://nut-guo.github.io/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</guid>
-      <description>CTF学习资源整理 队伍资源 Vidar Team wiki Github Web Hacker101 picoCTF Reverse Compiler Explorer Wargame Reversing.kr IO NetGarage Pwnable.kr OverTheWire ret2 Blogs Ret2 Systems Engineering Blog Online tools 在线工具集</description>
+      <description>CTF学习资源整理 队伍资源 Vidar Team wiki Github Web Hacker101 picoCTF Reverse Compiler Explorer Wargame Reversing.kr IO NetGarage Pwnable.kr OverTheWire ret2 Blogs Ret2 Systems Engineering Blog iBinary Maxkersten即Tutorial中的Binary Analysis Course Tutorial tut4you Binary Analysis Course</description>
     </item>
     
     <item>
