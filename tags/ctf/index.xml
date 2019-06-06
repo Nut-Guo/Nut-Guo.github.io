@@ -6,10 +6,19 @@
     <description>Recent content in CTF on Sciver&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 May 2019 19:40:56 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Jun 2019 18:46:23 +0800</lastBuildDate>
     
 	<atom:link href="https://nut-guo.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Exploit Education整理</title>
+      <link>https://nut-guo.github.io/posts/exploit-education%E6%95%B4%E7%90%86/</link>
+      <pubDate>Thu, 06 Jun 2019 18:46:23 +0800</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/exploit-education%E6%95%B4%E7%90%86/</guid>
+      <description>Exploit Education整理 Phoenix stack-four 不同于之前几道题目静态分析的方法，此题涉及到多个函数之间的跳转，单纯的静态分析不太方便，利用pattern动态调</description>
+    </item>
     
     <item>
       <title>Pwnable</title>
@@ -71,7 +80,7 @@
       <pubDate>Tue, 19 Feb 2019 16:23:29 +0000</pubDate>
       
       <guid>https://nut-guo.github.io/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</guid>
-      <description>CTF学习资源整理 队伍资源 Vidar Team wiki Github Web Hacker101 picoCTF Reverse Compiler Explorer Wargame Reversing.kr IO NetGarage Pwnable.kr OverTheWire ret2 Blogs Ret2 Systems Engineering Blog iBinary Maxkersten即Tutorial中的Binary Analysis Course Tutorial tut4you Binary Analysis Course</description>
+      <description>CTF学习资源整理 Lists vabstutorials网络资源 Knowledge is free一篇整理了很多学习资源的帖子 队伍资源 Vidar Team wiki Github Web Hacker101 picoCTF Vulnability vulhub Assembly Compiler Explorer Malware Samples Wargame Reversing.kr IO NetGarage Pwnable.kr</description>
     </item>
     
     <item>
