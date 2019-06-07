@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    
+    <link rel="canonical" href="https://nut-guo.github.io/posts/ioli%E6%95%B4%E7%90%86/" />
+    <meta name="description" content="CTF the hard way ">
+    
+
+    <title>IOLI整理 &middot; Sciver&#39;s Blog</title>
+
+    <link rel="shortcut icon" href="https://nut-guo.github.io/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://nut-guo.github.io/css/main.css" />
+    
+        
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-light.min.css">
+        
+    
+    
+    
+    <link rel="stylesheet" href="https://nut-guo.github.io/css/">
+    
+</head>
+
+
+<body class="loading light-mode">
+    
+<div class="top">
+    <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+</div>
+<div class="bottom">
+    <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+</div>
+
+    <header class="header">
+    <ul class="menu clearfix control">
+        
+<li class="logo-container logo-light">
+    <a href="https://nut-guo.github.io/" class="btn logo-link">
+        <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+    </a>
+</li>
+
+
+<li class="logo-container logo-wild">
+    <a href="https://nut-guo.github.io/" class="btn logo-link">
+        <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+    </a>
+</li>
+
+<li class="logo-container logo-default">
+    <a href="https://nut-guo.github.io/" class="btn logo-link">
+        <img class="logo" src="https://nut-guo.github.io/images/logo.svg" alt="logo" />
+    </a>
+</li>
+
+        
+        
+        
+        
+        <li 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                Article
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="/posts"
+                    
+                        class="btn "
+                    >Posts</a>
+                </li>
+                
+                <li class="">
+                    <a href="/tags"
+                    
+                        class="btn "
+                    >Tags</a>
+                </li>
+                
+                <li class="">
+                    <a href="/categories"
+                    
+                        class="btn "
+                    >Categories</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+        
+        
+        <li 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                View
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="#"
+                    
+                        class="btn toggle-sidebar"
+                    >Toggle Sidebar</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+        
+        
+        <li  id="theme-switcher" 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                Theme
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="light" class="btn"
+                        
+                    >Light</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="dark" class="btn"
+                        
+                    >Dark</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="wild" class="btn"
+                        
+                    >Wild</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        class="export-wild btn"
+                        
+                    >Export Wild Style</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+    </ul>
+</header>
+
+    <div class="middle">
+        <nav class="sidebar">
+            <ul class="posts control">
+    
+    <li><a class="no-break btn" href='/posts/ioli%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>IOLI整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/exploit-education%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>Exploit Education整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/pwnable.kr/'><i class="icon icon-post"></i>Pwnable.kr</a></li>
+    
+    <li><a class="no-break btn" href='/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/'><i class="icon icon-post"></i>资源整理</a></li>
+    
+    <li><a class="no-break btn" href='/posts/8086cpu%E6%A6%82%E8%BF%B0/'><i class="icon icon-post"></i>8086CPU概述</a></li>
+    
+    <li><a class="no-break btn" href='/posts/manjaro%E8%A3%85%E6%9C%BA%E8%AE%B0%E5%BD%95/'><i class="icon icon-post"></i>Manjaro装机记录</a></li>
+    
+</ul>
+
+        </nav>
+        <main class="main">
+            <article class="article">
+    <h2 class="title"><a href='/posts/ioli%E6%95%B4%E7%90%86/' class="btn">IOLI整理</a></h2>
+    <div class="article-meta clearfix">
+        <ul class="dates clearfix left control">
+            <li><i class="icon icon-date"></i></li>
+            <li class="publish-date">
+                <time datetime="2019.06.07">2019.06.07</time>
+            </li>
+        </ul>
+        
+        <ul class="article-categories clearfix left control">
+            <li><i class="icon icon-categories"></i></li>
+            
+            <li>
+                <a href="https://nut-guo.github.io/categories/ctf/" class="btn">CTF</a>
+            </li>
+            
+            <li>
+                <a href="https://nut-guo.github.io/categories/wargame/" class="btn">Wargame</a>
+            </li>
+            
+        </ul>
+        
+        
+        <div class="article-meta-splitter clearfix"></div>
+        <ul class="article-tags clearfix control">
+            <li><i class="icon icon-tags"></i></li>
+            
+            <li>
+                <a href="https://nut-guo.github.io/tags/ctf/" class="btn">CTF</a>
+            </li>
+            
+            <li>
+                <a href="https://nut-guo.github.io/tags/wargame/" class="btn">Wargame</a>
+            </li>
+            
+        </ul>
+        
+    </div>
+    <div class="content">
+        
+        
+
+<h1 id="ioli-crackme">IOLI crackme</h1>
+
+<h2 id="crackme0x05">crackme0x05</h2>
+
+<p>分析sym.check这个函数</p>
+
+<pre><code>/ (fcn) sym.check 120
+|   sym.check (char *s);
+|           ; var char *var_dh @ ebp-0xd
+|           ; var uint32_t var_ch @ ebp-0xc
+|           ; var uint32_t var_8h @ ebp-0x8
+|           ; var int32_t var_4h @ ebp-0x4
+|           ; arg char *s @ ebp+0x8
+|           ; var char *format @ esp+0x4
+|           ; var int32_t var_8h_2 @ esp+0x8
+|           ; CALL XREF from main (0x8048590)
+|           0x080484c8      55             push ebp
+|           0x080484c9      89e5           mov ebp, esp
+|           0x080484cb      83ec28         sub esp, 0x28               ; '('
+|           0x080484ce      c745f8000000.  mov dword [var_8h], 0
+|           0x080484d5      c745f4000000.  mov dword [var_ch], 0
+|           ; CODE XREF from sym.check (0x8048530)
+|       .-&gt; 0x080484dc      8b4508         mov eax, dword [s]          ; [0x8:4]=-1 ; 8
+|       :   0x080484df      890424         mov dword [esp], eax        ; const char *s
+|       :   0x080484e2      e89dfeffff     call sym.imp.strlen         ; size_t strlen(const char *s)
+|       :   0x080484e7      3945f4         cmp dword [var_ch], eax
+|      ,==&lt; 0x080484ea      7346           jae 0x8048532
+|      |:   0x080484ec      8b45f4         mov eax, dword [var_ch]
+|      |:   0x080484ef      034508         add eax, dword [s]
+|      |:   0x080484f2      0fb600         movzx eax, byte [eax]
+|      |:   0x080484f5      8845f3         mov byte [var_dh], al
+|      |:   0x080484f8      8d45fc         lea eax, [var_4h]
+|      |:   0x080484fb      89442408       mov dword [var_8h_2], eax   ;   ...
+|      |:   0x080484ff      c74424046886.  mov dword [format], 0x8048668 ; [0x8048668:4]=0x50006425 ; const char *format
+|      |:   0x08048507      8d45f3         lea eax, [var_dh]
+|      |:   0x0804850a      890424         mov dword [esp], eax        ; const char *s
+|      |:   0x0804850d      e892feffff     call sym.imp.sscanf         ; int sscanf(const char *s,|     `---&gt; 0x0804852b      8d45f4         lea eax, [var_ch]
+|      |:   0x0804852e      ff00           inc dword [eax]
+|      |`=&lt; 0x08048530      ebaa           jmp 0x80484dc const char *format,   ...)
+|      |:   0x08048512      8b55fc         mov edx, dword [var_4h]
+|      |:   0x08048515      8d45f8         lea eax, [var_8h]
+|      |:   0x08048518      0110           add dword [eax], edx
+|      |:   0x0804851a      837df810       cmp dword [var_8h], 0x10
+|     ,===&lt; 0x0804851e      750b           jne 0x804852b
+|     ||:   0x08048520      8b4508         mov eax, dword [s]          ; [0x8:4]=-1 ; 8
+|     ||:   0x08048523      890424         mov dword [esp], eax
+|     ||:   0x08048526      e859ffffff     call sym.parell
+|     ||:   ; CODE XREF from sym.check (0x804851e)
+|     `---&gt; 0x0804852b      8d45f4         lea eax, [var_ch]
+|      |:   0x0804852e      ff00           inc dword [eax]
+|      |`=&lt; 0x08048530      ebaa           jmp 0x80484dc
+|      |    ; CODE XREF from sym.check (0x80484ea)
+|      `--&gt; 0x08048532      c70424798604.  mov dword [esp], str.Password_Incorrect ; [0x8048679:4]=0x73736150 ; &quot;Password Incorrect!\n&quot; ; const char *format
+|           0x08048539      e856feffff     call sym.imp.printf         ; int printf(const char *format)
+|           0x0804853e      c9             leave
+\           0x0804853f      c3             ret
+</code></pre>
+
+<p>程序开始将两个变量置为零，分析发现其中一个用于记步，一个用于累加。执行的次数受输入的字符串的长度制约。</p>
+
+<pre><code>|      |:   0x080484ec      8b45f4         mov eax, dword [var_ch]
+|      |:   0x080484ef      034508         add eax, dword [s]
+|      |:   0x080484f2      0fb600         movzx eax, byte [eax]
+|      |:   0x080484f5      8845f3         mov byte [var_dh], al
+|      |:   0x080484f8      8d45fc         lea eax, [var_4h]
+|      |:   0x080484fb      89442408       mov dword [var_8h_2], eax   ;   ...
+|      |:   0x080484ff      c74424046886.  mov dword [format], 0x8048668 ; [0x8048668:4]=0x50006425 ; const char *format
+|      |:   0x08048507      8d45f3         lea eax, [var_dh]
+|      |:   0x0804850a      890424         mov dword [esp], eax        ; const char *s
+|      |:   0x0804850d      e892feffff     call sym.imp.sscanf         ; int sscanf(const char *s, const char *format,   ...)
+</code></pre>
+
+<p>分析这一部分，先将输入的字符串的地址与记步器的值相加。</p>
+
+<pre><code>|      |:   0x080484ec      8b45f4         mov eax, dword [var_ch]
+|      |:   0x080484ef      034508         add eax, dword [s]
+|      |:   0x080484f2      0fb600 
+</code></pre>
+
+<p>注意此处的<code>dword [s]</code>是作为参数传递进来的字符串，而字符串变量实际上是字符串起始位置的地址，通过此地址与下标的相加可以得到字符串各个位置的字符的地址。</p>
+
+<pre><code>|      |:   0x080484f2      0fb600         movzx eax, byte [eax]   
+|      |:   0x080484f5      8845f3         mov byte [var_dh], al
+</code></pre>
+
+<p>eax此时存储的是输入的字符串中的某一位的地址，byte[eax]获取了该地址上的那一位字符，利用movzx实现8位向32位赋值，高位补零，将这一位字符存入eax中。然后将al，即刚刚取出来的这一位字符存放在变量var_dh中</p>
+
+<pre><code>|      |:   0x080484f8      8d45fc         lea eax, [var_4h]
+|      |:   0x080484fb      89442408       mov dword [var_8h_2], eax   ;   ...
+|      |:   0x080484ff      c74424046886.  mov dword [format], 0x8048668 ; [0x8048668:4]=0x50006425 ; const char *format
+|      |:   0x08048507      8d45f3         lea eax, [var_dh]
+|      |:   0x0804850a      890424         mov dword [esp], eax        ; const char *s
+|      |:   0x0804850d      e892feffff     call sym.imp.sscanf         ; int sscanf(const char *s, const char *format,   ...)
+</code></pre>
+
+<p>将参数存储在栈上。依次将目标字符串地址，格式，源字符串存入栈中，接着调用sscanf函数。由于格式化字符串设置为%d，即读取一个十进制数，该过程实现了将数字字符转换为相应的数字的过程。</p>
+
+<pre><code>|      |:   0x08048512      8b55fc         mov edx, dword [var_4h]
+|      |:   0x08048515      8d45f8         lea eax, [var_8h]
+|      |:   0x08048518      0110           add dword [eax], edx
+|      |:   0x0804851a      837df810       cmp dword [var_8h], 0x10
+|     ,===&lt; 0x0804851e      750b           jne 0x804852b
+</code></pre>
+
+<p>接下来将读取出来的数字加在累加器上，进行求和，与0x10进行比较，若不等，则进行跳转</p>
+
+<pre><code>|     `---&gt; 0x0804852b      8d45f4         lea eax, [var_ch]
+|      |:   0x0804852e      ff00           inc dword [eax]
+|      |`=&lt; 0x08048530      ebaa           jmp 0x80484dc
+</code></pre>
+
+<p>记步器+1之后进行下一轮循环，即将下一个数字加上。</p>
+
+<p>若求和之后等于0x10，则继续进行检验</p>
+
+<pre><code>|     ||:   0x08048520      8b4508         mov eax, dword [s]          ; [0x8:4]=-1 ; 8
+|     ||:   0x08048523      890424         mov dword [esp], eax
+|     ||:   0x08048526      e859ffffff     call sym.parell
+|     ||:   ; CODE XREF from sym.check (0x804851e)
+</code></pre>
+
+<p>将输入的字符串作为参数传递给sym.parell，sym.parell程序如下：</p>
+
+<pre><code>/ (fcn) sym.parell 68
+|   sym.parell (char *s);
+|           ; var int32_t var_4h @ ebp-0x4
+|           ; arg char *s @ ebp+0x8
+|           ; var char *format @ esp+0x4
+|           ; var int32_t var_8h @ esp+0x8
+|           ; CALL XREF from sym.check (0x8048526)
+|           0x08048484      55             push ebp
+|           0x08048485      89e5           mov ebp, esp
+|           0x08048487      83ec18         sub esp, 0x18
+|           0x0804848a      8d45fc         lea eax, [var_4h]
+|           0x0804848d      89442408       mov dword [var_8h], eax     ;   ...
+|           0x08048491      c74424046886.  mov dword [format], 0x8048668 ; [0x8048668:4]=0x50006425 ; const char *format
+|           0x08048499      8b4508         mov eax, dword [s]          ; [0x8:4]=-1 ; 8
+|           0x0804849c      890424         mov dword [esp], eax        ; const char *s
+|           0x0804849f      e800ffffff     call sym.imp.sscanf         ; int sscanf(const char *s, const char *format,   ...)
+|           0x080484a4      8b45fc         mov eax, dword [var_4h]
+|           0x080484a7      83e001         and eax, 1
+|           0x080484aa      85c0           test eax, eax
+|       ,=&lt; 0x080484ac      7518           jne 0x80484c6
+|       |   0x080484ae      c704246b8604.  mov dword [esp], str.Password_OK ; [0x804866b:4]=0x73736150 ; &quot;Password OK!\n&quot; ; const char *format
+|       |   0x080484b5      e8dafeffff     call sym.imp.printf         ; int printf(const char *format)
+|       |   0x080484ba      c70424000000.  mov dword [esp], 0          ; int status
+|       |   0x080484c1      e8eefeffff     call sym.imp.exit           ; void exit(int status)
+|       |   ; CODE XREF from sym.parell (0x80484ac)
+|       `-&gt; 0x080484c6      c9             leave
+\           0x080484c7      c3             ret
+</code></pre>
+
+<p>此函数先通过sscanf函数将passcode转化为了整数，过程与前一个函数类似。</p>
+
+<pre><code>|           0x080484a4      8b45fc         mov eax, dword [var_4h]
+|           0x080484a7      83e001         and eax, 1
+|           0x080484aa      85c0           test eax, eax
+</code></pre>
+
+<p>得到的整数进行<code>and eax, 1</code>操作，相当于模2。
+<code>test eax, eax</code>进行判断。test的含义如下：</p>
+
+<blockquote>
+<p>The test instruction sets the zero flag if the result of a bitwise logical AND operation with both operands equals 0. The result is zero if either one of the parameters, or both, equal zero. None of the provided operands are altered using this instruction.</p>
+</blockquote>
+
+<p>来源：<a href="https://maxkersten.nl/binary-analysis-course/assembly-basics/crash-course/">https://maxkersten.nl/binary-analysis-course/assembly-basics/crash-course/</a></p>
+
+<p>即若两个操作数中至少一个为零，则zf被置为0.</p>
+
+<pre><code>|       ,=&lt; 0x080484ac      7518           jne 0x80484c6
+|       |   0x080484ae      c704246b8604.  mov dword [esp], str.Password_OK ; [0x804866b:4]=0x73736150 ; &quot;Password OK!\n&quot; ; const char *format
+|       |   0x080484b5      e8dafeffff     call sym.imp.printf         ; int printf(const char *format)
+|       |   0x080484ba      c70424000000.  mov dword [esp], 0          ; int status
+|       |   0x080484c1      e8eefeffff     call sym.imp.exit           ; void exit(int status)
+|       |   ; CODE XREF from sym.parell (0x80484ac)
+|       `-&gt; 0x080484c6      c9             leave
+\           0x080484c7      c3             ret
+</code></pre>
+
+<p>利用test的结果进行条件跳转，分析可知，若eax为0，则zf为0，等价于cmp的两个操作数相等，jne不跳转，顺序执行。而顺序执行将会打印成功的信息后退出，这是我们的目标。否则将会退出该函数，回顾前一个函数，我们知道这样一来继续运行就会给出密码错误的信息。从而可知我们需要让test的结果为将zf置为0，则eax需要为0，即输入的密码应当是偶数。</p>
+
+<p>综上所述，密码应当是一个各位相加和为16的偶数。</p>
+
+        
+    </div>
+
+</article>
+<section class="comment">
+    <p class="local-info">
+        Comment is disabled to avoid unwanted discussions from 'localhost:1313' on your Disqus
+        account...
+    </p>
+    <div id="disqus_thread"></div>
+</section>
+<script type="text/javascript">
+
+    (function () {
+        if (window.location.hostname == "localhost") {
+            return
+        }
+        document.querySelector('.local-info').classList.add('hide')
+
+        let dsq = document.createElement('script')
+        dsq.type = 'text/javascript'
+        dsq.async = true
+        let disqus_shortname = 'Sciver'
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+    })()
+</script>
+
+
+        </main>
+    </div>
+    <footer class="footer clearfix">
+    <ul class="control social clearfix">
+        <li><a class="author btn" href="#">Sciver</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="https://nut-guo.github.io/index.xml" type="application/rss+xml" title="rss">
+                <i class="rss icon"></i></a>
+        </li>
+    </ul>
+
+    <ul class="control status clearfix">
+        <li><a href="#" class="btn">Posts:
+                7</a>
+        </li>
+        <li><a href="#" class="btn">Pages:
+                0</a></li>
+        <li><a href="#" class="btn">en</a></li>
+        <li><a href="https://gohugo.io" class="btn">Hugo, 0.55.6</a></li>
+        <li><a href="https://github.com/jacobsun/edidor" class="btn">Theme: Edidor</a></li>
+        <li>
+            <a href="#" class="btn">Last build: <time
+                    datetime=""></time>
+            </a>
+        </li>
+    </ul>
+</footer>
+<div class="dialog">
+    <div class="wrapper">
+        <div class="clearfix"><button class="btn close-dialog">X</button></div>
+        <header>
+            <h1 class="title">Theme Name</h1>
+        </header>
+        <main>
+            <div class="clearfix">
+                <label for="theme-name">
+                    <p>Only English Character, space, hyphen are allowed!</p>
+                    <p>Valid name examples: "custom", "fantastic theme", "my-theme"</p>
+                    <p>Invalid name examles: "我的主题", ":)", "123"</p>
+                </label>
+                <input type="text" name="theme-name" id="theme-name">
+            </div>
+            <div class="clearfix">
+                <button class="btn export">Export</button>
+            </div>
+
+        </main>
+        <footer></footer>
+    </div>
+</div>
+
+    <script src="https://nut-guo.github.io/js/main.js"></script>
+
+    <script src="https://nut-guo.github.io/js/"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-141115323-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</body>
+
+</html>

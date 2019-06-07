@@ -6,19 +6,10 @@
     <description>Recent content in 基础 on Sciver&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 12 Apr 2019 21:48:10 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 19 Feb 2019 14:46:39 +0000</lastBuildDate>
     
 	<atom:link href="https://nut-guo.github.io/tags/%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>数据结构</title>
-      <link>https://nut-guo.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
-      <pubDate>Fri, 12 Apr 2019 21:48:10 +0000</pubDate>
-      
-      <guid>https://nut-guo.github.io/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
-      <description>绪论 程序开发过程 需求分析 确定实际问题对程序的要求 模型设计 将具体问题抽象为可以通过计算机解决的为题，其中需要利用数据结构和算法的知识 编码实现 检</description>
-    </item>
     
     <item>
       <title>8086CPU概述</title>

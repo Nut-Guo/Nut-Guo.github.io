@@ -6,10 +6,19 @@
     <description>Recent content in Wargame on Sciver&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 06 Jun 2019 18:46:23 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 07 Jun 2019 09:02:09 +0800</lastBuildDate>
     
 	<atom:link href="https://nut-guo.github.io/tags/wargame/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>IOLI整理</title>
+      <link>https://nut-guo.github.io/posts/ioli%E6%95%B4%E7%90%86/</link>
+      <pubDate>Fri, 07 Jun 2019 09:02:09 +0800</pubDate>
+      
+      <guid>https://nut-guo.github.io/posts/ioli%E6%95%B4%E7%90%86/</guid>
+      <description>IOLI crackme crackme0x05 分析sym.check这个函数 / (fcn) sym.check 120 | sym.check (char *s); | ; var char *var_dh @ ebp-0xd | ; var uint32_t var_ch @ ebp-0xc | ; var uint32_t var_8h @ ebp-0x8 | ; var int32_t var_4h @ ebp-0x4 | ; arg char *s @ ebp+0x8 | ; var char *format @ esp+0x4 | ;</description>
+    </item>
     
     <item>
       <title>Exploit Education整理</title>
@@ -21,48 +30,12 @@
     </item>
     
     <item>
-      <title>Pwnable</title>
+      <title>Pwnable.kr</title>
       <link>https://nut-guo.github.io/posts/pwnable.kr/</link>
       <pubDate>Thu, 30 May 2019 19:40:56 +0800</pubDate>
       
       <guid>https://nut-guo.github.io/posts/pwnable.kr/</guid>
       <description>Pwnable.kr Notes flag 运行程序得到如下输出： I will malloc() and strcpy the flag there. take it. 根据提示信息，flag会被存放载程序中并且通过strcpy进行处理，按理说应该刻意直接通过s</description>
-    </item>
-    
-    <item>
-      <title>liveoverflow笔记</title>
-      <link>https://nut-guo.github.io/posts/liveoverflow/</link>
-      <pubDate>Fri, 15 Mar 2019 10:55:51 +0000</pubDate>
-      
-      <guid>https://nut-guo.github.io/posts/liveoverflow/</guid>
-      <description>0x0B ssh 连接，ps aux查看进程，ip addr查看网络地址，id 查看当前id(gid uid ) 0x0C 利用man 命令查看C函数，阅读manual 找到可能存在</description>
-    </item>
-    
-    <item>
-      <title>natas整理</title>
-      <link>https://nut-guo.github.io/posts/natas%E6%95%B4%E7%90%86/</link>
-      <pubDate>Mon, 11 Mar 2019 20:33:14 +0000</pubDate>
-      
-      <guid>https://nut-guo.github.io/posts/natas%E6%95%B4%E7%90%86/</guid>
-      <description>natas0 natas0 可以利用快捷键或者使用右键打开源码获得password natas1 gtVrDuiDfck831PqWsLEZy5gyDz1clto 在浏览器中利用F12查看html源码 在index中找到了被注释掉的passwo</description>
-    </item>
-    
-    <item>
-      <title>leviathan整理</title>
-      <link>https://nut-guo.github.io/posts/leviathan%E6%95%B4%E7%90%86/</link>
-      <pubDate>Mon, 11 Mar 2019 18:42:53 +0000</pubDate>
-      
-      <guid>https://nut-guo.github.io/posts/leviathan%E6%95%B4%E7%90%86/</guid>
-      <description>Leviathan0 leviathan0 ls -la查看文件夹下的所有文件的信息，发现属主为leviathan1的文件夹，有大量冗余的信息，利用管道和grep配合查找信息 Leviathan1 rioGegei8m 目录下</description>
-    </item>
-    
-    <item>
-      <title>Bandit整理</title>
-      <link>https://nut-guo.github.io/posts/bandit%E6%95%B4%E7%90%86/</link>
-      <pubDate>Thu, 21 Feb 2019 23:25:20 +0000</pubDate>
-      
-      <guid>https://nut-guo.github.io/posts/bandit%E6%95%B4%E7%90%86/</guid>
-      <description>题目来源：OverTheWire Bandit0 ssh ssh @ -p Bandit1 linux命令 或者你可以自己man dashed filename：-会被识别为标准输入输出，若存在名称为“-</description>
     </item>
     
   </channel>
