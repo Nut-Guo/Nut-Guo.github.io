@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Manjaro - Nut&#39;s Blog</title><meta name="Description" content="Notes at UCAS"><meta property="og:title" content="Manjaro" />
+<meta property="og:description" content="Configure manjaro Change sources rank mirrors 1 2 sudo pacman-mirrors -i -c China -m rank sudo pacman -Syu change the gem source 1 gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/ change the npm source 1 2 3 npm install -g nrm // 全局安装nrm模块 nrm ls // 显示所有可用的源 nrm use taobao // 切换到淘宝" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nut-guo.github.io/manjaro-configure/" />
+<meta property="og:image" content="https://nut-guo.github.io/"/>
+<meta property="article:published_time" content="2020-09-01T16:13:47+08:00" />
+<meta property="article:modified_time" content="2020-10-17T16:13:47+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://nut-guo.github.io/"/>
+
+<meta name="twitter:title" content="Manjaro"/>
+<meta name="twitter:description" content="Configure manjaro Change sources rank mirrors 1 2 sudo pacman-mirrors -i -c China -m rank sudo pacman -Syu change the gem source 1 gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/ change the npm source 1 2 3 npm install -g nrm // 全局安装nrm模块 nrm ls // 显示所有可用的源 nrm use taobao // 切换到淘宝"/>
+<meta name="application-name" content="Nut&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Nut&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://nut-guo.github.io/manjaro-configure/" /><link rel="next" href="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.8235a67a2521ef99fb1e455a5891b022af1653b4ede3cfffcac4e473beee88fbcc1a36bbb3cfdd75fd6df46732032f9d96e30adae9c88b769e1fbf7945cd27e0.css" integrity="sha512-gjWmeiUh75n7HkVaWJGwIq8WU7Tt48//ysTkc77uiPvMGja7s8/ddf1t9GcyAy&#43;dluMK2unIi3aeH795Rc0n4A=="><link rel="stylesheet" href="/css/style.min.89b621a9bf174f6453c265bdcf5f2ffe8feb8bf3555ce4432c220058d367643a9e0aae3b0c211fc83b05a5bdc47d2ce47d74361d8a2becb6f76a7df35e3c3def.css" integrity="sha512-ibYhqb8XT2RTwmW9z18v/o/ri/NVXORDLCIAWNNnZDqeCq47DCEfyDsFpb3EfSzkfXQ2HYor7Lb3an3zXjw97w=="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.2fb31670aec534f73036a9cb759abcea54c760b750a996b3e58700804fb97271a6970f094f4dd0076fa8c4bd74d14781e9197364b531086492e3ffbe98d65dc7.css" integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE&#43;5cnGmlw8JT03QB2&#43;oxL100UeB6RlzZLUxCGSS4/&#43;&#43;mNZdxw=="><link rel="stylesheet" href="/lib/animate/animate.min.76826b0bfa1c53c546551c773bdf7cd7ed9a6149f77ee5955afa8b8b553eb40d8c595cecc3e3552aad4fac4345d3733e4d804ff763e7614957147d595b41692f.css" integrity="sha512-doJrC/ocU8VGVRx3O9981&#43;2aYUn3fuWVWvqLi1U&#43;tA2MWVzsw&#43;NVKq1PrENF03M&#43;TYBP92PnYUlXFH1ZW0FpLw=="><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Manjaro",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/nut-guo.github.io\/manjaro-configure\/"
+        },"genre": "posts","keywords": "Manjaro","wordcount":  331 ,
+        "url": "https:\/\/nut-guo.github.io\/manjaro-configure\/","datePublished": "2020-09-01T16:13:47+08:00","dateModified": "2020-10-17T16:13:47+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Nut"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Nut&#39;s Blog">Nut&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Nut&#39;s Blog">Nut&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Manjaro</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Nut</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><i class="far fa-folder fa-fw"></i>环境配置</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-01">2020-09-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 331 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#change-sources">Change sources</a>
+      <ul>
+        <li><a href="#rank-mirrors">rank mirrors</a></li>
+        <li><a href="#change-the-gem-source">change the gem source</a></li>
+      </ul>
+    </li>
+    <li><a href="#change-the-npm-source">change the npm source</a></li>
+    <li><a href="#change-the-bundle-source">change the bundle source</a>
+      <ul>
+        <li><a href="#add-archlinuxcn-and-arch4edu">add archlinuxcn and arch4edu</a></li>
+        <li><a href="#add-blackarch">add blackarch</a></li>
+      </ul>
+    </li>
+    <li><a href="#necessary-software">Necessary software</a></li>
+    <li><a href="#configure-the-environment">Configure the environment</a></li>
+    <li><a href="#backup">Backup</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="configure-manjaro">Configure manjaro</h1>
+<h2 id="change-sources">Change sources</h2>
+<h3 id="rank-mirrors">rank mirrors</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pacman-mirrors -i -c China -m rank
+sudo pacman -Syu
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="change-the-gem-source">change the gem source</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="change-the-npm-source">change the npm source</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">npm install -g nrm          // 全局安装nrm模块
+nrm ls                      // 显示所有可用的源
+nrm use taobao              // 切换到淘宝源：
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="change-the-bundle-source">change the bundle source</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">bundle config mirror.https://rubygems.org https://mirrors.tuna.tsinghua.edu.cn/rubygems 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="add-archlinuxcn-and-arch4edu">add archlinuxcn and arch4edu</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#edit /etc/pacman.conf</span>
+<span class="c1">#append the following content</span>
+<span class="o">[</span>archlinuxcn<span class="o">]</span>
+<span class="nv">SigLevel</span> <span class="o">=</span> Optional TrustedOnly
+<span class="nv">Server</span> <span class="o">=</span> http://mirrors.ustc.edu.cn/archlinuxcn/<span class="nv">$arch</span>
+
+<span class="o">[</span>arch4edu<span class="o">]</span>
+<span class="nv">SigLevel</span> <span class="o">=</span> Never
+<span class="nv">Server</span> <span class="o">=</span> http://mirrors.tuna.tsinghua.edu.cn/arch4edu/<span class="nv">$arch</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>add the archlinuxcn-keyring</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pacman -S archlinuxcn-keyring
+sudo pacman -Syu
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="add-blackarch">add blackarch</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Run https://blackarch.org/strap.sh as root and follow the instructions.</span>
+$ curl -O https://blackarch.org/strap.sh
+
+<span class="c1"># The SHA1 sum should match: 9f770789df3b7803105e5fbc19212889674cd503 strap.sh</span>
+$ sha1sum strap.sh
+
+<span class="c1"># Set execute bit</span>
+$ chmod +x strap.sh
+
+<span class="c1"># Run strap.sh</span>
+$ sudo ./strap.sh 
+
+<span class="c1">#change the source</span>
+<span class="c1">#edit the /etc/pacman.conf</span>
+<span class="o">[</span>blackarch<span class="o">]</span>
+<span class="nv">SigLevel</span> <span class="o">=</span> Optional TrustAll
+<span class="nv">Server</span> <span class="o">=</span> https://mirrors.ustc.edu.cn/blackarch/<span class="nv">$repo</span>/os/<span class="nv">$arch</span>
+<span class="c1"># add keyring first</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="necessary-software">Necessary software</h2>
+<ul>
+<li>
+<p>zsh</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pacman -S manjaro-zsh-config
+chsh -s /bin/zsh
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>yay</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pacman -S yay
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>chrome typora nvim code anaconda goldendict</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pacman -S google-chrome typora code goldendict
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>rime-pinyin</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pacman -S fctix-rime kcm-fcitx fcitx-gtk2 fcitx-gtk3#need to log out
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>gdb&amp;radare2&amp;pwntools</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pacman -S pwndbg peda gef radare2
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>ghidra</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pacman -S ghidra
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>vmware</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pacman -S vmware-workstation
+</code></pre></td></tr></table>
+</div>
+</div><p>Remember to install the right linux-headers before using vmware, and start the networking.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">systemctl start vmware-networks.service
+systemctl <span class="nb">enable</span> vmware-networks.service
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>metasploit</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pacman -S msfdb metasploit
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="configure-the-environment">Configure the environment</h2>
+<ul>
+<li>
+<p>asystem time synchronize</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo timedatectl set-local-rtc <span class="nb">true</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>mount the windows partion</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">UUID=0CB47F55B47F406E                     /mnt/C         ntfs-3g defaults         0 0  UUID=585245C85245AB96                     /mnt/D         ntfs-3g defaults         0 0
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="backup">Backup</h2>
+<p><a href="https://forum.manjaro.org/t/full-system-backup/2309/12" target="_blank" rel="noopener noreffer">backup with clonezilla</a></p>
+<p><a href="https://forum.manjaro.org/t/how-to-repair-manjaro-grub-after-it-has-been-restored-from-a-clonezilla-backup-image/84" target="_blank" rel="noopener noreffer">restore the grub</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-10-17</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/manjaro-configure/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://nut-guo.github.io/manjaro-configure/" data-title="Manjaro" data-hashtags="Manjaro"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://nut-guo.github.io/manjaro-configure/" data-hashtag="Manjaro"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://nut-guo.github.io/manjaro-configure/" data-title="Manjaro" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://nut-guo.github.io/manjaro-configure/" data-title="Manjaro"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://nut-guo.github.io/manjaro-configure/" data-title="Manjaro"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://nut-guo.github.io/manjaro-configure/" data-title="Manjaro" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://nut-guo.github.io/manjaro-configure/" data-title="Manjaro" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://nut-guo.github.io/manjaro-configure/" data-title="Manjaro"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/manjaro/">Manjaro</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="next" rel="next" title="内核调试环境配置">内核调试环境配置<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.75.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Nut</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.01a9044cb72aeb889854b4c442d03cc67db5dcfff848a5bba3c8df88e1ad3a04278cbda7603d1c97981d6759794e673f60aac6a54f53139bbdd044d4dfc2e475.css" integrity="sha512-AakETLcq64iYVLTEQtA8xn213P/4SKW7o8jfiOGtOgQnjL2nYD0cl5gdZ1l5Tmc/YKrGpU9TE5u90ETU38LkdQ=="><link rel="stylesheet" href="/lib/katex/copy-tex.min.cfee09198e00011c7d33435e1b23862f95b6827c243de4038963ca714516395c4f88715df65f4fd10a8a69988fbfed1b5a2aff27d588004581b91af98fc65a58.css" integrity="sha512-z&#43;4JGY4AARx9M0NeGyOGL5W2gnwkPeQDiWPKcUUWOVxPiHFd9l9P0QqKaZiPv&#43;0bWir/J9WIAEWBuRr5j8ZaWA=="><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.e9c0c2a48f70798908fc0c6e65ba47b80e8cd3961f0580a2fee3a84434d3af807a674e9447b49523af87a6a80642a32887c031eb5e1ded2af091bcd8e4bcd935.js" integrity="sha512-6cDCpI9weYkI/AxuZbpHuA6M05YfBYCi/uOoRDTTr4B6Z06UR7SVI6&#43;HpqgGQqMoh8Ax614d7SrwkbzY5LzZNQ=="></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.95377e01eea2e97083a9e6b4ae56c55a423a5b0cb7e6a298f06c004bbc318ff9a88e6687caa4c1c869aa278c33aae29bdb234b2cd85ae80acf7ad76b7ad61862.js" integrity="sha512-lTd&#43;Ae6i6XCDqea0rlbFWkI6Wwy35qKY8GwAS7wxj/mojmaHyqTByGmqJ4wzquKb2yNLLNha6ArPetdretYYYg=="></script><script type="text/javascript" src="/lib/lunr/lunr.min.1e225d911c92cd786251c5f65707976a2cbcc9e636d767a9fe3e75cd1ff3e483c25f86543b169fea7689ff47502ffda5f992fe07d8a7feee274fc40967fde68a.js" integrity="sha512-HiJdkRySzXhiUcX2VweXaiy8yeY212ep/j51zR/z5IPCX4ZUOxaf6naJ/0dQL/2l&#43;ZL&#43;B9in/u4nT8QJZ/3mig=="></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.9f24d2d5d3984e5efc4d6200848dcb80fc5b54627fca768d6fa74b48b656deee8e275c82ed618ce48a2a7798eb0bcbec7818e37cd054600e96a6fbf3b3fbd7cf.js" integrity="sha512-nyTS1dOYTl78TWIAhI3LgPxbVGJ/ynaNb6dLSLZW3u6OJ1yC7WGM5Ioqd5jrC8vseBjjfNBUYA6Wpvvzs/vXzw=="></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.a2323822e69f51b5d155ce2a5ad9ffe471ef99ca574abb3980fe976ac4a69394b2d9536951194f98ebf43658e34056a3d5fb77f9c6880f4c371abe70a527c94a.js" integrity="sha512-ojI4IuafUbXRVc4qWtn/5HHvmcpXSrs5gP6XasSmk5Sy2VNpURlPmOv0NljjQFaj1ft3&#43;caID0w3Gr5wpSfJSg=="></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.4e60f014b860dd4038646d046f8308c93d4ed4c6fe3b0c399051b4b87a97b1d6f2673f4372f61084aa4680d91a98023a876946199ab65fc7ed389bc5fd78d352.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb&#43;Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg=="></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.843586ca1f88cb832bf401cecd43f6f98d2254f9ff070c716a84a57848c7fe2d68e0455317fb21d3f0354b28a2f0f58e69efae3ebf93fca1f0ca7a1e6d2b8087.js" integrity="sha512-hDWGyh&#43;Iy4Mr9AHOzUP2&#43;Y0iVPn/BwxxaoSleEjH/i1o4EVTF/sh0/A1Syii8PWOae&#43;uPr&#43;T/KHwynoebSuAhw=="></script><script type="text/javascript" src="/lib/sharer/sharer.min.c4c86aeb36b41ca1e3aad5e04e9297a121178682f01c799a25844b78c742d98fe914b37de07ce1f1ce0812385a2272654d39db5d80c9df7658de91e4a1987f26.js" integrity="sha512-xMhq6za0HKHjqtXgTpKXoSEXhoLwHHmaJYRLeMdC2Y/pFLN94Hzh8c4IEjhaInJlTTnbXYDJ33ZY3pHkoZh/Jg=="></script><script type="text/javascript" src="/lib/katex/katex.min.da4f96fb738686d777c219c6b77dde93fa00d4cfdaa81e8c8abf9621c0ab4ae202db20fa8935fa22e3dfe6ad681091904f4ea399ae4ae9c6bb5ea6f8bbb52ba3.js" integrity="sha512-2k&#43;W&#43;3OGhtd3whnGt33ek/oA1M/aqB6Mir&#43;WIcCrSuIC2yD6iTX6IuPf5q1oEJGQT06jma5K6ca7Xqb4u7Urow=="></script><script type="text/javascript" src="/lib/katex/auto-render.min.1a2706adb2c15c987691b17e0d80feb025b984f6afa0e7d500a48e13bfaa8180a05537307befc3e0b5de812f4955363bda8bdce549e0e059a5fa2d6e0f7b8ec9.js" integrity="sha512-GicGrbLBXJh2kbF&#43;DYD&#43;sCW5hPavoOfVAKSOE7&#43;qgYCgVTcwe&#43;/D4LXegS9JVTY72ovc5Ung4Fml&#43;i1uD3uOyQ=="></script><script type="text/javascript" src="/lib/katex/copy-tex.min.0c94f619ff73a2094558dbb180570c677ce2f516bd18f0f1a70f7ff24c90e9c8e2f9239a2e5575038f48b6ce7778b66519f6f85a3c110a9b4451d363bba5b183.js" integrity="sha512-DJT2Gf9zoglFWNuxgFcMZ3zi9Ra9GPDxpw9/8kyQ6cji&#43;SOaLlV1A49Its53eLZlGfb4WjwRCptEUdNju6Wxgw=="></script><script type="text/javascript" src="/lib/katex/mhchem.min.078b12bb78ac618a5abab7d2b665ec875c0bef5b3cc4a159c8d8c20ae507c3c7de0a1f519691b4df1f3e6b77a016267556e0a88fae3adc8635f159eb0c16cab8.js" integrity="sha512-B4sSu3isYYpaurfStmXsh1wL71s8xKFZyNjCCuUHw8feCh9RlpG03x8&#43;a3egFiZ1VuCoj6463IY18VnrDBbKuA=="></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.69ac882c686e101963f9cd3dc6167cee800004e4e9f40dae6f6fbeb3b03fb81ead782f98cc6e6eeec42b70a1b7047c7902e8f0ba3171660e2c2dc59d62965c7a.js" integrity="sha512-aayILGhuEBlj&#43;c09xhZ87oAABOTp9A2ub2&#43;&#43;s7A/uB6teC&#43;YzG5u7sQrcKG3BHx5AujwujFxZg4sLcWdYpZceg=="></script></body>
+</html>

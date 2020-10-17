@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Manjaro - 标签 - Nut&#39;s Blog</title>
+        <link>https://nut-guo.github.io/tags/manjaro/</link>
+        <description>Manjaro - 标签 - Nut&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>qinsiliang18@mails.ucas.ac.cn (Nut)</managingEditor>
+            <webMaster>qinsiliang18@mails.ucas.ac.cn (Nut)</webMaster><lastBuildDate>Tue, 01 Sep 2020 16:13:47 &#43;0800</lastBuildDate><atom:link href="https://nut-guo.github.io/tags/manjaro/" rel="self" type="application/rss+xml" /><item>
+    <title>Manjaro</title>
+    <link>https://nut-guo.github.io/manjaro-configure/</link>
+    <pubDate>Tue, 01 Sep 2020 16:13:47 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://nut-guo.github.io/manjaro-configure/</guid>
+    <description><![CDATA[Configure manjaro Change sources rank mirrors 1 2 sudo pacman-mirrors -i -c China -m rank sudo pacman -Syu change the gem source 1 gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/ change the npm source 1 2 3 npm install -g nrm // 全局安装nrm模块 nrm ls // 显示所有可用的源 nrm use taobao // 切换到淘宝]]></description>
+</item></channel>
+</rss>
