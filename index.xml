@@ -8,10 +8,10 @@
             <atom:link href="https://nut-guo.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>内核调试环境配置</title>
-    <link>https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+    <link>https://nut-guo.github.io/kernel_debug/</link>
     <pubDate>Sat, 17 Oct 2020 16:13:47 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+    <guid>https://nut-guo.github.io/kernel_debug/</guid>
     <description><![CDATA[操作系统实验环境配置 操作系统实验中，利用qemu运行RISCV架构下的操作系统，gdb远程调试。利用vscode给gdb提供图形界面的支持可]]></description>
 </item><item>
     <title>Manjaro</title>
