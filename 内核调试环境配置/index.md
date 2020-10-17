@@ -7,7 +7,7 @@
 
 ## 1 安装Native Debug插件
 
-![](OS_Lab_Debug/Native_Debug.png)
+![Native Debug](Kernel_Debug/Native_Debug.png "Native Debug")
 
 ## 2 配置Lauch.json
 
@@ -41,7 +41,7 @@
 ### 2.1 愉快调试
 
 在终端中启动qemu后，`F5`打开调试器，程序将自动停止在设定的断点处。
-![](OS_Lab_Debug/debug.png)
+![debug](Kernel_Debug/debug.png "debug")
 
 Tips:
 1. 使用侧边栏调试窗口中的Call Stack查看调用栈
@@ -65,6 +65,6 @@ define pcur
 end
 ```
 示例：
-![](OS_Lab_Debug/pcur.png)
+![pcur](Kernel_Debug/pcur.png "pcur")
 
 祝大家调试愉快。

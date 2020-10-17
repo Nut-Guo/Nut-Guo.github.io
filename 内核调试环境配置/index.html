@@ -9,11 +9,11 @@
 <meta property="og:description" content="操作系统实验环境配置 操作系统实验中，利用qemu运行RISCV架构下的操作系统，gdb远程调试。利用vscode给gdb提供图形界面的支持可" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" />
-<meta property="og:image" content="https://nut-guo.github.io/assets/OS_Lab_Debug/Native_Debug.png" />
+<meta property="og:image" content="https://nut-guo.github.io/"/>
 <meta property="article:published_time" content="2020-10-17T16:13:47+08:00" />
 <meta property="article:modified_time" content="2020-10-17T16:13:47+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://nut-guo.github.io/assets/OS_Lab_Debug/Native_Debug.png"/>
+<meta name="twitter:image" content="https://nut-guo.github.io/"/>
 
 <meta name="twitter:title" content="内核调试环境配置"/>
 <meta name="twitter:description" content="操作系统实验环境配置 操作系统实验中，利用qemu运行RISCV架构下的操作系统，gdb远程调试。利用vscode给gdb提供图形界面的支持可"/>
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/nut-guo.github.io\/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE\/"
-        },"genre": "posts","keywords": "Lab","wordcount":  436 ,
+        },"genre": "posts","keywords": "Lab","wordcount":  448 ,
         "url": "https:\/\/nut-guo.github.io\/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE\/","datePublished": "2020-10-17T16:13:47+08:00","dateModified": "2020-10-17T16:13:47+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">内核调试环境配置</h1><h2 class="single-subtitle">使用VScode改善操作系统实验体验</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Nut</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/os/"><i class="far fa-folder fa-fw"></i>OS</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-17">2020-10-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 436 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-17">2020-10-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 448 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id="/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="leancloud_visitors" data-flag-title="内核调试环境配置">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -128,14 +128,16 @@
             </div><div class="content" id="content"><h1 id="操作系统实验环境配置">操作系统实验环境配置</h1>
 <p>操作系统实验中，利用qemu运行RISCV架构下的操作系统，gdb远程调试。利用vscode给gdb提供图形界面的支持可以极大的改善调试体验。</p>
 <h2 id="1-安装native-debug插件">1 安装Native Debug插件</h2>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="OS_Lab_Debug/Native_Debug.png"
-        data-srcset="/OS_Lab_Debug/Native_Debug.png, OS_Lab_Debug/Native_Debug.png 1.5x, /OS_Lab_Debug/Native_Debug.png 2x"
-        data-sizes="auto"
-        alt="/OS_Lab_Debug/Native_Debug.png"
-        title="/OS_Lab_Debug/Native_Debug.png" /></p>
+<p><figure><a class="lightgallery" href="/Kernel_Debug/Native_Debug.png" title="Native Debug" data-thumbnail="/Kernel_Debug/Native_Debug.png" data-sub-html="<h2>Native Debug</h2><p>Native Debug</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="Kernel_Debug/Native_Debug.png"
+            data-srcset="/Kernel_Debug/Native_Debug.png, Kernel_Debug/Native_Debug.png 1.5x, /Kernel_Debug/Native_Debug.png 2x"
+            data-sizes="auto"
+            alt="/Kernel_Debug/Native_Debug.png" />
+    </a><figcaption class="image-caption">Native Debug</figcaption>
+    </figure></p>
 <h2 id="2-配置lauchjson">2 配置Lauch.json</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -193,14 +195,16 @@
 </div>
 </div><h3 id="21-愉快调试">2.1 愉快调试</h3>
 <p>在终端中启动qemu后，<code>F5</code>打开调试器，程序将自动停止在设定的断点处。
-<img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="OS_Lab_Debug/debug.png"
-        data-srcset="/OS_Lab_Debug/debug.png, OS_Lab_Debug/debug.png 1.5x, /OS_Lab_Debug/debug.png 2x"
-        data-sizes="auto"
-        alt="/OS_Lab_Debug/debug.png"
-        title="/OS_Lab_Debug/debug.png" /></p>
+<figure><a class="lightgallery" href="/Kernel_Debug/debug.png" title="debug" data-thumbnail="/Kernel_Debug/debug.png" data-sub-html="<h2>debug</h2><p>debug</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="Kernel_Debug/debug.png"
+            data-srcset="/Kernel_Debug/debug.png, Kernel_Debug/debug.png 1.5x, /Kernel_Debug/debug.png 2x"
+            data-sizes="auto"
+            alt="/Kernel_Debug/debug.png" />
+    </a><figcaption class="image-caption">debug</figcaption>
+    </figure></p>
 <p>Tips:</p>
 <ol>
 <li>使用侧边栏调试窗口中的Call Stack查看调用栈</li>
@@ -244,14 +248,16 @@ end
 </code></pre></td></tr></table>
 </div>
 </div><p>示例：
-<img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="OS_Lab_Debug/pcur.png"
-        data-srcset="/OS_Lab_Debug/pcur.png, OS_Lab_Debug/pcur.png 1.5x, /OS_Lab_Debug/pcur.png 2x"
-        data-sizes="auto"
-        alt="/OS_Lab_Debug/pcur.png"
-        title="/OS_Lab_Debug/pcur.png" /></p>
+<figure><a class="lightgallery" href="/Kernel_Debug/pcur.png" title="pcur" data-thumbnail="/Kernel_Debug/pcur.png" data-sub-html="<h2>pcur</h2><p>pcur</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="Kernel_Debug/pcur.png"
+            data-srcset="/Kernel_Debug/pcur.png, Kernel_Debug/pcur.png 1.5x, /Kernel_Debug/pcur.png 2x"
+            data-sizes="auto"
+            alt="/Kernel_Debug/pcur.png" />
+    </a><figcaption class="image-caption">pcur</figcaption>
+    </figure></p>
 <p>祝大家调试愉快。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
