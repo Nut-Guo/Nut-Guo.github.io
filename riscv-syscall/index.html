@@ -5,32 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>内核调试环境配置 - Nut&#39;s Blog</title><meta name="Description" content="Notes at UCAS"><meta property="og:title" content="内核调试环境配置" />
-<meta property="og:description" content="操作系统实验环境配置 操作系统实验中，利用qemu运行RISCV架构下的操作系统，gdb远程调试。利用vscode给gdb提供图形界面的支持可" />
+        <title>Riscv Syscall - Nut&#39;s Blog</title><meta name="Description" content="Notes at UCAS"><meta property="og:title" content="Riscv Syscall" />
+<meta property="og:description" content="RISC-V 特权级切换 UCAS的计算机专业操作系统实验中要求实现sleep系统调用，涉及到RISC-V的一些细节，需要阅读手册理解该指令集下的工作机制" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" />
+<meta property="og:url" content="https://nut-guo.github.io/riscv-syscall/" />
 <meta property="og:image" content="https://nut-guo.github.io/"/>
-<meta property="article:published_time" content="2020-10-17T16:13:47+08:00" />
-<meta property="article:modified_time" content="2020-10-17T16:13:47+08:00" />
+<meta property="article:published_time" content="2020-10-18T22:28:00+08:00" />
+<meta property="article:modified_time" content="2020-10-18T22:28:00+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://nut-guo.github.io/"/>
 
-<meta name="twitter:title" content="内核调试环境配置"/>
-<meta name="twitter:description" content="操作系统实验环境配置 操作系统实验中，利用qemu运行RISCV架构下的操作系统，gdb远程调试。利用vscode给gdb提供图形界面的支持可"/>
+<meta name="twitter:title" content="Riscv Syscall"/>
+<meta name="twitter:description" content="RISC-V 特权级切换 UCAS的计算机专业操作系统实验中要求实现sleep系统调用，涉及到RISC-V的一些细节，需要阅读手册理解该指令集下的工作机制"/>
 <meta name="application-name" content="Nut&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="Nut&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="prev" href="https://nut-guo.github.io/manjaro-configure/" /><link rel="next" href="https://nut-guo.github.io/riscv-syscall/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.8235a67a2521ef99fb1e455a5891b022af1653b4ede3cfffcac4e473beee88fbcc1a36bbb3cfdd75fd6df46732032f9d96e30adae9c88b769e1fbf7945cd27e0.css" integrity="sha512-gjWmeiUh75n7HkVaWJGwIq8WU7Tt48//ysTkc77uiPvMGja7s8/ddf1t9GcyAy&#43;dluMK2unIi3aeH795Rc0n4A=="><link rel="stylesheet" href="/css/style.min.89b621a9bf174f6453c265bdcf5f2ffe8feb8bf3555ce4432c220058d367643a9e0aae3b0c211fc83b05a5bdc47d2ce47d74361d8a2becb6f76a7df35e3c3def.css" integrity="sha512-ibYhqb8XT2RTwmW9z18v/o/ri/NVXORDLCIAWNNnZDqeCq47DCEfyDsFpb3EfSzkfXQ2HYor7Lb3an3zXjw97w=="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.2fb31670aec534f73036a9cb759abcea54c760b750a996b3e58700804fb97271a6970f094f4dd0076fa8c4bd74d14781e9197364b531086492e3ffbe98d65dc7.css" integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE&#43;5cnGmlw8JT03QB2&#43;oxL100UeB6RlzZLUxCGSS4/&#43;&#43;mNZdxw=="><link rel="stylesheet" href="/lib/animate/animate.min.76826b0bfa1c53c546551c773bdf7cd7ed9a6149f77ee5955afa8b8b553eb40d8c595cecc3e3552aad4fac4345d3733e4d804ff763e7614957147d595b41692f.css" integrity="sha512-doJrC/ocU8VGVRx3O9981&#43;2aYUn3fuWVWvqLi1U&#43;tA2MWVzsw&#43;NVKq1PrENF03M&#43;TYBP92PnYUlXFH1ZW0FpLw=="><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://nut-guo.github.io/riscv-syscall/" /><link rel="prev" href="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.8235a67a2521ef99fb1e455a5891b022af1653b4ede3cfffcac4e473beee88fbcc1a36bbb3cfdd75fd6df46732032f9d96e30adae9c88b769e1fbf7945cd27e0.css" integrity="sha512-gjWmeiUh75n7HkVaWJGwIq8WU7Tt48//ysTkc77uiPvMGja7s8/ddf1t9GcyAy&#43;dluMK2unIi3aeH795Rc0n4A=="><link rel="stylesheet" href="/css/style.min.89b621a9bf174f6453c265bdcf5f2ffe8feb8bf3555ce4432c220058d367643a9e0aae3b0c211fc83b05a5bdc47d2ce47d74361d8a2becb6f76a7df35e3c3def.css" integrity="sha512-ibYhqb8XT2RTwmW9z18v/o/ri/NVXORDLCIAWNNnZDqeCq47DCEfyDsFpb3EfSzkfXQ2HYor7Lb3an3zXjw97w=="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.2fb31670aec534f73036a9cb759abcea54c760b750a996b3e58700804fb97271a6970f094f4dd0076fa8c4bd74d14781e9197364b531086492e3ffbe98d65dc7.css" integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE&#43;5cnGmlw8JT03QB2&#43;oxL100UeB6RlzZLUxCGSS4/&#43;&#43;mNZdxw=="><link rel="stylesheet" href="/lib/animate/animate.min.76826b0bfa1c53c546551c773bdf7cd7ed9a6149f77ee5955afa8b8b553eb40d8c595cecc3e3552aad4fac4345d3733e4d804ff763e7614957147d595b41692f.css" integrity="sha512-doJrC/ocU8VGVRx3O9981&#43;2aYUn3fuWVWvqLi1U&#43;tA2MWVzsw&#43;NVKq1PrENF03M&#43;TYBP92PnYUlXFH1ZW0FpLw=="><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "内核调试环境配置",
+        "headline": "Riscv Syscall",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/nut-guo.github.io\/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE\/"
-        },"genre": "posts","keywords": "Lab","wordcount":  448 ,
-        "url": "https:\/\/nut-guo.github.io\/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE\/","datePublished": "2020-10-17T16:13:47+08:00","dateModified": "2020-10-17T16:13:47+08:00","publisher": {
+            "@id": "https:\/\/nut-guo.github.io\/riscv-syscall\/"
+        },"genre": "posts","keywords": "Lab","wordcount":  1202 ,
+        "url": "https:\/\/nut-guo.github.io\/riscv-syscall\/","datePublished": "2020-10-18T22:28:00+08:00","dateModified": "2020-10-18T22:28:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -104,10 +104,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content always-active" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">内核调试环境配置</h1><h2 class="single-subtitle">使用VScode改善操作系统实验体验</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">Riscv Syscall</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Nut</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/os/"><i class="far fa-folder fa-fw"></i>OS</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-17">2020-10-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 448 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id="/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="leancloud_visitors" data-flag-title="内核调试环境配置">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-18">2020-10-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1202 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id="/riscv-syscall/" class="leancloud_visitors" data-flag-title="Riscv Syscall">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -117,159 +117,55 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#1-安装native-debug插件">1 安装Native Debug插件</a></li>
-    <li><a href="#2-配置lauchjson">2 配置Lauch.json</a></li>
-    <li><a href="#3-愉快调试">3 愉快调试</a></li>
+    <li><a href="#1-切换运行模式至用户态">1 切换运行模式至用户态</a></li>
+    <li><a href="#2-系统调用">2 系统调用</a></li>
+    <li><a href="#3-参考文献">3 参考文献</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="操作系统实验环境配置">操作系统实验环境配置</h1>
-<p>操作系统实验中，利用qemu运行RISCV架构下的操作系统，gdb远程调试。利用vscode给gdb提供图形界面的支持可以极大的改善调试体验。</p>
-<h2 id="1-安装native-debug插件">1 安装Native Debug插件</h2>
-<p><figure><a class="lightgallery" href="/Kernel_Debug/Native_Debug.png" title="Native Debug" data-thumbnail="/Kernel_Debug/Native_Debug.png" data-sub-html="<h2>Native Debug</h2><p>Native Debug</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="Kernel_Debug/Native_Debug.png"
-            data-srcset="/Kernel_Debug/Native_Debug.png, Kernel_Debug/Native_Debug.png 1.5x, /Kernel_Debug/Native_Debug.png 2x"
-            data-sizes="auto"
-            alt="/Kernel_Debug/Native_Debug.png" />
-    </a><figcaption class="image-caption">Native Debug</figcaption>
-    </figure></p>
-<h2 id="2-配置lauchjson">2 配置Lauch.json</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;0.2.0&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;configurations&#34;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;gdb&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;request&#34;</span><span class="p">:</span> <span class="s2">&#34;attach&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Attach to QEMU&#34;</span><span class="p">,</span>
-            <span class="err">//替换为自己的可执行文件路径</span>
-            <span class="nt">&#34;executable&#34;</span><span class="p">:</span> <span class="s2">&#34;${workspaceFolder}/prj2/main&#34;</span><span class="p">,</span> 
-            <span class="err">//将端口替换为当前实验中qemu打开的端口，例如xv6习惯于使用26000</span>
-            <span class="nt">&#34;target&#34;</span><span class="p">:</span> <span class="s2">&#34;localhost:1234&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;remote&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="nt">&#34;cwd&#34;</span><span class="p">:</span> <span class="s2">&#34;${workspaceRoot}&#34;</span><span class="p">,</span> 
-            <span class="err">//替换为相应的gdb可执行文件的地址</span>
-            <span class="nt">&#34;gdbpath&#34;</span><span class="p">:</span> <span class="s2">&#34;/riscv64-linux/bin/riscv64-unknown-linux-gnu-gdb&#34;</span><span class="p">,</span> 
-            <span class="nt">&#34;autorun&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="err">//添加其他需要的文件提供调试信息</span>
-                <span class="s2">&#34;add-symbol-file ${workspaceFolder}/prj2/bootblock&#34;</span><span class="p">,</span>
-                <span class="err">//在入口函数下断点</span>
-                <span class="s2">&#34;b _start&#34;</span> 											
-            <span class="p">]</span>
-        <span class="p">},</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="3-愉快调试">3 愉快调试</h2>
-<p>在终端中启动qemu后，<code>F5</code>打开调试器，程序将自动停止在设定的断点处。
-<figure><a class="lightgallery" href="/Kernel_Debug/debug.png" title="debug" data-thumbnail="/Kernel_Debug/debug.png" data-sub-html="<h2>debug</h2><p>debug</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="Kernel_Debug/debug.png"
-            data-srcset="/Kernel_Debug/debug.png, Kernel_Debug/debug.png 1.5x, /Kernel_Debug/debug.png 2x"
-            data-sizes="auto"
-            alt="/Kernel_Debug/debug.png" />
-    </a><figcaption class="image-caption">debug</figcaption>
-    </figure></p>
-<p>Tips:</p>
-<ol>
-<li>使用侧边栏调试窗口中的Call Stack查看调用栈</li>
-<li>Debug Console中照常使用gdb打印信息</li>
-<li>在.gdbinit中自定义宏，打印信息,例如:</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">define plist
-    <span class="nb">set</span> <span class="nv">$hd</span> <span class="o">=</span> <span class="o">(</span>list_node_t*<span class="o">)</span><span class="p">&amp;</span>ready_queue
-    <span class="nb">set</span> <span class="nv">$nd</span> <span class="o">=</span> ready_queue-&gt;next
-    <span class="k">while</span><span class="o">(</span><span class="nv">$nd</span> !<span class="o">=</span> <span class="nv">$hd</span><span class="o">)</span>
-        p/x <span class="nv">$nd</span>
-        <span class="nb">set</span> <span class="nv">$nd</span> <span class="o">=</span> <span class="o">((</span>list_node_t*<span class="o">)</span><span class="nv">$nd</span><span class="o">)</span>-&gt;next
-    end
-end
-
-define pcur
-    <span class="nb">printf</span> <span class="s2">&#34;current_running-&gt;kernel_sp= %lx&#34;</span>,current_running-&gt;kernel_sp
-    <span class="nb">printf</span> <span class="s2">&#34;current_running-&gt;user_sp= %lx&#34;</span>,current_running-&gt;user_sp
-    <span class="nb">printf</span> <span class="s2">&#34;context:\n&#34;</span>
-    x/36gx current_running-&gt;kernel_sp
-end
-</code></pre></td></tr></table>
-</div>
-</div><p>示例：
-<figure><a class="lightgallery" href="/Kernel_Debug/pcur.png" title="pcur" data-thumbnail="/Kernel_Debug/pcur.png" data-sub-html="<h2>pcur</h2><p>pcur</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="Kernel_Debug/pcur.png"
-            data-srcset="/Kernel_Debug/pcur.png, Kernel_Debug/pcur.png 1.5x, /Kernel_Debug/pcur.png 2x"
-            data-sizes="auto"
-            alt="/Kernel_Debug/pcur.png" />
-    </a><figcaption class="image-caption">pcur</figcaption>
-    </figure></p>
-<p>祝大家调试愉快。</p>
+            </div><div class="content" id="content"><h1 id="risc-v-特权级切换">RISC-V 特权级切换</h1>
+<p>UCAS的计算机专业操作系统实验中要求实现sleep系统调用，涉及到RISC-V的一些细节，需要阅读手册理解该指令集下的工作机制，在此做一总结。</p>
+<h2 id="1-切换运行模式至用户态">1 切换运行模式至用户态</h2>
+<p>实验手册的注意事项中给出了如下提示：</p>
+<blockquote>
+<p>RISC-V 在所有特全级下都用ecall执行系统调用。Supervisor态ecall会触发machine态的例外，user态的ecall会触发supervisor态的中断。所以大家务必注意，要让USER模式的进程/线程运行在用户态。</p>
+</blockquote>
+<p>Supervisor模式和User模式的切换是后续顺利实验的关键。《RISC-V手册》第10章关于特权架构的介绍中提到：</p>
+<blockquote>
+<p>S 模式有几个异常处理 CSR:sepc、stvec、scause、sscratch、stval 和 sstatus,它们执行与 M 模式 CSR 相同的功能。监管者异常返回指令 sret 与 mret 的行为相同,但它作用于 S 模式的异常处理 CSR,而不是 M 模式的 CSR。S 模式处理例外的行为已和 M 模式非常相似。如果 hart 接受了异常并且把它委派给了S 模式,则硬件会原子地经历几个类似的状态转换,其中用到了 S 模式而不是 M 模式的CSR:</p>
+<ul>
+<li>发生例外的指令的 PC 被存入 sepc,且 PC 被设置为 stvec。</li>
+<li>scause 根据异常类型设置,stval 被设置成出错的地址或者其它特定异常的信息字。</li>
+<li>把 sstatus CSR 中的 SIE 置零,屏蔽中断,且 SIE 之前的值被保存在 SPIE 中。</li>
+<li>发生例外时的权限模式被保存在 sstatus 的 SPP 域,然后设置当前模式为 S 模式。</li>
+</ul>
+</blockquote>
+<p>这一部分描述了从User模式进入到Supervisor模式的过程中硬件的处理机制，从Supervisor模式返回User模式的过程手册中没有直接介绍，但可以通过对mret的介绍了解其工作方式。</p>
+<blockquote>
+<p>处理程序用 mret 指令(M 模式特有的指令)返回。mret 将 PC 设置为 mepc,通过将 mstatus 的 MPIE 域复制到MIE 来恢复之前的中断使能设置,并将权限模式设置为 mstatus 的 MPP 域中的值。
+这基本是前一段中描述的逆操作。</p>
+</blockquote>
+<p>显然想要将运行模式切换到用户态，需要的指令就是sret了。</p>
+<p>在执行sret之前，需要准备好sepc，sstatus寄存器，这一部分寄存器应当在恢复上下文时完成，需要特别关注sstatus的SPIE位以及SPP位，这为初始化PCB时的设计给出了提示。具体实现可通过阅读手册中对于sret指令的说明得到一些提示。</p>
+<h2 id="2-系统调用">2 系统调用</h2>
+<p>ecall指令我们在Project 1的SBI_CALL中见到过，当时的用法是通过寄存器传参后调用sbi函数，这是在Supervisor模式下的行为。如果读者在没有完成上下文切换的时候尝试过使用ecall指令触发中断，并仔细调试的话，预期触发中断的地方很可能直接执行了一个sbi函数。而若已经正确切换到Supervisor模式，将会跳转到stvec继续执行，异常类型存放在scause中，stval 被设置成出错的地址或者其它特定异常的信息字。后续系统调用的实现就很简单了，不再赘述。</p>
+<p>祝大家实验顺利。</p>
+<h2 id="3-参考文献">3 参考文献</h2>
+<p><a href="http://crva.ict.ac.cn/documents/RISC-V-Reader-Chinese-v2p1.pdf" target="_blank" rel="noopener noreffer">RISC-V 手册</a></p>
+<p><a href="" rel="">P2-Guidebook-RISCV</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-10-17</span>
+                <span>更新于 2020-10-18</span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.md" target="_blank">阅读原始文档</a>
+                            <a class="link-to-markdown" href="/riscv-syscall/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="内核调试环境配置" data-hashtags="Lab"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-hashtag="Lab"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="内核调试环境配置" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="内核调试环境配置"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="内核调试环境配置"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="内核调试环境配置" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="内核调试环境配置" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="内核调试环境配置"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="Riscv Syscall" data-hashtags="Lab"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://nut-guo.github.io/riscv-syscall/" data-hashtag="Lab"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="Riscv Syscall" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="Riscv Syscall"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="Riscv Syscall"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="Riscv Syscall" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="Riscv Syscall" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="Riscv Syscall"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
@@ -281,8 +177,7 @@ end
         </section>
     </div>
 
-    <div class="post-nav"><a href="/manjaro-configure/" class="prev" rel="prev" title="Manjaro"><i class="fas fa-angle-left fa-fw"></i>Manjaro</a>
-            <a href="/riscv-syscall/" class="next" rel="next" title="Riscv Syscall">Riscv Syscall<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="prev" rel="prev" title="内核调试环境配置"><i class="fas fa-angle-left fa-fw"></i>内核调试环境配置</a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

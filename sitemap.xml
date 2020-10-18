@@ -2,12 +2,13 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://nut-guo.github.io/categories/</loc><lastmod>2020-10-17T16:13:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://nut-guo.github.io/tags/lab/</loc><lastmod>2020-10-17T16:13:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://nut-guo.github.io/</loc><lastmod>2020-10-17T16:13:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://nut-guo.github.io/categories/os/</loc><lastmod>2020-10-17T16:13:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://nut-guo.github.io/posts/</loc><lastmod>2020-10-17T16:13:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://nut-guo.github.io/tags/</loc><lastmod>2020-10-17T16:13:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://nut-guo.github.io/categories/</loc><lastmod>2020-10-18T22:28:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://nut-guo.github.io/tags/lab/</loc><lastmod>2020-10-18T22:28:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://nut-guo.github.io/</loc><lastmod>2020-10-18T22:28:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://nut-guo.github.io/categories/os/</loc><lastmod>2020-10-18T22:28:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://nut-guo.github.io/posts/</loc><lastmod>2020-10-18T22:28:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://nut-guo.github.io/riscv-syscall/</loc><lastmod>2020-10-18T22:28:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://nut-guo.github.io/tags/</loc><lastmod>2020-10-18T22:28:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc><lastmod>2020-10-17T16:13:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://nut-guo.github.io/tags/manjaro/</loc><lastmod>2020-10-17T16:13:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://nut-guo.github.io/manjaro-configure/</loc><lastmod>2020-10-17T16:13:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
