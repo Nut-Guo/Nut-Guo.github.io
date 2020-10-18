@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/nut-guo.github.io\/riscv-syscall\/"
-        },"genre": "posts","keywords": "Lab","wordcount":  1202 ,
+        },"genre": "posts","keywords": "Lab","wordcount":  1196 ,
         "url": "https:\/\/nut-guo.github.io\/riscv-syscall\/","datePublished": "2020-10-18T22:28:00+08:00","dateModified": "2020-10-18T22:28:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">RISC-V 特权级切换</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Nut</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/os/"><i class="far fa-folder fa-fw"></i>OS</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-18">2020-10-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1202 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-18">2020-10-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1196 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id="/riscv-syscall/" class="leancloud_visitors" data-flag-title="RISC-V 特权级切换">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -147,7 +147,7 @@
 <p>显然想要将运行模式切换到用户态，需要的指令就是sret了。</p>
 <p>在执行sret之前，需要准备好sepc，sstatus寄存器，这一部分寄存器应当在恢复上下文时完成，需要特别关注sstatus的SPIE位以及SPP位，这为初始化PCB时的设计给出了提示。具体实现可通过阅读手册中对于sret指令的说明得到一些提示。</p>
 <h2 id="2-系统调用">2 系统调用</h2>
-<p>ecall指令我们在Project 1的SBI_CALL中见到过，当时的用法是通过寄存器传参后调用sbi函数，这是在Supervisor模式下的行为。如果读者在没有完成上下文切换的时候尝试过使用ecall指令触发中断，并仔细调试的话，预期触发中断的地方很可能直接执行了一个sbi函数。而若已经正确切换到Supervisor模式，将会跳转到stvec继续执行，异常类型存放在scause中，stval 被设置成出错的地址或者其它特定异常的信息字。后续系统调用的实现就很简单了，不再赘述。</p>
+<p>ecall指令我们在Project 1的SBI_CALL中见到过，当时的用法是通过寄存器传参后调用sbi函数，这是在Supervisor模式下的行为。如果读者在没有完成上下文切换的时候尝试过使用ecall指令触发中断，并仔细调试的话，预期触发中断的地方很可能直接执行了一个sbi函数。而若已经正确切换到User模式，将会跳转到stvec继续执行，异常类型存放在scause中，stval 被设置成出错的地址或者其它特定异常的信息字。后续系统调用的实现就很简单了，不再赘述。</p>
 <p>祝大家实验顺利。</p>
 <h2 id="3-参考文献">3 参考文献</h2>
 <p><a href="http://crva.ict.ac.cn/documents/RISC-V-Reader-Chinese-v2p1.pdf" target="_blank" rel="noopener noreffer">RISC-V 手册</a></p>
