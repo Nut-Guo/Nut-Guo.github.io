@@ -4,7 +4,14 @@
         <link>https://nut-guo.github.io/tags/manjaro/</link>
         <description>Manjaro - 标签 - Nut&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>qinsiliang18@mails.ucas.ac.cn (Nut)</managingEditor>
-            <webMaster>qinsiliang18@mails.ucas.ac.cn (Nut)</webMaster><lastBuildDate>Tue, 01 Sep 2020 16:13:47 &#43;0800</lastBuildDate><atom:link href="https://nut-guo.github.io/tags/manjaro/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>qinsiliang18@mails.ucas.ac.cn (Nut)</webMaster><lastBuildDate>Mon, 19 Oct 2020 10:34:16 &#43;0800</lastBuildDate><atom:link href="https://nut-guo.github.io/tags/manjaro/" rel="self" type="application/rss+xml" /><item>
+    <title>在Manjaro下运行一个Ubuntu</title>
+    <link>https://nut-guo.github.io/systemd-nspawn/</link>
+    <pubDate>Mon, 19 Oct 2020 10:34:16 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://nut-guo.github.io/systemd-nspawn/</guid>
+    <description><![CDATA[在Manjaro下运行一个Ubuntu 在物理机上安装了两个Linux发行版，以应对不同的应用需求，但相互切换频繁操作繁琐，于是开始折腾如何在]]></description>
+</item><item>
     <title>Manjaro</title>
     <link>https://nut-guo.github.io/manjaro-configure/</link>
     <pubDate>Tue, 01 Sep 2020 16:13:47 &#43;0800</pubDate>

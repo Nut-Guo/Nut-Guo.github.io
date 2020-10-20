@@ -5,32 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>RISC-V 特权级切换 - Nut&#39;s Blog</title><meta name="Description" content="Notes at UCAS"><meta property="og:title" content="RISC-V 特权级切换" />
-<meta property="og:description" content="RISC-V 特权级切换 UCAS的计算机专业操作系统实验中要求实现sleep系统调用，涉及到RISC-V的一些细节，需要阅读手册理解该指令集下的工作机制" />
+        <title>在Manjaro下运行一个Ubuntu - Nut&#39;s Blog</title><meta name="Description" content="Notes at UCAS"><meta property="og:title" content="在Manjaro下运行一个Ubuntu" />
+<meta property="og:description" content="在Manjaro下运行一个Ubuntu 在物理机上安装了两个Linux发行版，以应对不同的应用需求，但相互切换频繁操作繁琐，于是开始折腾如何在" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nut-guo.github.io/riscv-syscall/" />
+<meta property="og:url" content="https://nut-guo.github.io/systemd-nspawn/" />
 <meta property="og:image" content="https://nut-guo.github.io/"/>
-<meta property="article:published_time" content="2020-10-18T22:28:00+08:00" />
-<meta property="article:modified_time" content="2020-10-18T22:28:00+08:00" />
+<meta property="article:published_time" content="2020-10-19T10:34:16+08:00" />
+<meta property="article:modified_time" content="2020-10-19T10:34:16+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://nut-guo.github.io/"/>
 
-<meta name="twitter:title" content="RISC-V 特权级切换"/>
-<meta name="twitter:description" content="RISC-V 特权级切换 UCAS的计算机专业操作系统实验中要求实现sleep系统调用，涉及到RISC-V的一些细节，需要阅读手册理解该指令集下的工作机制"/>
+<meta name="twitter:title" content="在Manjaro下运行一个Ubuntu"/>
+<meta name="twitter:description" content="在Manjaro下运行一个Ubuntu 在物理机上安装了两个Linux发行版，以应对不同的应用需求，但相互切换频繁操作繁琐，于是开始折腾如何在"/>
 <meta name="application-name" content="Nut&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="Nut&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://nut-guo.github.io/riscv-syscall/" /><link rel="prev" href="https://nut-guo.github.io/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="next" href="https://nut-guo.github.io/systemd-nspawn/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.8235a67a2521ef99fb1e455a5891b022af1653b4ede3cfffcac4e473beee88fbcc1a36bbb3cfdd75fd6df46732032f9d96e30adae9c88b769e1fbf7945cd27e0.css" integrity="sha512-gjWmeiUh75n7HkVaWJGwIq8WU7Tt48//ysTkc77uiPvMGja7s8/ddf1t9GcyAy&#43;dluMK2unIi3aeH795Rc0n4A=="><link rel="stylesheet" href="/css/style.min.89b621a9bf174f6453c265bdcf5f2ffe8feb8bf3555ce4432c220058d367643a9e0aae3b0c211fc83b05a5bdc47d2ce47d74361d8a2becb6f76a7df35e3c3def.css" integrity="sha512-ibYhqb8XT2RTwmW9z18v/o/ri/NVXORDLCIAWNNnZDqeCq47DCEfyDsFpb3EfSzkfXQ2HYor7Lb3an3zXjw97w=="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.2fb31670aec534f73036a9cb759abcea54c760b750a996b3e58700804fb97271a6970f094f4dd0076fa8c4bd74d14781e9197364b531086492e3ffbe98d65dc7.css" integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE&#43;5cnGmlw8JT03QB2&#43;oxL100UeB6RlzZLUxCGSS4/&#43;&#43;mNZdxw=="><link rel="stylesheet" href="/lib/animate/animate.min.76826b0bfa1c53c546551c773bdf7cd7ed9a6149f77ee5955afa8b8b553eb40d8c595cecc3e3552aad4fac4345d3733e4d804ff763e7614957147d595b41692f.css" integrity="sha512-doJrC/ocU8VGVRx3O9981&#43;2aYUn3fuWVWvqLi1U&#43;tA2MWVzsw&#43;NVKq1PrENF03M&#43;TYBP92PnYUlXFH1ZW0FpLw=="><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://nut-guo.github.io/systemd-nspawn/" /><link rel="prev" href="https://nut-guo.github.io/riscv-syscall/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.8235a67a2521ef99fb1e455a5891b022af1653b4ede3cfffcac4e473beee88fbcc1a36bbb3cfdd75fd6df46732032f9d96e30adae9c88b769e1fbf7945cd27e0.css" integrity="sha512-gjWmeiUh75n7HkVaWJGwIq8WU7Tt48//ysTkc77uiPvMGja7s8/ddf1t9GcyAy&#43;dluMK2unIi3aeH795Rc0n4A=="><link rel="stylesheet" href="/css/style.min.89b621a9bf174f6453c265bdcf5f2ffe8feb8bf3555ce4432c220058d367643a9e0aae3b0c211fc83b05a5bdc47d2ce47d74361d8a2becb6f76a7df35e3c3def.css" integrity="sha512-ibYhqb8XT2RTwmW9z18v/o/ri/NVXORDLCIAWNNnZDqeCq47DCEfyDsFpb3EfSzkfXQ2HYor7Lb3an3zXjw97w=="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.2fb31670aec534f73036a9cb759abcea54c760b750a996b3e58700804fb97271a6970f094f4dd0076fa8c4bd74d14781e9197364b531086492e3ffbe98d65dc7.css" integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE&#43;5cnGmlw8JT03QB2&#43;oxL100UeB6RlzZLUxCGSS4/&#43;&#43;mNZdxw=="><link rel="stylesheet" href="/lib/animate/animate.min.76826b0bfa1c53c546551c773bdf7cd7ed9a6149f77ee5955afa8b8b553eb40d8c595cecc3e3552aad4fac4345d3733e4d804ff763e7614957147d595b41692f.css" integrity="sha512-doJrC/ocU8VGVRx3O9981&#43;2aYUn3fuWVWvqLi1U&#43;tA2MWVzsw&#43;NVKq1PrENF03M&#43;TYBP92PnYUlXFH1ZW0FpLw=="><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "RISC-V 特权级切换",
+        "headline": "在Manjaro下运行一个Ubuntu",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/nut-guo.github.io\/riscv-syscall\/"
-        },"genre": "posts","keywords": "Lab","wordcount":  1196 ,
-        "url": "https:\/\/nut-guo.github.io\/riscv-syscall\/","datePublished": "2020-10-18T22:28:00+08:00","dateModified": "2020-10-18T22:28:00+08:00","publisher": {
+            "@id": "https:\/\/nut-guo.github.io\/systemd-nspawn\/"
+        },"genre": "posts","keywords": "Manjaro","wordcount":  1190 ,
+        "url": "https:\/\/nut-guo.github.io\/systemd-nspawn\/","datePublished": "2020-10-19T10:34:16+08:00","dateModified": "2020-10-19T10:34:16+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -104,10 +104,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content always-active" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">RISC-V 特权级切换</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Nut</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/os/"><i class="far fa-folder fa-fw"></i>OS</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-18">2020-10-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1196 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id="/riscv-syscall/" class="leancloud_visitors" data-flag-title="RISC-V 特权级切换">
+        </div><article class="page single"><h1 class="single-title animated flipInX">在Manjaro下运行一个Ubuntu</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Nut</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/misc/"><i class="far fa-folder fa-fw"></i>misc</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-19">2020-10-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1190 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id="/systemd-nspawn/" class="leancloud_visitors" data-flag-title="在Manjaro下运行一个Ubuntu">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -117,68 +117,122 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#1-切换运行模式至用户态">1 切换运行模式至用户态</a></li>
-    <li><a href="#2-系统调用">2 系统调用</a></li>
-    <li><a href="#3-参考文献">3 参考文献</a></li>
+    <li><a href="#1-方案一修改fstab挂载分区">1 方案一：修改fstab挂载分区</a></li>
+    <li><a href="#2-方案二mountchroot">2 方案二：mount+chroot</a></li>
+    <li><a href="#3-方案三systemd-nspawn">3 方案三：systemd-nspawn</a></li>
+    <li><a href="#参考文献">参考文献</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="risc-v-特权级切换">RISC-V 特权级切换</h1>
-<p>UCAS的计算机专业操作系统实验中要求实现sleep系统调用，涉及到RISC-V的一些细节，需要阅读手册理解该指令集下的工作机制，在此做一总结。</p>
-<h2 id="1-切换运行模式至用户态">1 切换运行模式至用户态</h2>
-<p>实验手册的注意事项中给出了如下提示：</p>
-<blockquote>
-<p>RISC-V 在所有特全级下都用ecall执行系统调用。Supervisor态ecall会触发machine态的例外，user态的ecall会触发supervisor态的中断。所以大家务必注意，要让USER模式的进程/线程运行在用户态。</p>
-</blockquote>
-<p>Supervisor模式和User模式的切换是后续顺利实验的关键。《RISC-V手册》第10章关于特权架构的介绍中提到：</p>
-<blockquote>
-<p>S 模式有几个异常处理 CSR:sepc、stvec、scause、sscratch、stval 和 sstatus,它们执行与 M 模式 CSR 相同的功能。监管者异常返回指令 sret 与 mret 的行为相同,但它作用于 S 模式的异常处理 CSR,而不是 M 模式的 CSR。S 模式处理例外的行为已和 M 模式非常相似。如果 hart 接受了异常并且把它委派给了S 模式,则硬件会原子地经历几个类似的状态转换,其中用到了 S 模式而不是 M 模式的CSR:</p>
-<ul>
-<li>发生例外的指令的 PC 被存入 sepc,且 PC 被设置为 stvec。</li>
-<li>scause 根据异常类型设置,stval 被设置成出错的地址或者其它特定异常的信息字。</li>
-<li>把 sstatus CSR 中的 SIE 置零,屏蔽中断,且 SIE 之前的值被保存在 SPIE 中。</li>
-<li>发生例外时的权限模式被保存在 sstatus 的 SPP 域,然后设置当前模式为 S 模式。</li>
-</ul>
-</blockquote>
-<p>这一部分描述了从User模式进入到Supervisor模式的过程中硬件的处理机制，从Supervisor模式返回User模式的过程手册中没有直接介绍，但可以通过对mret的介绍了解其工作方式。</p>
-<blockquote>
-<p>处理程序用 mret 指令(M 模式特有的指令)返回。mret 将 PC 设置为 mepc,通过将 mstatus 的 MPIE 域复制到MIE 来恢复之前的中断使能设置,并将权限模式设置为 mstatus 的 MPP 域中的值。
-这基本是前一段中描述的逆操作。</p>
-</blockquote>
-<p>显然想要将运行模式切换到用户态，需要的指令就是sret了。</p>
-<p>在执行sret之前，需要准备好sepc，sstatus寄存器，这一部分寄存器应当在恢复上下文时完成，需要特别关注sstatus的SPIE位以及SPP位，这为初始化PCB时的设计给出了提示。具体实现可通过阅读手册中对于sret指令的说明得到一些提示。</p>
-<h2 id="2-系统调用">2 系统调用</h2>
-<p>ecall指令我们在Project 1的SBI_CALL中见到过，当时的用法是通过寄存器传参后调用sbi函数，这是在Supervisor模式下的行为。如果读者在没有完成上下文切换的时候尝试过使用ecall指令触发中断，并仔细调试的话，预期触发中断的地方很可能直接执行了一个sbi函数。而若已经正确切换到User模式，将会跳转到stvec继续执行，异常类型存放在scause中，stval 被设置成出错的地址或者其它特定异常的信息字。后续系统调用的实现就很简单了，不再赘述。</p>
-<p>祝大家实验顺利。</p>
-<h2 id="3-参考文献">3 参考文献</h2>
-<p><a href="http://crva.ict.ac.cn/documents/RISC-V-Reader-Chinese-v2p1.pdf" target="_blank" rel="noopener noreffer">RISC-V 手册</a></p>
-<p><a href="" rel="">P2-Guidebook-RISCV</a></p>
+            </div><div class="content" id="content"><h1 id="在manjaro下运行一个ubuntu">在Manjaro下运行一个Ubuntu</h1>
+<p>在物理机上安装了两个Linux发行版，以应对不同的应用需求，但相互切换频繁操作繁琐，于是开始折腾如何在已经启动一个Linux安装之后使用安装在另一个分区的Linux发行版。</p>
+<h2 id="1-方案一修改fstab挂载分区">1 方案一：修改fstab挂载分区</h2>
+<p>直接打开Manjaro后，在文件管理器中可以直接打开Ubuntu所在的分区，但是由于每次动态挂载回导致路径不固定，不方便于后续的折腾。可在/etc/fstab文件中添加对于Ubuntu所在分区的挂载，将其挂载到固定的位置。</p>
+<p>使用<code>lsblk -f</code>命令找到相应分区的UUID，在/etc/fstab文件中添加挂载的配置条目。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">UUID=&lt;UUID&gt; 	/ubuntu      ext4    defaults,noatime 0 1
+</code></pre></td></tr></table>
+</div>
+</div><p>挂载后，部分软件已经可以直接使用了，例如基于Java的Vivado，在挂载之后可以直接在其安装目录下运行命令，打开图形界面进行使用。但这是因为Vivado是跑在Java虚拟机中的，本机安装了Java之后不需要额外的依赖环境。尝试执行ELF格式的软件时，将会发现部分软件缺少依赖的动态库而无法直接运行，这时仅挂载目录的方案就不能完全解决问题了。</p>
+<h2 id="2-方案二mountchroot">2 方案二：mount+chroot</h2>
+<p>将主机的<code>/proc</code>目录<code>/sys</code>目录<code>/run/udev</code>目录<code>/dev</code>目录绑定到Ubuntu文件系统的相应位置，注意由于这些目录均为虚拟文件目录，不必担心这样的绑定破坏了Ubuntu文件系统的完整性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">mount -t proc /proc /ubuntu/proc
+mount --rbind /dev /ubuntu/dev
+mount --bind /run /ubuntu/run
+mount --bind /tmp /ubuntu/tmp
+</code></pre></td></tr></table>
+</div>
+</div><p>在host操作系统中打开一个新的Xserver并监听，注意需要先使用xhost允许来自localhost的连接。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo xhost +local:
+sudo X -quiet -nolisten tcp  -noreset :1 vt2
+</code></pre></td></tr></table>
+</div>
+</div><p>chroot到Ubuntu操作系统中之后指定使用的DISPLAY端口，即可在相应的tty中执行GUI应用程序。</p>
+<p>例如：<code>DISPLAY=:1 firefox</code>。或者也可以直接指定<code>DISPLAY=:0</code>，使用主机的桌面环境。</p>
+<p>这一方法可以支撑ELF格式的软件的执行，但问题在于可能没有办法使用网络。</p>
+<h2 id="3-方案三systemd-nspawn">3 方案三：systemd-nspawn</h2>
+<p>直接使用<code>systemd-nspawn</code>指令，可用于在一个轻量命名空间容器中运行命令或操作系统。它比 <a href="https://wiki.archlinux.org/index.php/Chroot" target="_blank" rel="noopener noreffer">chroot</a> 更强大在于它完全虚拟化了文件系统层次结构、进程树、各种 IPC 子系统以及主机和域名。</p>
+<p>通过该指令可直接在container中运行一个受限的Ubuntu操作系统，通过systemd-nspawn，可以直接在另一个tty中打开一个ubuntu的gnome桌面。</p>
+<p>将操作封装为函数添加到<code>.zshrc</code>以便重用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> spawn_ubuntu<span class="o">()</span> <span class="o">{</span>
+  sudo xhost +local:
+  sudo X -quiet -nolisten tcp  -noreset :1 vt2 &gt;&gt; /dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span><span class="c1">#打开Xserver</span>
+  sudo systemd-nspawn -bD /ubuntu <span class="se">\
+</span><span class="se"></span>    --bind<span class="o">=</span>/lib/modules <span class="se">\
+</span><span class="se"></span>    --bind-ro<span class="o">=</span>/tmp/.X11-unix <span class="se">\
+</span><span class="se"></span>    --bind<span class="o">=</span>/mnt <span class="c1">#非必要</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在终端中直接输入spawn_ubuntu便可直接使用Ubuntu了，终端中登录后使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">DISPLAY</span><span class="o">=</span>:1 gnome-session
+</code></pre></td></tr></table>
+</div>
+</div><p>在tty2中打开gnome桌面环境，通过<code>Ctrl + Alt + &lt;tty_num&gt;</code>在不同的tty之间进行切换。</p>
+<h2 id="参考文献">参考文献</h2>
+<p><a href="https://wiki.archlinux.org/index.php/Fstab" target="_blank" rel="noopener noreffer">fstab wiki</a></p>
+<p><a href="https://www.linuxquestions.org/questions/linux-from-scratch-13/chroot-with-second-desktop-environment-howto-and-notes-4175614913/" target="_blank" rel="noopener noreffer"> Chroot with second desktop environment - Howto and notes</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Systemd-nspawn" target="_blank" rel="noopener noreffer">systemd-nspawn wiki</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-10-18</span>
+                <span>更新于 2020-10-19</span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/riscv-syscall/index.md" target="_blank">阅读原始文档</a>
+                            <a class="link-to-markdown" href="/systemd-nspawn/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="RISC-V 特权级切换" data-hashtags="Lab"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://nut-guo.github.io/riscv-syscall/" data-hashtag="Lab"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="RISC-V 特权级切换" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="RISC-V 特权级切换"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="RISC-V 特权级切换"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="RISC-V 特权级切换" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="RISC-V 特权级切换" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://nut-guo.github.io/riscv-syscall/" data-title="RISC-V 特权级切换"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://nut-guo.github.io/systemd-nspawn/" data-title="在Manjaro下运行一个Ubuntu" data-hashtags="Manjaro"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://nut-guo.github.io/systemd-nspawn/" data-hashtag="Manjaro"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://nut-guo.github.io/systemd-nspawn/" data-title="在Manjaro下运行一个Ubuntu" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://nut-guo.github.io/systemd-nspawn/" data-title="在Manjaro下运行一个Ubuntu"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://nut-guo.github.io/systemd-nspawn/" data-title="在Manjaro下运行一个Ubuntu"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://nut-guo.github.io/systemd-nspawn/" data-title="在Manjaro下运行一个Ubuntu" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://nut-guo.github.io/systemd-nspawn/" data-title="在Manjaro下运行一个Ubuntu" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://nut-guo.github.io/systemd-nspawn/" data-title="在Manjaro下运行一个Ubuntu"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lab/">Lab</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/manjaro/">Manjaro</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="prev" rel="prev" title="内核调试环境配置"><i class="fas fa-angle-left fa-fw"></i>内核调试环境配置</a>
-            <a href="/systemd-nspawn/" class="next" rel="next" title="在Manjaro下运行一个Ubuntu">在Manjaro下运行一个Ubuntu<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/riscv-syscall/" class="prev" rel="prev" title="RISC-V 特权级切换"><i class="fas fa-angle-left fa-fw"></i>RISC-V 特权级切换</a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
