@@ -57,7 +57,7 @@ BUGS
 
 在64位程序中，前三个参数分别存放在`rdi`，`rbi`，`rdx`这几个寄存器当中，由于我们调用的这些函数均只用到了一个参数，故我们只需要一个`pop rdi; ret`的gadget，利用`ROPgadget`在文件中查找得其地址为`0x401283`。
 
-```bash
+```
 ~/.../SoftwareSecurity/hw1 >>> ROPgadget --binary pwn1 
 Gadgets information
 ============================================================
