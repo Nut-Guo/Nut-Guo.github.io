@@ -5,7 +5,7 @@
 
 一道简单的栈溢出的题目，检查程序保护措施如下：
 
-```bash
+```
     Arch:     amd64-64-little
     RELRO:    Partial RELRO
     Stack:    No canary found
