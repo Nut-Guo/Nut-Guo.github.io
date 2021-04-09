@@ -37,12 +37,18 @@ int main(void)
 
 在栈上分配了一个48 byte的buffer，利用gets读入数据，gets为一个常见的危险函数，其手册中描述如下：
 
-```text
+```
 gets()  
-	   reads a line from stdin into the buffer pointed to by s until either a terminating newline or EOF, which it replaces with a null byte ('\0').  No check for buffer overrun is performed (see BUGS below).
+	  reads a line from stdin into the buffer pointed to by s until either a
+    terminating newline or EOF, which it replaces with a null byte ('\0').
+    No check for buffer overrun is performed (see BUGS below).
 	   
 BUGS
-       Never use gets().  Because it is impossible to tell without knowing the data  in  advance  how  many  characters gets()  will  read,  and  because gets() will continue to store characters past the end of the buffer, it is extremely dangerous to use.  It has been used to break computer security.  Use fgets() instead.
+    Never use gets().  Because it is impossible to tell without knowing the
+    data  in  advance  how  many  characters gets()  will  read,  and  
+    because gets() will continue to store characters past the end of the 
+    buffer, it is extremely dangerous to use.  It has been used to break 
+    computer security.  Use fgets() instead.
 ```
 
 即可以读入一段任意长度的数据，直接构造rop链进行利用。程序中没有直接可以用来拿shell的函数，需要在libc中找，考虑先利用puts获取libc的基址，再向bss段中写入`/bin/sh\x00`，然后以此为参数调用system函数。
