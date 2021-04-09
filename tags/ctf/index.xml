@@ -1,60 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>CTF on Sciver&#39;s Blog</title>
-    <link>https://nut-guo.github.io/tags/ctf/</link>
-    <description>Recent content in CTF on Sciver&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 07 Jun 2019 09:02:09 +0800</lastBuildDate>
-    
-	<atom:link href="https://nut-guo.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>IOLI整理</title>
-      <link>https://nut-guo.github.io/posts/ioli%E6%95%B4%E7%90%86/</link>
-      <pubDate>Fri, 07 Jun 2019 09:02:09 +0800</pubDate>
-      
-      <guid>https://nut-guo.github.io/posts/ioli%E6%95%B4%E7%90%86/</guid>
-      <description>IOLI crackme crackme0x05 分析sym.check这个函数 / (fcn) sym.check 120 | sym.check (char *s); | ; var char *var_dh @ ebp-0xd | ; var uint32_t var_ch @ ebp-0xc | ; var uint32_t var_8h @ ebp-0x8 | ; var int32_t var_4h @ ebp-0x4 | ; arg char *s @ ebp+0x8 | ; var char *format @ esp+0x4 | ;</description>
-    </item>
-    
-    <item>
-      <title>Exploit Education整理</title>
-      <link>https://nut-guo.github.io/posts/exploit-education%E6%95%B4%E7%90%86/</link>
-      <pubDate>Thu, 06 Jun 2019 18:46:23 +0800</pubDate>
-      
-      <guid>https://nut-guo.github.io/posts/exploit-education%E6%95%B4%E7%90%86/</guid>
-      <description>Exploit Education整理 Phoenix stack-four 不同于之前几道题目静态分析的方法，此题涉及到多个函数之间的跳转，单纯的静态分析不太方便，利用pattern动态调</description>
-    </item>
-    
-    <item>
-      <title>Pwnable.kr</title>
-      <link>https://nut-guo.github.io/posts/pwnable.kr/</link>
-      <pubDate>Thu, 30 May 2019 19:40:56 +0800</pubDate>
-      
-      <guid>https://nut-guo.github.io/posts/pwnable.kr/</guid>
-      <description>Pwnable.kr Notes flag 运行程序得到如下输出： I will malloc() and strcpy the flag there. take it. 根据提示信息，flag会被存放载程序中并且通过strcpy进行处理，按理说应该刻意直接通过s</description>
-    </item>
-    
-    <item>
-      <title>资源整理</title>
-      <link>https://nut-guo.github.io/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</link>
-      <pubDate>Tue, 19 Feb 2019 16:23:29 +0000</pubDate>
-      
-      <guid>https://nut-guo.github.io/posts/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</guid>
-      <description>CTF学习资源整理 Lists vabstutorials网络资源 Knowledge is free一篇整理了很多学习资源的帖子 队伍资源 Vidar Team wiki Github Web Hacker101 picoCTF Vulnability vulhub Assembly Compiler Explorer Wargame Reversing.kr IO NetGarage Pwnable.kr OverTheWire ret2</description>
-    </item>
-    
-    <item>
-      <title>8086CPU概述</title>
-      <link>https://nut-guo.github.io/posts/8086cpu%E6%A6%82%E8%BF%B0/</link>
-      <pubDate>Tue, 19 Feb 2019 14:46:39 +0000</pubDate>
-      
-      <guid>https://nut-guo.github.io/posts/8086cpu%E6%A6%82%E8%BF%B0/</guid>
-      <description>资料 8086 《汇编语言（第三版）》王爽 基础知识 概念 机器语言：以二进制数字表示的机器指令的集合 汇编语言：机器指令便于记忆和书写的形式 汇编指令：机器码</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ctf - 标签 - Nut&#39;s Blog</title>
+        <link>https://nut-guo.github.io/tags/ctf/</link>
+        <description>ctf - 标签 - Nut&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>qinsiliang18@mails.ucas.ac.cn (Nut)</managingEditor>
+            <webMaster>qinsiliang18@mails.ucas.ac.cn (Nut)</webMaster><lastBuildDate>Fri, 09 Apr 2021 20:14:48 &#43;0800</lastBuildDate><atom:link href="https://nut-guo.github.io/tags/ctf/" rel="self" type="application/rss+xml" /><item>
+    <title>软件安全hw1</title>
+    <link>https://nut-guo.github.io/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8hw1/</link>
+    <pubDate>Fri, 09 Apr 2021 20:14:48 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://nut-guo.github.io/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8hw1/</guid>
+    <description><![CDATA[软件安全 hw1 pwn1 一道简单的栈溢出的题目，检查程序保护措施如下： 1 2 3 4 5 Arch: amd64-64-little RELRO: Partial RELRO Stack: No canary found NX: NX enabled PIE: No PIE (0x400000) 无canary，可直接利用栈溢出。 无PI]]></description>
+</item></channel>
 </rss>
