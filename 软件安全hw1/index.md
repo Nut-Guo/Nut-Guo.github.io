@@ -810,7 +810,7 @@ p.interactive()
 
 ## CVE-2021-3156
 
-实验截图：![](/run/media/sciver/Data/Chores/Blog/content/posts/软件安全hw1.assets/Screenshot_20210410_210304.png)
+实验截图：![](hw1/Photo.png)
 
 如上图所示，在在Ubuntu18.04上，选用sudo 1.8.21p2-3ubuntu1，成功复现了CVE-2021-3156，以普通用户的身份执行命令拿到了root shell。
 
