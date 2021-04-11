@@ -808,4 +808,103 @@ del_note(6)
 p.interactive()
 ```
 
+## CVE-2021-3156
+
+实验截图：![](/run/media/sciver/Data/Chores/Blog/content/posts/软件安全hw1.assets/Screenshot_20210410_210304.png)
+
+如上图所示，在在Ubuntu18.04上，选用sudo 1.8.21p2-3ubuntu1，成功复现了CVE-2021-3156，以普通用户的身份执行命令拿到了root shell。
+
+漏洞在于在`plugins/sudoers/sudoers.c`文件中存在如下函数：
+
+```C
+
+/*
+ * Fill in user_cmnd, user_args, user_base and user_stat variables
+ * and apply any command-specific defaults entries.
+ */
+static int
+set_cmnd(void)
+{
+	// Ignore
+    
+	if (sudo_mode & (MODE_RUN | MODE_EDIT | MODE_CHECK))
+	{
+		if (ISSET(sudo_mode, MODE_RUN | MODE_CHECK))
+		{
+			// Ignore
+		}
+
+		/* set user_args */
+		if (NewArgc > 1)
+		{
+			char *to, *from, **av;
+			size_t size, n;
+
+			/* Alloc and build up user_args. */
+			for (size = 0, av = NewArgv + 1; *av; av++)
+				size += strlen(*av) + 1;
+			if (size == 0 || (user_args = malloc(size)) == NULL)
+			{
+				sudo_warnx(U_("%s: %s"), __func__, U_("unable to allocate memory"));
+				debug_return_int(-1);
+			}
+			if (ISSET(sudo_mode, MODE_SHELL | MODE_LOGIN_SHELL))
+			{
+				/*
+                 * When running a command via a shell, the sudo front-end
+                 * escapes potential meta chars.  We unescape non-spaces
+                 * for sudoers matching and logging purposes.
+                 */
+				for (to = user_args, av = NewArgv + 1; (from = *av); av++)
+				{
+					while (*from)
+					{
+						if (from[0] == '\\' && !isspace((unsigned char)from[1]))
+							from++;
+						*to++ = *from++;
+					}
+					*to++ = ' ';
+				}
+				*--to = '\0';
+			}
+			else
+			{
+				for (to = user_args, av = NewArgv + 1; *av; av++)
+				{
+					n = strlcpy(to, *av, size - (to - user_args));
+					if (n >= size - (to - user_args))
+					{
+						sudo_warnx(U_("internal error, %s overflow"), __func__);
+						debug_return_int(-1);
+					}
+					to += n;
+					*to++ = ' ';
+				}
+				*--to = '\0';
+			}
+		}
+	}
+	// Ignore
+}
+```
+
+`if (NewArgc > 1)`这一分支中，根据参数的大小在堆上分配了堆内存。然后将命令行参数依次复制到堆空间中。但在上述代码的第43行中，如果某一命令行参数以反斜杠结尾，`from++`后在`*to++ = *from++`这一条指令处再次使得`from`指针指向下一位置，发生指针越界，这时不会跳出循环，而是会继续拷贝后续内容，将后面的内容复制到`user_args`堆块中，发生堆溢出。
+
+为了使得程序执行到这一分支，需要满足如下条件：
+
+```C
+// parse_args
+!((ISSET(mode, MODE_RUN) && ISSET(flags, MODE_SHELL)) //避免代码执行，对命令行中所有的参数进行转义
+  
+//sudoers_policy_main
+sudo_mode & (MODE_RUN | MODE_EDIT | MODE_CHECK)
+ISSET(sudo_mode, MODE_SHELL | MODE_LOGIN_SHELL)
+```
+
+即要求`!MODE_RUN) & MODE_EDIT & MODE_SHELL & MODE_LOGIN`。在parse_args.c中查找参数配置情况。在各种参数配置中，发现执行sudoedit时满足上述条件，可以正常执行到堆溢出的部分。
+
+之后的工作就是利用这个堆溢出获得root shell。具体的实现细节十分复杂，利用了nss库，大致思路为利用nss在加载动态库时会将名字信息存在堆上，通过拼接得到动态链接库的全称，然后加载，如果我们能够利用堆溢出使其加载我们构造的恶意动态链接库，就可以执行任意代码。而为了能够覆盖到nss中用到的结构体，需要我们的堆块位于其前方不远处。PoC中的方法为利用setlocale获得free原语，利用其对于换进见变量的匹配机制将分配堆块后再释放掉，这样我们后面分配堆块时能够复用这一堆块，实现溢出。
+
+具体的细节见[这里的writeup](https://www.anquanke.com/post/id/231408#h2-0)。
+
 

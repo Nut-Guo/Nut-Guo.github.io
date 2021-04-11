@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/nut-guo.github.io\/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8hw1\/"
-        },"genre": "posts","keywords": "ctf, hw, pwn","wordcount":  8740 ,
+        },"genre": "posts","keywords": "ctf, hw, pwn","wordcount":  9777 ,
         "url": "https:\/\/nut-guo.github.io\/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8hw1\/","datePublished": "2021-04-09T20:14:48+08:00","dateModified": "2021-04-09T20:14:48+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,8 +106,8 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">软件安全hw1</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Nut</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/ctf/"><i class="far fa-folder fa-fw"></i>ctf</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-09">2021-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8740 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 18 分钟&nbsp;<span id="/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8hw1/" class="leancloud_visitors" data-flag-title="软件安全hw1">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-04-09">2021-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 9777 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 20 分钟&nbsp;<span id="/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8hw1/" class="leancloud_visitors" data-flag-title="软件安全hw1">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -120,6 +120,7 @@
     <li><a href="#pwn1">pwn1</a></li>
     <li><a href="#pwn2_32">pwn2_32</a></li>
     <li><a href="#pwn3">pwn3</a></li>
+    <li><a href="#cve-2021-3156">CVE-2021-3156</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="软件安全-hw1">软件安全 hw1</h1>
@@ -1758,7 +1759,185 @@ Unique gadgets found: 66
 <span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h2 id="cve-2021-3156">CVE-2021-3156</h2>
+<p>实验截图：<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/run/media/sciver/Data/Chores/Blog/content/posts/%e8%bd%af%e4%bb%b6%e5%ae%89%e5%85%a8hw1.assets/Screenshot_20210410_210304.png"
+        data-srcset="/run/media/sciver/Data/Chores/Blog/content/posts/%e8%bd%af%e4%bb%b6%e5%ae%89%e5%85%a8hw1.assets/Screenshot_20210410_210304.png, /run/media/sciver/Data/Chores/Blog/content/posts/%e8%bd%af%e4%bb%b6%e5%ae%89%e5%85%a8hw1.assets/Screenshot_20210410_210304.png 1.5x, /run/media/sciver/Data/Chores/Blog/content/posts/%e8%bd%af%e4%bb%b6%e5%ae%89%e5%85%a8hw1.assets/Screenshot_20210410_210304.png 2x"
+        data-sizes="auto"
+        alt="/run/media/sciver/Data/Chores/Blog/content/posts/软件安全hw1.assets/Screenshot_20210410_210304.png"
+        title="/run/media/sciver/Data/Chores/Blog/content/posts/软件安全hw1.assets/Screenshot_20210410_210304.png" /></p>
+<p>如上图所示，在在Ubuntu18.04上，选用sudo 1.8.21p2-3ubuntu1，成功复现了CVE-2021-3156，以普通用户的身份执行命令拿到了root shell。</p>
+<p>漏洞在于在<code>plugins/sudoers/sudoers.c</code>文件中存在如下函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C">
+<span class="cm">/*
+</span><span class="cm"> * Fill in user_cmnd, user_args, user_base and user_stat variables
+</span><span class="cm"> * and apply any command-specific defaults entries.
+</span><span class="cm"> */</span>
+<span class="k">static</span> <span class="kt">int</span>
+<span class="nf">set_cmnd</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// Ignore
+</span><span class="c1"></span>    
+	<span class="k">if</span> <span class="p">(</span><span class="n">sudo_mode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">MODE_RUN</span> <span class="o">|</span> <span class="n">MODE_EDIT</span> <span class="o">|</span> <span class="n">MODE_CHECK</span><span class="p">))</span>
+	<span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">ISSET</span><span class="p">(</span><span class="n">sudo_mode</span><span class="p">,</span> <span class="n">MODE_RUN</span> <span class="o">|</span> <span class="n">MODE_CHECK</span><span class="p">))</span>
+		<span class="p">{</span>
+			<span class="c1">// Ignore
+</span><span class="c1"></span>		<span class="p">}</span>
+
+		<span class="cm">/* set user_args */</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">NewArgc</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="kt">char</span> <span class="o">*</span><span class="n">to</span><span class="p">,</span> <span class="o">*</span><span class="n">from</span><span class="p">,</span> <span class="o">**</span><span class="n">av</span><span class="p">;</span>
+			<span class="n">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="n">n</span><span class="p">;</span>
+
+			<span class="cm">/* Alloc and build up user_args. */</span>
+			<span class="k">for</span> <span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">av</span> <span class="o">=</span> <span class="n">NewArgv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="o">*</span><span class="n">av</span><span class="p">;</span> <span class="n">av</span><span class="o">++</span><span class="p">)</span>
+				<span class="n">size</span> <span class="o">+=</span> <span class="n">strlen</span><span class="p">(</span><span class="o">*</span><span class="n">av</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="p">(</span><span class="n">user_args</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+			<span class="p">{</span>
+				<span class="n">sudo_warnx</span><span class="p">(</span><span class="n">U_</span><span class="p">(</span><span class="s">&#34;%s: %s&#34;</span><span class="p">),</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">U_</span><span class="p">(</span><span class="s">&#34;unable to allocate memory&#34;</span><span class="p">));</span>
+				<span class="n">debug_return_int</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+			<span class="p">}</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">ISSET</span><span class="p">(</span><span class="n">sudo_mode</span><span class="p">,</span> <span class="n">MODE_SHELL</span> <span class="o">|</span> <span class="n">MODE_LOGIN_SHELL</span><span class="p">))</span>
+			<span class="p">{</span>
+				<span class="cm">/*
+</span><span class="cm">                 * When running a command via a shell, the sudo front-end
+</span><span class="cm">                 * escapes potential meta chars.  We unescape non-spaces
+</span><span class="cm">                 * for sudoers matching and logging purposes.
+</span><span class="cm">                 */</span>
+				<span class="k">for</span> <span class="p">(</span><span class="n">to</span> <span class="o">=</span> <span class="n">user_args</span><span class="p">,</span> <span class="n">av</span> <span class="o">=</span> <span class="n">NewArgv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="p">(</span><span class="n">from</span> <span class="o">=</span> <span class="o">*</span><span class="n">av</span><span class="p">);</span> <span class="n">av</span><span class="o">++</span><span class="p">)</span>
+				<span class="p">{</span>
+					<span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">from</span><span class="p">)</span>
+					<span class="p">{</span>
+						<span class="k">if</span> <span class="p">(</span><span class="n">from</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\\&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isspace</span><span class="p">((</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="n">from</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+							<span class="n">from</span><span class="o">++</span><span class="p">;</span>
+						<span class="o">*</span><span class="n">to</span><span class="o">++</span> <span class="o">=</span> <span class="o">*</span><span class="n">from</span><span class="o">++</span><span class="p">;</span>
+					<span class="p">}</span>
+					<span class="o">*</span><span class="n">to</span><span class="o">++</span> <span class="o">=</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
+				<span class="p">}</span>
+				<span class="o">*--</span><span class="n">to</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="k">else</span>
+			<span class="p">{</span>
+				<span class="k">for</span> <span class="p">(</span><span class="n">to</span> <span class="o">=</span> <span class="n">user_args</span><span class="p">,</span> <span class="n">av</span> <span class="o">=</span> <span class="n">NewArgv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="o">*</span><span class="n">av</span><span class="p">;</span> <span class="n">av</span><span class="o">++</span><span class="p">)</span>
+				<span class="p">{</span>
+					<span class="n">n</span> <span class="o">=</span> <span class="n">strlcpy</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="o">*</span><span class="n">av</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="p">(</span><span class="n">to</span> <span class="o">-</span> <span class="n">user_args</span><span class="p">));</span>
+					<span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="n">size</span> <span class="o">-</span> <span class="p">(</span><span class="n">to</span> <span class="o">-</span> <span class="n">user_args</span><span class="p">))</span>
+					<span class="p">{</span>
+						<span class="n">sudo_warnx</span><span class="p">(</span><span class="n">U_</span><span class="p">(</span><span class="s">&#34;internal error, %s overflow&#34;</span><span class="p">),</span> <span class="n">__func__</span><span class="p">);</span>
+						<span class="n">debug_return_int</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+					<span class="p">}</span>
+					<span class="n">to</span> <span class="o">+=</span> <span class="n">n</span><span class="p">;</span>
+					<span class="o">*</span><span class="n">to</span><span class="o">++</span> <span class="o">=</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
+				<span class="p">}</span>
+				<span class="o">*--</span><span class="n">to</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="c1">// Ignore
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>if (NewArgc &gt; 1)</code>这一分支中，根据参数的大小在堆上分配了堆内存。然后将命令行参数依次复制到堆空间中。但在上述代码的第43行中，如果某一命令行参数以反斜杠结尾，<code>from++</code>后在<code>*to++ = *from++</code>这一条指令处再次使得<code>from</code>指针指向下一位置，发生指针越界，这时不会跳出循环，而是会继续拷贝后续内容，将后面的内容复制到<code>user_args</code>堆块中，发生堆溢出。</p>
+<p>为了使得程序执行到这一分支，需要满足如下条件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="c1">// parse_args
+</span><span class="c1"></span><span class="o">!</span><span class="p">((</span><span class="n">ISSET</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">MODE_RUN</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">ISSET</span><span class="p">(</span><span class="n">flags</span><span class="p">,</span> <span class="n">MODE_SHELL</span><span class="p">))</span> <span class="c1">//避免代码执行，对命令行中所有的参数进行转义
+</span><span class="c1"></span>  
+<span class="c1">//sudoers_policy_main
+</span><span class="c1"></span><span class="n">sudo_mode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">MODE_RUN</span> <span class="o">|</span> <span class="n">MODE_EDIT</span> <span class="o">|</span> <span class="n">MODE_CHECK</span><span class="p">)</span>
+<span class="n">ISSET</span><span class="p">(</span><span class="n">sudo_mode</span><span class="p">,</span> <span class="n">MODE_SHELL</span> <span class="o">|</span> <span class="n">MODE_LOGIN_SHELL</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>即要求<code>!MODE_RUN) &amp; MODE_EDIT &amp; MODE_SHELL &amp; MODE_LOGIN</code>。在parse_args.c中查找参数配置情况。在各种参数配置中，发现执行sudoedit时满足上述条件，可以正常执行到堆溢出的部分。</p>
+<p>之后的工作就是利用这个堆溢出获得root shell。具体的实现细节十分复杂，利用了nss库，大致思路为利用nss在加载动态库时会将名字信息存在堆上，通过拼接得到动态链接库的全称，然后加载，如果我们能够利用堆溢出使其加载我们构造的恶意动态链接库，就可以执行任意代码。而为了能够覆盖到nss中用到的结构体，需要我们的堆块位于其前方不远处。PoC中的方法为利用setlocale获得free原语，利用其对于换进见变量的匹配机制将分配堆块后再释放掉，这样我们后面分配堆块时能够复用这一堆块，实现溢出。</p>
+<p>具体的细节见<a href="https://www.anquanke.com/post/id/231408#h2-0" target="_blank" rel="noopener noreffer">这里的writeup</a>。</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
