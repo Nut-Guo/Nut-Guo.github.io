@@ -10,6 +10,6 @@
     <pubDate>Fri, 09 Apr 2021 20:14:48 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://nut-guo.github.io/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8hw1/</guid>
-    <description><![CDATA[软件安全 hw1 pwn1 一道简单的栈溢出的题目，检查程序保护措施如下： 1 2 3 4 5 Arch: amd64-64-little RELRO: Partial RELRO Stack: No canary found NX: NX enabled PIE: No PIE (0x400000) 无canary，可直接利用栈溢出。 无PI]]></description>
+    <description><![CDATA[软件安全 hw1 pwn1 pwn1，一道简单的栈溢出的题目，检查程序保护措施如下： 1 2 3 4 5 Arch: amd64-64-little RELRO: Partial RELRO Stack: No canary found NX: NX enabled PIE: No PIE (0x400000) 无canary，可直接利用栈溢]]></description>
 </item></channel>
 </rss>
