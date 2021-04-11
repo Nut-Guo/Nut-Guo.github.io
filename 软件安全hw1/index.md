@@ -420,7 +420,7 @@ LAB_00101788:
 }
 ```
 
-实际提供了3各选项，分别为add，delete和list，分别如下：
+实际提供了3个选项，分别为add，delete和list，分别如下：
 
 - add
 
@@ -907,4 +907,11 @@ ISSET(sudo_mode, MODE_SHELL | MODE_LOGIN_SHELL)
 
 具体的细节见[这里的writeup](https://www.anquanke.com/post/id/231408#h2-0)。
 
+缓解措施：临时禁用危险的sudoedit命令或者升级至新版本的sudo。
 
+根据sudo官网的更新日志来看，其针对CVE-2021-3156的修改主要如下：
+
+> - When invoked as sudoedit, the same set of command line options are now accepted as for sudo -e. The -H and -P options are now rejected for sudoedit and sudo -e which matches the sudo 1.7 behavior. This is part of the fix for CVE-2021-3156.
+> - Fixed a potential buffer overflow when unescaping backslashes in the command's arguments. Normally, sudo escapes special characters when running a command via a shell (`sudo -s` or `sudo -i`). However, it was also possible to run `sudoedit` with the **-s** or **-i** flags in which case no escaping had actually been done, making a buffer overflow possible. This fixes [CVE-2021-3156](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3156).
+
+即禁用了相关的选项，使原来的堆溢出问题不再可能发生。
