@@ -4,9 +4,16 @@
         <link>https://nut-guo.github.io/</link>
         <description>Notes at UCAS</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>qinsiliang18@mails.ucas.ac.cn (Nut)</managingEditor>
-            <webMaster>qinsiliang18@mails.ucas.ac.cn (Nut)</webMaster><lastBuildDate>Tue, 11 May 2021 12:56:56 &#43;0800</lastBuildDate>
+            <webMaster>qinsiliang18@mails.ucas.ac.cn (Nut)</webMaster><lastBuildDate>Fri, 18 Jun 2021 17:04:41 &#43;0800</lastBuildDate>
             <atom:link href="https://nut-guo.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>TCP协议中的RTO计算方式分析</title>
+    <link>https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/</link>
+    <pubDate>Fri, 18 Jun 2021 17:04:41 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/</guid>
+    <description><![CDATA[TCP协议中的RTO计算方式分析 TCP的可靠通信依赖于超时重传机制，重传的时间选择是TCP最复杂的问题之一。超时重传时间设置过长会使得丢包后]]></description>
+</item><item>
     <title>软件安全hw2</title>
     <link>https://nut-guo.github.io/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8hw2/</link>
     <pubDate>Tue, 11 May 2021 12:56:56 &#43;0800</pubDate>

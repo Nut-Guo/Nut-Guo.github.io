@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>TCP协议中的RTO计算方式分析 - Nut&#39;s Blog</title><meta name="Description" content="Notes at UCAS"><meta property="og:title" content="TCP协议中的RTO计算方式分析" />
+<meta property="og:description" content="TCP协议中的RTO计算方式分析 TCP的可靠通信依赖于超时重传机制，重传的时间选择是TCP最复杂的问题之一。超时重传时间设置过长会使得丢包后" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" /><meta property="og:image" content="https://nut-guo.github.io/"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-06-18T17:04:41&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-18T17:04:41&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://nut-guo.github.io/"/>
+
+<meta name="twitter:title" content="TCP协议中的RTO计算方式分析"/>
+<meta name="twitter:description" content="TCP协议中的RTO计算方式分析 TCP的可靠通信依赖于超时重传机制，重传的时间选择是TCP最复杂的问题之一。超时重传时间设置过长会使得丢包后"/>
+<meta name="application-name" content="Nut&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Nut&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" /><link rel="prev" href="https://nut-guo.github.io/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8hw2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.8235a67a2521ef99fb1e455a5891b022af1653b4ede3cfffcac4e473beee88fbcc1a36bbb3cfdd75fd6df46732032f9d96e30adae9c88b769e1fbf7945cd27e0.css" integrity="sha512-gjWmeiUh75n7HkVaWJGwIq8WU7Tt48//ysTkc77uiPvMGja7s8/ddf1t9GcyAy&#43;dluMK2unIi3aeH795Rc0n4A=="><link rel="stylesheet" href="/css/style.min.b6e22fc51ffdd39b7469596b3fb37f60d5f0c58847e1a4ed53a0d3e6e21549d3f0327d548f14afe6fd656c37ac70a86d11e7f192e189b1e242a3cea8fe185f98.css" integrity="sha512-tuIvxR/905t0aVlrP7N/YNXwxYhH4aTtU6DT5uIVSdPwMn1UjxSv5v1lbDescKhtEefxkuGJseJCo86o/hhfmA=="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.2fb31670aec534f73036a9cb759abcea54c760b750a996b3e58700804fb97271a6970f094f4dd0076fa8c4bd74d14781e9197364b531086492e3ffbe98d65dc7.css" integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE&#43;5cnGmlw8JT03QB2&#43;oxL100UeB6RlzZLUxCGSS4/&#43;&#43;mNZdxw=="><link rel="stylesheet" href="/lib/animate/animate.min.76826b0bfa1c53c546551c773bdf7cd7ed9a6149f77ee5955afa8b8b553eb40d8c595cecc3e3552aad4fac4345d3733e4d804ff763e7614957147d595b41692f.css" integrity="sha512-doJrC/ocU8VGVRx3O9981&#43;2aYUn3fuWVWvqLi1U&#43;tA2MWVzsw&#43;NVKq1PrENF03M&#43;TYBP92PnYUlXFH1ZW0FpLw=="><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "TCP协议中的RTO计算方式分析",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/nut-guo.github.io\/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90\/"
+        },"genre": "posts","wordcount":  2315 ,
+        "url": "https:\/\/nut-guo.github.io\/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90\/","datePublished": "2021-06-18T17:04:41+08:00","dateModified": "2021-06-18T17:04:41+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Nut"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Nut&#39;s Blog">Nut&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Nut&#39;s Blog">Nut&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">TCP协议中的RTO计算方式分析</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Nut</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-06-18">2021-06-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2315 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;<span id="/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" class="leancloud_visitors" data-flag-title="TCP协议中的RTO计算方式分析">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#参考文献">参考文献</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="tcp协议中的rto计算方式分析">TCP协议中的RTO计算方式分析</h1>
+<p>TCP的可靠通信依赖于超时重传机制，重传的时间选择是TCP最复杂的问题之一。超时重传时间设置过长会使得丢包后发送方持续等待，网络空闲时间增大；超时重传时间设置过短会使得超时时很多报文已经到达接收方而只是发送方还没有收到确认，导致很多报文段不必要的重传，使网络负荷增大。</p>
+<p>TCP采用了一种自适应算法，依据报文段发送的时间以及收到相应确认的时间计算报文段的往返时间RTT，依此计算超时重传时间RTO。算法如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C">	<span class="cm">/* Given a new RTT measurement `RTT&#39; */</span>
+
+	<span class="k">if</span> <span class="p">(</span><span class="n">RTT</span> <span class="n">is</span> <span class="n">the</span> <span class="n">first</span> <span class="n">measurement</span> <span class="n">made</span> <span class="n">on</span> <span class="n">this</span> <span class="n">connection</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nl">SRTT</span>    <span class="p">:</span><span class="o">=</span> <span class="n">RTT</span>
+		<span class="nl">RTTVAR</span>  <span class="p">:</span><span class="o">=</span> <span class="n">RTT</span> <span class="o">/</span> <span class="mi">2</span>
+		<span class="nl">RTO</span>	<span class="p">:</span><span class="o">=</span> <span class="n">SRTT</span> <span class="o">+</span> <span class="n">max</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">RTT</span><span class="p">)</span>	<span class="cm">/* G is clock granularity in seconds */</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nl">delta</span>	<span class="p">:</span><span class="o">=</span> <span class="n">RTT</span> <span class="o">-</span> <span class="n">SRTT</span>
+		<span class="n">SRTT</span><span class="err">&#39;</span>	<span class="o">:=</span> <span class="n">SRTT</span>  <span class="o">+</span>  <span class="mi">1</span><span class="o">/</span><span class="mi">8</span> <span class="o">*</span> <span class="n">delta</span>
+		<span class="n">RTTVAR</span><span class="err">&#39;</span> <span class="o">:=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span> <span class="o">*</span> <span class="n">RTTVAR</span>  <span class="o">+</span>  <span class="mi">1</span><span class="o">/</span><span class="mi">4</span> <span class="o">*</span> <span class="o">|</span><span class="n">delta</span><span class="o">|</span>
+		<span class="nl">RTO</span>	<span class="p">:</span><span class="o">=</span> <span class="n">SRTT</span><span class="err">&#39;</span> <span class="o">+</span> <span class="n">max</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">RTTVAR</span><span class="err">&#39;</span><span class="p">)</span>	
+	<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其中对于SRTT和RTTVAR的计算使用了加权平均的方式，其结果更加平滑。这样的方式也使得越久远的数据对当前结果影响越小，越近的数据对当前结果影响越大，既避免了网络状况抖动对估算结果的影响，又使得该数据尽可能反应当前网络状况。</p>
+<p>其中RTO的具体计算方式如上所示为<code>RTO:= SRTT' + max(G, 4 * RTTVAR')	</code>。为什么这里会选用4倍的RTTVAR呢？</p>
+<p>Linux内核实现中关于这一部分有如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C">
+<span class="cm">/* Called to compute a smoothed rtt estimate. The data fed to this 
+</span><span class="cm"> * routine either comes from timestamps, or from segments that were
+</span><span class="cm"> * known _not_ to have been retransmitted [see Karn/Partridge Proceedings
+</span><span class="cm"> * SIGCOMM 87]. The algorithm is from the SIGCOMM 88 piece by Van
+</span><span class="cm"> * Jacobson.
+</span><span class="cm"> * NOTE : the next three routines used to be one big routine.
+</span><span class="cm"> * To save cycles in the RFC 1323 implementation it was better to break it
+</span><span class="cm"> * up into three procedures. ——erics
+</span><span class="cm"> */</span>
+ 
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">tcp_rtt_estimator</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sock</span> <span class="o">*</span><span class="n">sk</span><span class="p">,</span> <span class="k">const</span> <span class="n">__u32</span> <span class="n">mrtt</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">tcp_sock</span> <span class="o">*</span><span class="n">tp</span> <span class="o">=</span> <span class="n">tcp_sk</span><span class="p">(</span><span class="n">sk</span><span class="p">);</span>
+    <span class="kt">long</span> <span class="n">m</span> <span class="o">=</span> <span class="n">mrtt</span><span class="p">;</span> <span class="cm">/*此为得到的新的RTT测量值*/</span>
+ 
+    <span class="cm">/* The following amusing code comes from Jacobson&#39;s article in
+</span><span class="cm">     * SIGCOMM &#39;88. Note that rtt and mdev are scaled versions of rtt and
+</span><span class="cm">     * mean deviation. This is designed to be as fast as possible
+</span><span class="cm">     * m stands for &#34;measurement&#34;.
+</span><span class="cm">     * 
+</span><span class="cm">     * On a 1990 paper the rto value is changed to :
+</span><span class="cm">     * RTO = rtt + 4 * mdev
+</span><span class="cm">     *
+</span><span class="cm">     * Funny. This algorithm seems to be very broken.
+</span><span class="cm">     * These formulae increase RTO, when it should be decreased, increase
+</span><span class="cm">     * too slowly, when it should be increased quickly, decrease too quickly
+</span><span class="cm">     * etc. I guess in BSD RTO takes ONE value, so that it is absolutely does
+</span><span class="cm">     * not matter how to calculate it. Seems, it was trap that VJ failed to 
+</span><span class="cm">     * avoid. 8)
+</span><span class="cm">     */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* RTT的采样值不能为0 */</span>
+ 
+    <span class="cm">/* 不是得到第一个RTT采样*/</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">srtt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">m</span> <span class="o">-=</span> <span class="p">(</span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">srtt</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">);</span> <span class="cm">/* m is now error in rtt est */</span>
+        <span class="n">tp</span><span class="o">-&gt;</span><span class="n">srtt</span> <span class="o">+=</span> <span class="n">m</span><span class="p">;</span> <span class="cm">/* rtt = 7/8 rtt + 1/8 new ，更新srtt*/</span>
+ 
+        <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/*RTT变小*/</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="o">-</span><span class="n">m</span><span class="p">;</span> <span class="cm">/* m is now abs(error) */</span>
+            <span class="n">m</span> <span class="o">-=</span> <span class="p">(</span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">);</span> <span class="cm">/* similar update on mdev */</span>
+ 
+            <span class="cm">/* This is similar to one of Eifel findings.
+</span><span class="cm">             * Eifel blocks mdev updates when rtt decreases.
+</span><span class="cm">             * This solution is a bit different : we use finer gain
+</span><span class="cm">             * mdev in this case (alpha * beta).
+</span><span class="cm">             * Like Eifel it also prevents growth of rto, but also it
+</span><span class="cm">             * limits too fast rto decreases, happening in pure Eifel.
+</span><span class="cm">             */</span>
+             <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="cm">/* |err| &gt; 1/4 mdev */</span>
+                 <span class="n">m</span> <span class="o">&gt;&gt;=</span> <span class="mi">3</span><span class="p">;</span>
+ 
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="cm">/* RTT变大 */</span>
+            <span class="n">m</span> <span class="o">-=</span> <span class="p">(</span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">);</span> <span class="cm">/* similar update on mdev */</span>
+        <span class="p">}</span>
+ 
+        <span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev</span> <span class="o">+=</span> <span class="n">m</span><span class="p">;</span> <span class="cm">/* mdev = 3/4 mdev + 1/4 new，更新mdev */</span>
+ 
+        <span class="cm">/* 更新mdev_max和rttvar */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev</span> <span class="o">&gt;</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev_max</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev_max</span> <span class="o">=</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev_max</span> <span class="o">&gt;</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">rttvar</span> <span class="p">)</span>
+                <span class="n">tp</span><span class="o">-&gt;</span><span class="n">rttvar</span> <span class="o">=</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev_max</span><span class="p">;</span>
+        <span class="p">}</span>
+ 
+       <span class="cm">/* 过了一个RTT了，更新mdev_max和rttvar */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">after</span><span class="p">(</span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">snd_una</span><span class="p">,</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">rtt_seq</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev_max</span> <span class="o">&lt;</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">rttvar</span><span class="p">)</span><span class="cm">/*减小rttvar */</span>
+                <span class="n">tp</span><span class="o">-&gt;</span><span class="n">rttvar</span> <span class="o">-=</span> <span class="p">(</span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">rttvar</span> <span class="o">-</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev_max</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">;</span> 
+            <span class="n">tp</span><span class="o">-&gt;</span><span class="n">rtt_seq</span> <span class="o">=</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">snd_nxt</span><span class="p">;</span>
+            <span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev_max</span> <span class="o">=</span> <span class="n">tcp_rto_min</span><span class="p">(</span><span class="n">sk</span><span class="p">);</span> <span class="cm">/*重置mdev_max */</span>
+        <span class="p">}</span>
+ 
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> 
+    <span class="cm">/* 获得第一个RTT采样*/</span>
+        <span class="cm">/* no previous measure. */</span>
+        <span class="n">tp</span><span class="o">-&gt;</span><span class="n">srtt</span> <span class="o">=</span> <span class="n">m</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="cm">/* take the measured time to be rtt */</span>
+        <span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev</span> <span class="o">=</span> <span class="n">m</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* make sure rto = 3 * rtt */</span>
+        <span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev_max</span> <span class="o">=</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">rttvar</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">mdev</span><span class="p">,</span> <span class="n">tcp_rto_min</span><span class="p">(</span><span class="n">sk</span><span class="p">));</span>
+        <span class="n">tp</span><span class="o">-&gt;</span><span class="n">rtt_seq</span> <span class="o">=</span> <span class="n">tp</span><span class="o">-&gt;</span><span class="n">snd_nxt</span><span class="p">;</span> <span class="cm">/*设置更新mdev_max的时间*/</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其中提到了</p>
+<blockquote>
+<pre><code> * On a 1990 paper the rto value is changed to :
+ * RTO = rtt + 4 * mdev
+</code></pre>
+</blockquote>
+<p>这里的paper既上文中所提到的Jacobson&rsquo;s article in SIGCOMM &lsquo;88：即<a href="http://www.it.uu.se/edu/course/homepage/datakomDVNV/h03/papers/JK88.pdf" target="_blank" rel="noopener noreffer">Congestion Avoidance and Control</a>。</p>
+<p>在该文章的附录C中，作者详细解释了该算法中选取$RTO = rtt + 4 * mdev$的原因。</p>
+<p>文章中的符号与代码中的符号有些许差异，这里采用文章中的符号。用R表示往返时延，用V表示偏差。在文章的第一版中采用了$RTO = R + 2 \times V$，之所以改为$RTO = R + 4 \times V$，是由于之前的算法低速链路下存在问题。</p>
+<p>为了保证网络的可用性，防止过多的数据注入到网络中致使网络瘫痪，TCP采用了拥塞控制算法，包括慢开始、拥塞避免、快重传和快恢复。这里RTO的计算主要与慢开始阶段有关。</p>
+<p>慢开始的思路是当主机开始发送数据时，由于并不清楚网络的负荷情况，如果立刻将大量数据字节注入到网络中，可能引起网络发生拥塞。经验证较好的方法是由小到大的增大发送窗口。为此发送方维持一个叫做拥塞窗口的状态变量，在刚开始通信时为其赋予一个较小的初值，每收到一个对新的报文段的确认后，将拥塞窗口增加刚收到的确认报文段所确认的字节数（小于发送方的最大报文段SMSS）。可以认为在使用慢开始算法后每经过一个传输轮次，拥塞窗口cwnd就加倍。为避免cwnd增长过大引起网络拥塞，需要设置一个慢开始门限ssthresh，如果在慢开始阶段发生了超时重传，则需要将ssthresh设置为当前cwnd的一半。</p>
+<p>网络的$总时延=发送时延+传输时延+处理时延+排队时延$。在低速链路下，传输时延相对较小，总时延由发送时延主导，可以近似认为$总时延=发送时延=\frac{数据量}{发送速率}$。当cwnd增加$\Delta w$时，总时延增加约$\Delta R = \frac{\Delta w}{b}$ 。</p>
+<p>记慢开始第i个轮次的RTT为$R_i$，偏差为$V_i$，不妨假设$SRTT_i=RTT_i$则有
+$$
+\begin{align*}
+V_i &amp;= R_i - SRTT_i\ &amp;= R_i - R_{i - 1} \&amp;= R_i - \frac{R_i}{2}\&amp;=\frac{R_i}{2}
+\end{align*}
+$$
+如果采用$RTO = R + 2 \times V$，则$RTO_i = R_i + 2 \times \frac{R_i}{2} = 2 R_i = R_{i + 1}$。既超时重传时间等于下一个RTT，并未留有缓冲，这将极大概率导致重传发生。而根据拥塞控制算法的设计，一旦发生重传，ssthresh就要变为当前cwnd的一半，最终的结果为ssthresh迅速减小到0，这将严重影响网络的正常运行。</p>
+<p>而采用$RTO = R + 4 \times V$，则$RTO_i = R_i + 4 \times \frac{R_i}{2} = 3 R_i &gt; R_{i + 1}$。此时超时重传时间大于下一个RTT，避免了在慢开始阶段因算法设计缺陷导致的重传和网络故障。</p>
+<h2 id="参考文献">参考文献</h2>
+<p>[1]<a href="https://www.cs.auckland.ac.nz/courses/compsci742s2c/resources/congavoid.pdf" target="_blank" rel="noopener noreffer">Congestion Avoidance and Control </a></p>
+<p>[2]计算机网络 第7版 谢希仁</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-06-18</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" data-title="TCP协议中的RTO计算方式分析"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" data-title="TCP协议中的RTO计算方式分析" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" data-title="TCP协议中的RTO计算方式分析"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" data-title="TCP协议中的RTO计算方式分析"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" data-title="TCP协议中的RTO计算方式分析" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" data-title="TCP协议中的RTO计算方式分析" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://nut-guo.github.io/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" data-title="TCP协议中的RTO计算方式分析"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8hw2/" class="prev" rel="prev" title="软件安全hw2"><i class="fas fa-angle-left fa-fw"></i>软件安全hw2</a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.83.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Nut</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.01a9044cb72aeb889854b4c442d03cc67db5dcfff848a5bba3c8df88e1ad3a04278cbda7603d1c97981d6759794e673f60aac6a54f53139bbdd044d4dfc2e475.css" integrity="sha512-AakETLcq64iYVLTEQtA8xn213P/4SKW7o8jfiOGtOgQnjL2nYD0cl5gdZ1l5Tmc/YKrGpU9TE5u90ETU38LkdQ=="><link rel="stylesheet" href="/lib/katex/copy-tex.min.cfee09198e00011c7d33435e1b23862f95b6827c243de4038963ca714516395c4f88715df65f4fd10a8a69988fbfed1b5a2aff27d588004581b91af98fc65a58.css" integrity="sha512-z&#43;4JGY4AARx9M0NeGyOGL5W2gnwkPeQDiWPKcUUWOVxPiHFd9l9P0QqKaZiPv&#43;0bWir/J9WIAEWBuRr5j8ZaWA=="><script type="text/javascript" src="/lib/valine/Valine.min.bd6cb3c89b27a208393491a80056b9c7102fdb7f562dd38b69b273ecc2a13d6841d7a96ecbdcb1878c71bb75e4518d617892584d8746fc40da269808494d0ca7.js" integrity="sha512-vWyzyJsnogg5NJGoAFa5xxAv239WLdOLabJz7MKhPWhB16luy9yxh4xxu3XkUY1heJJYTYdG/EDaJpgISU0Mpw=="></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.e9c0c2a48f70798908fc0c6e65ba47b80e8cd3961f0580a2fee3a84434d3af807a674e9447b49523af87a6a80642a32887c031eb5e1ded2af091bcd8e4bcd935.js" integrity="sha512-6cDCpI9weYkI/AxuZbpHuA6M05YfBYCi/uOoRDTTr4B6Z06UR7SVI6&#43;HpqgGQqMoh8Ax614d7SrwkbzY5LzZNQ=="></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.95377e01eea2e97083a9e6b4ae56c55a423a5b0cb7e6a298f06c004bbc318ff9a88e6687caa4c1c869aa278c33aae29bdb234b2cd85ae80acf7ad76b7ad61862.js" integrity="sha512-lTd&#43;Ae6i6XCDqea0rlbFWkI6Wwy35qKY8GwAS7wxj/mojmaHyqTByGmqJ4wzquKb2yNLLNha6ArPetdretYYYg=="></script><script type="text/javascript" src="/lib/lunr/lunr.min.1e225d911c92cd786251c5f65707976a2cbcc9e636d767a9fe3e75cd1ff3e483c25f86543b169fea7689ff47502ffda5f992fe07d8a7feee274fc40967fde68a.js" integrity="sha512-HiJdkRySzXhiUcX2VweXaiy8yeY212ep/j51zR/z5IPCX4ZUOxaf6naJ/0dQL/2l&#43;ZL&#43;B9in/u4nT8QJZ/3mig=="></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.d39330aac5214e750aa32beeed2f4f1935d17d4801adf8def0b7b529c6c0fed578ff046d14cc5468136c01ce2efc1c4af2b9302109b421728a7472e03b654bbd.js" integrity="sha512-05MwqsUhTnUKoyvu7S9PGTXRfUgBrfje8Le1KcbA/tV4/wRtFMxUaBNsAc4u/BxK8rkwIQm0IXKKdHLgO2VLvQ=="></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.ccf4ba70e80b6a3d4de3bf7cc4a94f96db1c18fb5381339988fe0c4d7897fedef139b6eafe2f6d9af38405ba6a702e5168a2ca29881bc05b4cef0002d8ed119d.js" integrity="sha512-zPS6cOgLaj1N4798xKlPltscGPtTgTOZiP4MTXiX/t7xObbq/i9tmvOEBbpqcC5RaKLKKYgbwFtM7wAC2O0RnQ=="></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.4e60f014b860dd4038646d046f8308c93d4ed4c6fe3b0c399051b4b87a97b1d6f2673f4372f61084aa4680d91a98023a876946199ab65fc7ed389bc5fd78d352.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb&#43;Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg=="></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.843586ca1f88cb832bf401cecd43f6f98d2254f9ff070c716a84a57848c7fe2d68e0455317fb21d3f0354b28a2f0f58e69efae3ebf93fca1f0ca7a1e6d2b8087.js" integrity="sha512-hDWGyh&#43;Iy4Mr9AHOzUP2&#43;Y0iVPn/BwxxaoSleEjH/i1o4EVTF/sh0/A1Syii8PWOae&#43;uPr&#43;T/KHwynoebSuAhw=="></script><script type="text/javascript" src="/lib/sharer/sharer.min.c4c86aeb36b41ca1e3aad5e04e9297a121178682f01c799a25844b78c742d98fe914b37de07ce1f1ce0812385a2272654d39db5d80c9df7658de91e4a1987f26.js" integrity="sha512-xMhq6za0HKHjqtXgTpKXoSEXhoLwHHmaJYRLeMdC2Y/pFLN94Hzh8c4IEjhaInJlTTnbXYDJ33ZY3pHkoZh/Jg=="></script><script type="text/javascript" src="/lib/katex/katex.min.da4f96fb738686d777c219c6b77dde93fa00d4cfdaa81e8c8abf9621c0ab4ae202db20fa8935fa22e3dfe6ad681091904f4ea399ae4ae9c6bb5ea6f8bbb52ba3.js" integrity="sha512-2k&#43;W&#43;3OGhtd3whnGt33ek/oA1M/aqB6Mir&#43;WIcCrSuIC2yD6iTX6IuPf5q1oEJGQT06jma5K6ca7Xqb4u7Urow=="></script><script type="text/javascript" src="/lib/katex/auto-render.min.1a2706adb2c15c987691b17e0d80feb025b984f6afa0e7d500a48e13bfaa8180a05537307befc3e0b5de812f4955363bda8bdce549e0e059a5fa2d6e0f7b8ec9.js" integrity="sha512-GicGrbLBXJh2kbF&#43;DYD&#43;sCW5hPavoOfVAKSOE7&#43;qgYCgVTcwe&#43;/D4LXegS9JVTY72ovc5Ung4Fml&#43;i1uD3uOyQ=="></script><script type="text/javascript" src="/lib/katex/copy-tex.min.0c94f619ff73a2094558dbb180570c677ce2f516bd18f0f1a70f7ff24c90e9c8e2f9239a2e5575038f48b6ce7778b66519f6f85a3c110a9b4451d363bba5b183.js" integrity="sha512-DJT2Gf9zoglFWNuxgFcMZ3zi9Ra9GPDxpw9/8kyQ6cji&#43;SOaLlV1A49Its53eLZlGfb4WjwRCptEUdNju6Wxgw=="></script><script type="text/javascript" src="/lib/katex/mhchem.min.078b12bb78ac618a5abab7d2b665ec875c0bef5b3cc4a159c8d8c20ae507c3c7de0a1f519691b4df1f3e6b77a016267556e0a88fae3adc8635f159eb0c16cab8.js" integrity="sha512-B4sSu3isYYpaurfStmXsh1wL71s8xKFZyNjCCuUHw8feCh9RlpG03x8&#43;a3egFiZ1VuCoj6463IY18VnrDBbKuA=="></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":20},"comment":{"valine":{"appId":"iCNKSkjtgPlaC7LrE1HCLBQP-MdYXbMMI","appKey":"CsfLCHM3VFxOATkM2ST4896F","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh_CN","pageSize":10,"placeholder":"说点什么呗","recordIP":true,"visitor":true}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.69ac882c686e101963f9cd3dc6167cee800004e4e9f40dae6f6fbeb3b03fb81ead782f98cc6e6eeec42b70a1b7047c7902e8f0ba3171660e2c2dc59d62965c7a.js" integrity="sha512-aayILGhuEBlj&#43;c09xhZ87oAABOTp9A2ub2&#43;&#43;s7A/uB6teC&#43;YzG5u7sQrcKG3BHx5AujwujFxZg4sLcWdYpZceg=="></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-141115323-1', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-141115323-1" async></script></body>
+</html>
