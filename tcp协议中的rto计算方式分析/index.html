@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/nut-guo.github.io\/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90\/"
-        },"genre": "posts","wordcount":  2313 ,
+        },"genre": "posts","wordcount":  2315 ,
         "url": "https:\/\/nut-guo.github.io\/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90\/","datePublished": "2021-06-18T17:04:41+08:00","dateModified": "2021-06-18T17:04:41+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">TCP协议中的RTO计算方式分析</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Nut</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-06-18">2021-06-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2313 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-06-18">2021-06-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2315 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;<span id="/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" class="leancloud_visitors" data-flag-title="TCP协议中的RTO计算方式分析">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -341,9 +341,13 @@
 <p>慢开始的思路是当主机开始发送数据时，由于并不清楚网络的负荷情况，如果立刻将大量数据字节注入到网络中，可能引起网络发生拥塞。经验证较好的方法是由小到大的增大发送窗口。为此发送方维持一个叫做拥塞窗口的状态变量，在刚开始通信时为其赋予一个较小的初值，每收到一个对新的报文段的确认后，将拥塞窗口增加刚收到的确认报文段所确认的字节数（小于发送方的最大报文段SMSS）。可以认为在使用慢开始算法后每经过一个传输轮次，拥塞窗口cwnd就加倍。为避免cwnd增长过大引起网络拥塞，需要设置一个慢开始门限ssthresh，如果在慢开始阶段发生了超时重传，则需要将ssthresh设置为当前cwnd的一半。</p>
 <p>网络的$总时延=发送时延+传输时延+处理时延+排队时延$。在低速链路下，传输时延相对较小，总时延由发送时延主导，可以近似认为$总时延=发送时延=\frac{数据量}{发送速率}$。当cwnd增加$\Delta w$时，总时延增加约$\Delta R = \frac{\Delta w}{b}$ 。</p>
 <p>记慢开始第i个轮次的RTT为$R_i$，偏差为$V_i$，不妨假设$SRTT_i=RTT_i$则有</p>
-<p>\[\begin{align*}
-V_i &amp;= R_i - SRTT_i\ &amp;= R_i - R_{i - 1} \&amp;= R_i - \frac{R_i}{2}\&amp;=\frac{R_i}{2}
-\end{align*}\]</p>
+<div>
+$$
+\begin{aligned}
+V_i &= R_i - SRTT_i\\ &= R_i - R_{i - 1} \\&= R_i - \frac{R_i}{2}\\&=\frac{R_i}{2}
+\end{aligned}
+$$
+<div/>
 <p>如果采用$RTO = R + 2 \times V$，则$RTO_i = R_i + 2 \times \frac{R_i}{2} = 2 R_i = R_{i + 1}$。既超时重传时间等于下一个RTT，并未留有缓冲，这将极大概率导致重传发生。而根据拥塞控制算法的设计，一旦发生重传，ssthresh就要变为当前cwnd的一半，最终的结果为ssthresh迅速减小到0，这将严重影响网络的正常运行。</p>
 <p>而采用$RTO = R + 4 \times V$，则$RTO_i = R_i + 4 \times \frac{R_i}{2} = 3 R_i &gt; R_{i + 1}$。此时超时重传时间大于下一个RTT，避免了在慢开始阶段因算法设计缺陷导致的重传和网络故障。</p>
 <h2 id="参考文献">参考文献</h2>

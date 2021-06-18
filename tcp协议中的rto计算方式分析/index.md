@@ -133,9 +133,13 @@ static void tcp_rtt_estimator (struct sock *sk, const __u32 mrtt)
 
 记慢开始第i个轮次的RTT为$R_i$，偏差为$V_i$，不妨假设$SRTT_i=RTT_i$则有
 
-\\[\begin{align*}
+<div>
+$$
+\begin{aligned}
 V_i &= R_i - SRTT_i\\ &= R_i - R_{i - 1} \\&= R_i - \frac{R_i}{2}\\&=\frac{R_i}{2}
-\end{align*}\\]
+\end{aligned}
+$$
+<div/>
 
 如果采用$RTO = R + 2 \times V$，则$RTO_i = R_i + 2 \times \frac{R_i}{2} = 2 R_i = R_{i + 1}$。既超时重传时间等于下一个RTT，并未留有缓冲，这将极大概率导致重传发生。而根据拥塞控制算法的设计，一旦发生重传，ssthresh就要变为当前cwnd的一半，最终的结果为ssthresh迅速减小到0，这将严重影响网络的正常运行。
 
