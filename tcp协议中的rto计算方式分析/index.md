@@ -132,11 +132,11 @@ static void tcp_rtt_estimator (struct sock *sk, const __u32 mrtt)
 网络的$总时延=发送时延+传输时延+处理时延+排队时延$。在低速链路下，传输时延相对较小，总时延由发送时延主导，可以近似认为$总时延=发送时延=\frac{数据量}{发送速率}$。当cwnd增加$\Delta w$时，总时延增加约$\Delta R = \frac{\Delta w}{b}$ 。
 
 记慢开始第i个轮次的RTT为$R_i$，偏差为$V_i$，不妨假设$SRTT_i=RTT_i$则有
-$$
-\begin{align*}
+
+\\[\begin{align*}
 V_i &= R_i - SRTT_i\\ &= R_i - R_{i - 1} \\&= R_i - \frac{R_i}{2}\\&=\frac{R_i}{2}
-\end{align*}
-$$
+\end{align*}\\]
+
 如果采用$RTO = R + 2 \times V$，则$RTO_i = R_i + 2 \times \frac{R_i}{2} = 2 R_i = R_{i + 1}$。既超时重传时间等于下一个RTT，并未留有缓冲，这将极大概率导致重传发生。而根据拥塞控制算法的设计，一旦发生重传，ssthresh就要变为当前cwnd的一半，最终的结果为ssthresh迅速减小到0，这将严重影响网络的正常运行。
 
 而采用$RTO = R + 4 \times V$，则$RTO_i = R_i + 4 \times \frac{R_i}{2} = 3 R_i > R_{i + 1}$。此时超时重传时间大于下一个RTT，避免了在慢开始阶段因算法设计缺陷导致的重传和网络故障。
