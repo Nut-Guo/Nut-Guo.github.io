@@ -136,7 +136,7 @@ static void tcp_rtt_estimator (struct sock *sk, const __u32 mrtt)
 <div>
 $$
 \begin{aligned}
-V_i &= R_i - SRTT_i\\ &= R_i - R_{i - 1} \\&= R_i - \frac{R_i}{2}\\&=\frac{R_i}{2}
+V_i &= R_i - SRTT_{i - 1}\\ &= R_i - R_{i - 1} \\&= R_i - \frac{R_i}{2}\\&=\frac{R_i}{2}
 \end{aligned}
 $$
 <div/>

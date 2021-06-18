@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/nut-guo.github.io\/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90\/"
-        },"genre": "posts","wordcount":  2315 ,
+        },"genre": "posts","wordcount":  2317 ,
         "url": "https:\/\/nut-guo.github.io\/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90\/","datePublished": "2021-06-18T17:04:41+08:00","dateModified": "2021-06-18T17:04:41+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">TCP协议中的RTO计算方式分析</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Nut</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-06-18">2021-06-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2315 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-06-18">2021-06-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2317 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;<span id="/tcp%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84rto%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E5%88%86%E6%9E%90/" class="leancloud_visitors" data-flag-title="TCP协议中的RTO计算方式分析">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -344,7 +344,7 @@
 <div>
 $$
 \begin{aligned}
-V_i &= R_i - SRTT_i\\ &= R_i - R_{i - 1} \\&= R_i - \frac{R_i}{2}\\&=\frac{R_i}{2}
+V_i &= R_i - SRTT_{i - 1}\\ &= R_i - R_{i - 1} \\&= R_i - \frac{R_i}{2}\\&=\frac{R_i}{2}
 \end{aligned}
 $$
 <div/>
